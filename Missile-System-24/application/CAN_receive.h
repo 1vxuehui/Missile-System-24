@@ -23,33 +23,20 @@
 
 #include "struct_typedef.h"
 
-#define CHASSIS_CAN hcan1
-#define GIMBAL_CAN 	hcan1
-#define POWER_CAN   hcan1
+#define LAUNCHER_CAN hcan1
 #define SHOOT_CAN 	hcan2
-#define CAP_CAN			hcan2
 
 /* CAN send and receive ID */
 typedef enum
 {
-    CAN_CHASSIS_ALL_ID = 0x200,
-    CAN_3508_M1_ID = 0x201,
-    CAN_3508_M2_ID = 0x202,
-    CAN_3508_M3_ID = 0x203,
-    CAN_3508_M4_ID = 0x204,
-	
-		CAN_GIMBAL_ALL_ID = 0x1FF,
-    CAN_YAW_MOTOR_ID = 0x205,
-    CAN_PIT_MOTOR_ID = 0x206,
+    CAN_LAUNCHER_ALL_ID = 0x200,
+    CAN_M15_ID = 0x201,
+    CAN_3508_ID = 0x202,
 	
 		CAN_SHOOT_ALL_ID = 0x200,
-    CAN_2006_ID = 0x201,
-		CAN_3508_LEFT_ID = 0x202,
-		CAN_3508_RIGHT_ID = 0x203,
-		CAN_TRIGGER_MOTOR_ID = 0x204,
-	
-		CAP_ID = 0x211,
-    
+		CAN_3508_SHOOT_ID = 0x201,
+		CAN_6020_RELOAD_ID = 0x202,   
+
 } can_msg_id_e;
 
 //RM 电机数据
@@ -62,32 +49,6 @@ typedef struct
     int16_t last_ecd;
 } motor_measure_t;
 
-typedef struct
-{
-    int16_t invot;
-    int16_t capvot;
-    int16_t current;
-    int16_t power;
-} cap_measure_t;
-
-typedef struct
-{
-    fp32 voltage;
-    fp32 cuttent;
-    fp32 power;
-} pm_measure_t;
-
-extern cap_measure_t get_cap;
-/**
-  * @brief          发送电机控制电流(0x205,0x206,0x207,0x208)
-  * @param[in]      yaw: (0x205) 6020电机控制电流, 范围 [-30000,30000]
-  * @param[in]      pitch: (0x206) 6020电机控制电流, 范围 [-30000,30000]
-  * @param[in]      rev1: (0x207) 保留，电机控制电流
-  * @param[in]      rev2: (0x208) 保留，电机控制电流
-  * @retval         none
-  */
-extern void CAN_cmd_gimbal(int16_t yaw, int16_t pitch, int16_t rev1, int16_t rev2);
-
 /**
   * @brief          发送ID为0x700的CAN包,它会设置3508电机进入快速设置ID
   * @param[in]      none
@@ -97,13 +58,17 @@ extern void CAN_cmd_chassis_reset_ID(void);
 
 /**
   * @brief          发送电机控制电流(0x201,0x202,0x203,0x204)
-  * @param[in]      motor1: (0x201) 3508电机控制电流, 范围 [-16384,16384]
-  * @param[in]      motor2: (0x202) 3508电机控制电流, 范围 [-16384,16384]
-  * @param[in]      motor3: (0x203) 3508电机控制电流, 范围 [-16384,16384]
-  * @param[in]      motor4: (0x204) 3508电机控制电流, 范围 [-16384,16384]
+  * @param[in]      motor1: (0x202) M15电机控制电流, 范围 [0,32767]
   * @retval         none
   */
-extern void CAN_cmd_chassis(int16_t motor1, int16_t motor2, int16_t motor3, int16_t motor4);
+extern void CAN_cmd_M15(int16_t motor2);
+
+/**
+  * @brief          发送电机控制电流(0x201,0x202,0x203,0x204)
+  * @param[in]      motor2: (0x202) 3508电机控制电流, 范围 [-16384,16384]
+  * @retval         none
+  */
+extern void CAN_cmd_3508(int16_t motor2);
 
 /**
   * @brief          发送电机控制电流(0x205,0x206,0x207,0x208)
