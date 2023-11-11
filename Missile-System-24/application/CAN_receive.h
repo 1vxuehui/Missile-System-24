@@ -78,56 +78,34 @@ extern void CAN_cmd_3508(int16_t motor2);
   * @param[in]      trigger: (0x204) 3508电机控制电流, 范围 [-16384,16384]
   * @retval         none
   */
-extern void CAN_cmd_shoot(int16_t s0, int16_t s1, int16_t s2, int16_t trigger);
+extern void CAN_cmd_shoot(int16_t shoot, int16_t reload);
 
 
-extern void CAN_cmd_cap(int16_t temPower);
 /**
-  * @brief          返回yaw 6020电机数据指针
+  * @brief          返回yaw M15电机数据指针
   * @param[in]      none
   * @retval         电机数据指针
   */
-extern const motor_measure_t *get_yaw_gimbal_motor_measure_point(void);
-
+const motor_measure_t *get_yaw_M15_motor_measure_point(void);
 /**
-  * @brief          返回pitch 6020电机数据指针
+  * @brief          返回弹簧 3508电机数据指针
   * @param[in]      none
   * @retval         电机数据指针
   */
-extern const motor_measure_t *get_pitch_gimbal_motor_measure_point(void);
+const motor_measure_t *get_spring_motor_measure_point(void);
 
 /**
-  * @brief          返回拨弹电机 2006电机数据指针
+  * @brief          返回发射 3508电机数据指针
   * @param[in]      none
   * @retval         电机数据指针
   */
-extern const motor_measure_t *get_trigger_motor_measure_point(void);
+const motor_measure_t *get_can_2006_measure_point(void);
 
 /**
-  * @brief          返回底盘电机 3508电机数据指针
-  * @param[in]      i: 电机编号,范围[0,3]
-  * @retval         电机数据指针
-  */
-extern const motor_measure_t *get_chassis_motor_measure_point(uint8_t i);
-
-/**
-  * @brief          返回拨弹电机 2006电机数据指针
+  * @brief          返回换弹 6020电机数据指针
   * @param[in]      none
   * @retval         电机数据指针
   */
-extern const motor_measure_t *get_can_2006_measure_point(void);
-		
-/**
-  * @brief          返回摩擦轮 3508电机数据指针
-  * @param[in]      none
-  * @retval         电机数据指针
-  */
-extern const motor_measure_t *get_can_3508_left_measure_point(void);
+const motor_measure_t *get_can_3508_left_measure_point(void);
 
-/**
-  * @brief          返回摩擦轮 3508电机数据指针
-  * @param[in]      none
-  * @retval         电机数据指针
-  */
-extern const motor_measure_t *get_can_3508_right_measure_point(void);
 #endif
