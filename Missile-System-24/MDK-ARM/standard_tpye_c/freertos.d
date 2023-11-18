@@ -1,7 +1,7 @@
 standard_tpye_c\freertos.o: ../Src/freertos.c
 standard_tpye_c\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
-standard_tpye_c\freertos.o: E:\Keil_v5\ARM\5.06\Bin\..\include\stddef.h
-standard_tpye_c\freertos.o: E:\Keil_v5\ARM\5.06\Bin\..\include\stdint.h
+standard_tpye_c\freertos.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+standard_tpye_c\freertos.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 standard_tpye_c\freertos.o: ../Inc/FreeRTOSConfig.h
 standard_tpye_c\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
 standard_tpye_c\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h
@@ -72,7 +72,7 @@ standard_tpye_c\freertos.o: ..\components\controller\stm32_types.h
 standard_tpye_c\freertos.o: ..\application\remote_control.h
 standard_tpye_c\freertos.o: ..\bsp\boards\bsp_rc.h
 standard_tpye_c\freertos.o: ..\components\algorithm\user_lib.h
-standard_tpye_c\freertos.o: E:\Keil_v5\ARM\5.06\Bin\..\include\stdlib.h
+standard_tpye_c\freertos.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 standard_tpye_c\freertos.o: ..\application\detect_task.h
 standard_tpye_c\freertos.o: ..\application\shoot_task.h
 standard_tpye_c\freertos.o: ..\application\INS_task.h

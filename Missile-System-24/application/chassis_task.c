@@ -25,7 +25,7 @@
 #include "pid.h"
 #include "remote_control.h"
 #include "CAN_receive.h"
-#include "detect_task.h"
+#include "detect_task.h" 
 #include "INS_task.h"
 
 #include "referee.h"

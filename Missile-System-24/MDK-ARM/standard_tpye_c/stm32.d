@@ -4,7 +4,7 @@ standard_tpye_c\stm32.o: ..\components\controller\STM32_Config.h
 standard_tpye_c\stm32.o: ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h
 standard_tpye_c\stm32.o: ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h
 standard_tpye_c\stm32.o: ../Drivers/CMSIS/Include/core_cm4.h
-standard_tpye_c\stm32.o: E:\Keil_v5\ARM\5.06\Bin\..\include\stdint.h
+standard_tpye_c\stm32.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 standard_tpye_c\stm32.o: ../Drivers/CMSIS/Include/cmsis_version.h
 standard_tpye_c\stm32.o: ../Drivers/CMSIS/Include/cmsis_compiler.h
 standard_tpye_c\stm32.o: ../Drivers/CMSIS/Include/cmsis_armcc.h
@@ -16,7 +16,7 @@ standard_tpye_c\stm32.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h
 standard_tpye_c\stm32.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h
 standard_tpye_c\stm32.o: ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h
 standard_tpye_c\stm32.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h
-standard_tpye_c\stm32.o: E:\Keil_v5\ARM\5.06\Bin\..\include\stddef.h
+standard_tpye_c\stm32.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
 standard_tpye_c\stm32.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc_ex.h
 standard_tpye_c\stm32.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_exti.h
 standard_tpye_c\stm32.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h

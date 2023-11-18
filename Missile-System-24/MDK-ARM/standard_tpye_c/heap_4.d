@@ -1,8 +1,8 @@
 standard_tpye_c\heap_4.o: ../Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c
-standard_tpye_c\heap_4.o: E:\Keil_v5\ARM\5.06\Bin\..\include\stdlib.h
+standard_tpye_c\heap_4.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 standard_tpye_c\heap_4.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
-standard_tpye_c\heap_4.o: E:\Keil_v5\ARM\5.06\Bin\..\include\stddef.h
-standard_tpye_c\heap_4.o: E:\Keil_v5\ARM\5.06\Bin\..\include\stdint.h
+standard_tpye_c\heap_4.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+standard_tpye_c\heap_4.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 standard_tpye_c\heap_4.o: ../Inc/FreeRTOSConfig.h
 standard_tpye_c\heap_4.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
 standard_tpye_c\heap_4.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h
