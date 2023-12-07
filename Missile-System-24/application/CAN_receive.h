@@ -26,16 +26,17 @@
 #define LAUNCHER_CAN hcan1
 #define SHOOT_CAN 	hcan2
 
+
 /* CAN send and receive ID */
 typedef enum
 {
     CAN_LAUNCHER_ALL_ID = 0x200,
-    CAN_M15_ID = 0x201,
+    CAN_YAW_3508_ID = 0x201,
     CAN_3508_ID = 0x202,
 	
 		CAN_SHOOT_ALL_ID = 0x200,
-		CAN_3508_SHOOT_ID = 0x201,
-		CAN_6020_RELOAD_ID = 0x202,   
+    CAN_SHOOT_MOTOR_ID = 0x201,
+		CAN_RELOAD_MOTOR_ID = 0x204,
 
 } can_msg_id_e;
 
@@ -49,63 +50,49 @@ typedef struct
     int16_t last_ecd;
 } motor_measure_t;
 
-/**
-  * @brief          发送ID为0x700的CAN包,它会设置3508电机进入快速设置ID
-  * @param[in]      none
-  * @retval         none
-  */
-extern void CAN_cmd_chassis_reset_ID(void);
 
 /**
-  * @brief          发送电机控制电流(0x201,0x202,0x203,0x204)
-  * @param[in]      motor1: (0x202) M15电机控制电流, 范围 [0,32767]
+  * @brief          发送电机控制电流(0x201,0x202)
+  * @param[in]      yaw: (0x205) 3508电机控制电流, 范围 [-16384,16384]
+  * @param[in]      spring: (0x206) 3508电机控制电流, 范围 [-16384,16384]
   * @retval         none
   */
-extern void CAN_cmd_M15(int16_t motor2);
-
-/**
-  * @brief          发送电机控制电流(0x201,0x202,0x203,0x204)
-  * @param[in]      motor2: (0x202) 3508电机控制电流, 范围 [-16384,16384]
-  * @retval         none
-  */
-extern void CAN_cmd_3508(int16_t motor2);
+extern void CAN_cmd_launcher(int16_t yaw, int16_t spring);
 
 /**
   * @brief          发送电机控制电流(0x205,0x206,0x207,0x208)
-  * @param[in]      s0: (0x201) 2006电机控制电流, 范围 [-16384,16384]
-  * @param[in]      s1: (0x202) 3508电机控制电流, 范围 [-16384,16384]
-  * @param[in]      s2: (0x203) 3508电机控制电流, 范围 [-16384,16384]
-  * @param[in]      trigger: (0x204) 3508电机控制电流, 范围 [-16384,16384]
+  * @param[in]      shoot: (0x201) 2006电机控制电流, 范围 [-16384,16384]
+  * @param[in]      reload: (0x202) 3508电机控制电流, 范围 [-16384,16384]
   * @retval         none
   */
 extern void CAN_cmd_shoot(int16_t shoot, int16_t reload);
 
-
 /**
-  * @brief          返回yaw M15电机数据指针
+  * @brief          返回yaw 6020电机数据指针
   * @param[in]      none
   * @retval         电机数据指针
   */
-const motor_measure_t *get_yaw_M15_motor_measure_point(void);
+extern const motor_measure_t *get_yaw_motor_measure_point(void);
+
 /**
   * @brief          返回弹簧 3508电机数据指针
   * @param[in]      none
   * @retval         电机数据指针
   */
-const motor_measure_t *get_spring_motor_measure_point(void);
+extern const motor_measure_t *get_spring_motor_measure_point(void);
+
+/**
+  * @brief          返回换弹 3508电机数据指针
+  * @param[in]      none
+  * @retval         电机数据指针
+  */
+extern const motor_measure_t *get_reload_measure_point(void);
 
 /**
   * @brief          返回发射 3508电机数据指针
   * @param[in]      none
   * @retval         电机数据指针
   */
-const motor_measure_t *get_can_2006_measure_point(void);
-
-/**
-  * @brief          返回换弹 6020电机数据指针
-  * @param[in]      none
-  * @retval         电机数据指针
-  */
-const motor_measure_t *get_can_3508_left_measure_point(void);
+extern const motor_measure_t *get_shoot_measure_point(void);
 
 #endif

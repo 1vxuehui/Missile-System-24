@@ -2,7 +2,7 @@ standard_tpye_c\chassis_task.o: ..\application\chassis_task.c
 standard_tpye_c\chassis_task.o: ..\application\chassis_task.h
 standard_tpye_c\chassis_task.o: ..\application\struct_typedef.h
 standard_tpye_c\chassis_task.o: ..\application\CAN_receive.h
-standard_tpye_c\chassis_task.o: ..\application\gimbal_task.h
+standard_tpye_c\chassis_task.o: ..\application\launcher_task.h
 standard_tpye_c\chassis_task.o: ..\components\controller\pid.h
 standard_tpye_c\chassis_task.o: ..\components\controller\stm32.h
 standard_tpye_c\chassis_task.o: ..\components\controller\STM32_Config.h

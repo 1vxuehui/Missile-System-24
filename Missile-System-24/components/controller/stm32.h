@@ -90,25 +90,25 @@ struct tag_RTM_stm32 {
 
 /* Block states (default storage) */
 extern DW_stm32 stm32_DW_yaw;
-extern DW_stm32 stm32_DW_pitch;
+extern DW_stm32 stm32_DW_spring;
 extern DW_stm32 stm32_DW_trigger;
 
 /* External inputs (root inport signals with default storage) */
 extern ExtU_stm32 stm32_U_yaw;
-extern ExtU_stm32 stm32_U_pitch;
+extern ExtU_stm32 stm32_U_spring;
 extern ExtU_stm32 stm32_U_trigger;
 
 /* External outputs (root outports fed by signals with default storage) */
 extern ExtY_stm32 stm32_Y_yaw;
-extern ExtY_stm32 stm32_Y_pitch;
+extern ExtY_stm32 stm32_Y_spring;
 extern ExtY_stm32 stm32_Y_trigger;
 
 /* Model entry point functions */
 extern void stm32_initialize(void);
 extern void stm32_pid_yaw_init(void);
-extern void stm32_pid_pitch_init(void);
+extern void stm32_pid_spring_init(void);
 extern void stm32_pid_trigger_init(void);
-extern void stm32_step_pitch(double angle_set,double angle_feedback,double speed_feedback);
+extern void stm32_step_spring(double angle_set,double angle_feedback,double speed_feedback);
 extern void stm32_step_yaw(double angle_set,double angle_feedback,double speed_feedback);
 extern void stm32_step_trigger(double angle_set,double angle_feedback,double speed_feedback);
 /* Real-time Model object */

@@ -54,7 +54,7 @@ chassis motor2:%s\r\n\
 chassis motor3:%s\r\n\
 chassis motor4:%s\r\n\
 yaw motor:%s\r\n\
-pitch motor:%s\r\n\
+spring motor:%s\r\n\
 trigger motor:%s\r\n\
 gyro sensor:%s\r\n\
 accel sensor:%s\r\n\
@@ -63,13 +63,10 @@ referee usart:%s\r\n\
 ******************************\r\n",
             get_battery_percentage(), 
             status[error_list_usb_local[DBUS_TOE].error_exist],
-            status[error_list_usb_local[CHASSIS_MOTOR1_TOE].error_exist],
-            status[error_list_usb_local[CHASSIS_MOTOR2_TOE].error_exist],
-            status[error_list_usb_local[CHASSIS_MOTOR3_TOE].error_exist],
-            status[error_list_usb_local[CHASSIS_MOTOR4_TOE].error_exist],
-            status[error_list_usb_local[YAW_GIMBAL_MOTOR_TOE].error_exist],
-            status[error_list_usb_local[PITCH_GIMBAL_MOTOR_TOE].error_exist],
-            status[error_list_usb_local[TRIGGER_MOTOR_TOE].error_exist],
+            status[error_list_usb_local[LAUNCHER_MOTOR1_TOE].error_exist],
+            status[error_list_usb_local[LAUNCHER_MOTOR2_TOE].error_exist],
+            status[error_list_usb_local[SHOOT_MOTOR_TOE].error_exist],
+            status[error_list_usb_local[RELOAD_MOTOR_TOE].error_exist],
             status[error_list_usb_local[BOARD_GYRO_TOE].error_exist],
             status[error_list_usb_local[BOARD_ACCEL_TOE].error_exist],
             status[error_list_usb_local[BOARD_MAG_TOE].error_exist],

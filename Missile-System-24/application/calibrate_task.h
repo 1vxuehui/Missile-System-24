@@ -1,14 +1,14 @@
 /**
   ****************************(C) COPYRIGHT 2019 DJI****************************
   * @file       calibrate_task.c/h
-  * @brief      calibrate these device，include gimbal, gyro, accel, magnetometer,
-  *             chassis. gimbal calibration is to calc the midpoint, max/min 
+  * @brief      calibrate these device，include launcher, gyro, accel, magnetometer,
+  *             chassis. launcher calibration is to calc the midpoint, max/min 
   *             relative angle. gyro calibration is to calc the zero drift.
   *             accel and mag calibration have not been implemented yet, because
   *             accel is not necessary to calibrate, mag is not used. chassis 
   *             calibration is to make motor 3508 enter quick reset ID mode.
-  *             校准设备，包括云台,陀螺仪,加速度计,磁力计,底盘.云台校准是主要计算零点
-  *             和最大最小相对角度.云台校准是主要计算零漂.加速度计和磁力计校准还没有实现
+  *             校准设备，包括发射架,陀螺仪,加速度计,磁力计,底盘.发射架校准是主要计算零点
+  *             和最大最小相对角度.发射架校准是主要计算零漂.加速度计和磁力计校准还没有实现
   *             因为加速度计还没有必要去校准,而磁力计还没有用.底盘校准是使M3508进入快速
   *             设置ID模式.
   * @note       
@@ -23,7 +23,7 @@
   *             first: two switchs of remote control are down
   *             second:hold for 2 seconds, two rockers set to V, like \../;  \. means the letf rocker go bottom right.
   *             third:hold for 2 seconds, two rockers set to ./\., begin the gyro calibration
-  *                     or set to '\/', begin the gimbal calibration
+  *                     or set to '\/', begin the launcher calibration
   *                     or set to /''\, begin the chassis calibration
   *
   *             data in flash, include cali data and name[3] and cali_flag
@@ -58,7 +58,7 @@
   *             第一步:遥控器的两个开关都打到下
   *             第二步:两个摇杆打成\../,保存两秒.\.代表左摇杆向右下打.
   *             第三步:摇杆打成./\. 开始陀螺仪校准
-  *                    或者摇杆打成'\/' 开始云台校准
+  *                    或者摇杆打成'\/' 开始发射架校准
   *                    或者摇杆打成/''\ 开始底盘校准
   *
   *             数据在flash中，包括校准数据和名字 name[3] 和 校准标志位 cali_flag
@@ -103,8 +103,8 @@
 
 //when imu is calibrating ,buzzer set frequency and strength. 当imu在校准,蜂鸣器的设置频率和强度
 #define imu_start_buzzer()          buzzer_on(95, 10000)    
-//when gimbal is calibrating ,buzzer set frequency and strength.当云台在校准,蜂鸣器的设置频率和强度
-#define gimbal_start_buzzer()       buzzer_on(31, 19999)    
+//when launcher is calibrating ,buzzer set frequency and strength.当发射架在校准,蜂鸣器的设置频率和强度
+#define launcher_start_buzzer()       buzzer_on(31, 19999)    
 #define cali_buzzer_off()           buzzer_off()            //buzzer off，关闭蜂鸣器
 
 
@@ -145,13 +145,13 @@
 #define CALIED_FLAG             0x55                // means it has been calibrated
 //you have 20 seconds to calibrate by remote control. 有20s可以用遥控器进行校准
 #define CALIBRATE_END_TIME          20000
-//when 10 second, buzzer frequency change to high frequency of gimbal calibration.当10s的时候,蜂鸣器切成高频声音
+//when 10 second, buzzer frequency change to high frequency of launcher calibration.当10s的时候,蜂鸣器切成高频声音
 #define RC_CALI_BUZZER_MIDDLE_TIME  10000
 //in the beginning, buzzer frequency change to low frequency of imu calibration.当开始校准的时候,蜂鸣器切成低频声音
 #define RC_CALI_BUZZER_START_TIME   0
 
 
-#define rc_cali_buzzer_middle_on()  gimbal_start_buzzer()
+#define rc_cali_buzzer_middle_on()  launcher_start_buzzer()
 #define rc_cali_buzzer_start_on()   imu_start_buzzer()
 #define RC_CMD_LONG_TIME            2000    
 
@@ -166,7 +166,7 @@
 typedef enum
 {
     CALI_HEAD = 0,
-    CALI_GIMBAL = 1,
+    CALI_launcher = 1,
     CALI_GYRO = 2,
     CALI_ACC = 3,
     CALI_MAG = 4,
@@ -195,16 +195,16 @@ typedef __packed struct
     int8_t temperature;         // imu control temperature
     fp32 latitude;              // latitude
 } head_cali_t;
-//gimbal device
+//launcher device
 typedef struct
 {
     uint16_t yaw_offset;
-    uint16_t pitch_offset;
+    uint16_t spring_offset;
     fp32 yaw_max_angle;
     fp32 yaw_min_angle;
-    fp32 pitch_max_angle;
-    fp32 pitch_min_angle;
-} gimbal_cali_t;
+    fp32 spring_max_angle;
+    fp32 spring_min_angle;
+} launcher_cali_t;
 //gyro, accel, mag device
 typedef struct
 {
@@ -214,12 +214,12 @@ typedef struct
 
 
 /**
-  * @brief          use remote control to begin a calibrate,such as gyro, gimbal, chassis
+  * @brief          use remote control to begin a calibrate,such as gyro, launcher, chassis
   * @param[in]      none
   * @retval         none
   */
 /**
-  * @brief          使用遥控器开始校准，例如陀螺仪，云台，底盘
+  * @brief          使用遥控器开始校准，例如陀螺仪，发射架，底盘
   * @param[in]      none
   * @retval         none
   */

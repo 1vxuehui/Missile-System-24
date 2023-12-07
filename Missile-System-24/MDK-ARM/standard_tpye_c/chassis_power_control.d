@@ -3,7 +3,7 @@ standard_tpye_c\chassis_power_control.o: ..\application\chassis_power_control.h
 standard_tpye_c\chassis_power_control.o: ..\application\chassis_task.h
 standard_tpye_c\chassis_power_control.o: ..\application\struct_typedef.h
 standard_tpye_c\chassis_power_control.o: ..\application\CAN_receive.h
-standard_tpye_c\chassis_power_control.o: ..\application\gimbal_task.h
+standard_tpye_c\chassis_power_control.o: ..\application\launcher_task.h
 standard_tpye_c\chassis_power_control.o: ..\components\controller\pid.h
 standard_tpye_c\chassis_power_control.o: ..\components\controller\stm32.h
 standard_tpye_c\chassis_power_control.o: ..\components\controller\STM32_Config.h

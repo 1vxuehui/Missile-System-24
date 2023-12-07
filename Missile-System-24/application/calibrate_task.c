@@ -1,14 +1,14 @@
 /**
   ****************************(C) COPYRIGHT 2019 DJI****************************
   * @file       calibrate_task.c/h
-  * @brief      calibrate these device，include gimbal, gyro, accel, magnetometer,
-  *             chassis. gimbal calibration is to calc the midpoint, max/min 
+  * @brief      calibrate these device，include launcher, gyro, accel, magnetometer,
+  *             chassis. launcher calibration is to calc the midpoint, max/min 
   *             relative angle. gyro calibration is to calc the zero drift.
   *             accel and mag calibration have not been implemented yet, because
   *             accel is not necessary to calibrate, mag is not used. chassis 
   *             calibration is to make motor 3508 enter quick reset ID mode.
-  *             校准设备，包括云台,陀螺仪,加速度计,磁力计,底盘.云台校准是主要计算零点
-  *             和最大最小相对角度.云台校准是主要计算零漂.加速度计和磁力计校准还没有实现
+  *             校准设备，包括发射架,陀螺仪,加速度计,磁力计,底盘.发射架校准是主要计算零点
+  *             和最大最小相对角度.发射架校准是主要计算零漂.加速度计和磁力计校准还没有实现
   *             因为加速度计还没有必要去校准,而磁力计还没有用.底盘校准是使M3508进入快速
   *             设置ID模式.
   * @note       
@@ -23,7 +23,7 @@
   *             first: two switchs of remote control are down
   *             second:hold for 2 seconds, two rockers set to V, like \../;  \. means the letf rocker go bottom right.
   *             third:hold for 2 seconds, two rockers set to ./\., begin the gyro calibration
-  *                     or set to '\/', begin the gimbal calibration
+  *                     or set to '\/', begin the launcher calibration
   *                     or set to /''\, begin the chassis calibration
   *
   *             data in flash, include cali data and name[3] and cali_flag
@@ -58,7 +58,7 @@
   *             第一步:遥控器的两个开关都打到下
   *             第二步:两个摇杆打成\../,保存两秒.\.代表左摇杆向右下打.
   *             第三步:摇杆打成./\. 开始陀螺仪校准
-  *                    或者摇杆打成'\/' 开始云台校准
+  *                    或者摇杆打成'\/' 开始发射架校准
   *                    或者摇杆打成/''\ 开始底盘校准
   *
   *             数据在flash中，包括校准数据和名字 name[3] 和 校准标志位 cali_flag
@@ -106,22 +106,22 @@
 #include "can_receive.h"
 #include "remote_control.h"
 #include "INS_task.h"
-#include "gimbal_task.h"
+#include "launcher_task.h"
 
 
-//include head,gimbal,gyro,accel,mag. gyro,accel and mag have the same data struct. total 5(CALI_LIST_LENGHT) devices, need data lenght + 5 * 4 bytes(name[3]+cali)
-#define FLASH_WRITE_BUF_LENGHT  (sizeof(head_cali_t) + sizeof(gimbal_cali_t) + sizeof(imu_cali_t) * 3  + CALI_LIST_LENGHT * 4)
+//include head,launcher,gyro,accel,mag. gyro,accel and mag have the same data struct. total 5(CALI_LIST_LENGHT) devices, need data lenght + 5 * 4 bytes(name[3]+cali)
+#define FLASH_WRITE_BUF_LENGHT  (sizeof(head_cali_t) + sizeof(launcher_cali_t) + sizeof(imu_cali_t) * 3  + CALI_LIST_LENGHT * 4)
 
 
 
 
 /**
-  * @brief          use remote control to begin a calibrate,such as gyro, gimbal, chassis
+  * @brief          use remote control to begin a calibrate,such as gyro, launcher, chassis
   * @param[in]      none
   * @retval         none
   */
 /**
-  * @brief          使用遥控器开始校准，例如陀螺仪，云台，底盘
+  * @brief          使用遥控器开始校准，例如陀螺仪，发射架，底盘
   * @param[in]      none
   * @retval         none
   */
@@ -193,8 +193,8 @@ static bool_t cali_head_hook(uint32_t *cali, bool_t cmd);   //header device cali
 static bool_t cali_gyro_hook(uint32_t *cali, bool_t cmd);   //gyro device cali function
 
 /**
-  * @brief          gimbal cali function
-  * @param[in][out] cali:the point to gimbal data, when cmd == CALI_FUNC_CMD_INIT, param is [in],cmd == CALI_FUNC_CMD_ON, param is [out]
+  * @brief          launcher cali function
+  * @param[in][out] cali:the point to launcher data, when cmd == CALI_FUNC_CMD_INIT, param is [in],cmd == CALI_FUNC_CMD_ON, param is [out]
   * @param[in]      cmd: 
                     CALI_FUNC_CMD_INIT: means to use cali data to initialize original data
                     CALI_FUNC_CMD_ON: means need to calibrate
@@ -202,15 +202,15 @@ static bool_t cali_gyro_hook(uint32_t *cali, bool_t cmd);   //gyro device cali f
                     1:means cali task has been done
   */
 /**
-  * @brief          云台设备校准
-  * @param[in][out] cali:指针指向云台数据,当cmd为CALI_FUNC_CMD_INIT, 参数是输入,CALI_FUNC_CMD_ON,参数是输出
+  * @brief          发射架设备校准
+  * @param[in][out] cali:指针指向发射架数据,当cmd为CALI_FUNC_CMD_INIT, 参数是输入,CALI_FUNC_CMD_ON,参数是输出
   * @param[in]      cmd: 
                     CALI_FUNC_CMD_INIT: 代表用校准数据初始化原始数据
                     CALI_FUNC_CMD_ON: 代表需要校准
   * @retval         0:校准任务还没有完
                     1:校准任务已经完成
   */
-static bool_t cali_gimbal_hook(uint32_t *cali, bool_t cmd); //gimbal device cali function
+static bool_t cali_launcher_hook(uint32_t *cali, bool_t cmd); //launcher device cali function
 
 
 
@@ -221,7 +221,7 @@ uint32_t calibrate_task_stack;
 
 static const RC_ctrl_t *calibrate_RC;   //remote control point
 static head_cali_t     head_cali;       //head cali data
-static gimbal_cali_t   gimbal_cali;     //gimbal cali data
+static launcher_cali_t   launcher_cali;     //launcher cali data
 static imu_cali_t      accel_cali;      //accel cali data
 static imu_cali_t      gyro_cali;       //gyro cali data
 static imu_cali_t      mag_cali;        //mag cali data
@@ -235,17 +235,17 @@ static const uint8_t cali_name[CALI_LIST_LENGHT][3] = {"HD", "GM", "GYR", "ACC",
 
 //cali data address
 static uint32_t *cali_sensor_buf[CALI_LIST_LENGHT] = {
-        (uint32_t *)&head_cali, (uint32_t *)&gimbal_cali,
+        (uint32_t *)&head_cali, (uint32_t *)&launcher_cali,
         (uint32_t *)&gyro_cali, (uint32_t *)&accel_cali,
         (uint32_t *)&mag_cali};
 
 
 static uint8_t cali_sensor_size[CALI_LIST_LENGHT] =
     {
-        sizeof(head_cali_t) / 4, sizeof(gimbal_cali_t) / 4,
+        sizeof(head_cali_t) / 4, sizeof(launcher_cali_t) / 4,
         sizeof(imu_cali_t) / 4, sizeof(imu_cali_t) / 4, sizeof(imu_cali_t) / 4};
 
-void *cali_hook_fun[CALI_LIST_LENGHT] = {cali_head_hook, cali_gimbal_hook, cali_gyro_hook, NULL, NULL};
+void *cali_hook_fun[CALI_LIST_LENGHT] = {cali_head_hook, cali_launcher_hook, cali_gyro_hook, NULL, NULL};
 
 static uint32_t calibrate_systemTick;
 
@@ -346,19 +346,19 @@ void get_flash_latitude(float *latitude)
 }
 
 /**
-  * @brief          use remote control to begin a calibrate,such as gyro, gimbal, chassis
+  * @brief          use remote control to begin a calibrate,such as gyro, launcher, chassis
   * @param[in]      none
   * @retval         none
   */
 /**
-  * @brief          使用遥控器开始校准，例如陀螺仪，云台，底盘
+  * @brief          使用遥控器开始校准，例如陀螺仪，发射架，底盘
   * @param[in]      none
   * @retval         none
   */
 static void RC_cmd_to_calibrate(void)
 {
     static const uint8_t BEGIN_FLAG   = 1;
-    static const uint8_t GIMBAL_FLAG  = 2;
+    static const uint8_t launcher_FLAG  = 2;
     static const uint8_t GYRO_FLAG    = 3;
     static const uint8_t CHASSIS_FLAG = 4;
 
@@ -388,12 +388,12 @@ static void RC_cmd_to_calibrate(void)
         rc_action_flag = BEGIN_FLAG;
         rc_cmd_time = 0;
     }
-    else if (rc_action_flag == GIMBAL_FLAG && rc_cmd_time > RC_CMD_LONG_TIME)
+    else if (rc_action_flag == launcher_FLAG && rc_cmd_time > RC_CMD_LONG_TIME)
     {
-        //gimbal cali, 
+        //launcher cali, 
         rc_action_flag = 0;
         rc_cmd_time = 0;
-        cali_sensor[CALI_GIMBAL].cali_cmd = 1;
+        cali_sensor[CALI_launcher].cali_cmd = 1;
         cali_buzzer_off();
     }
     else if (rc_action_flag == 3 && rc_cmd_time > RC_CMD_LONG_TIME)
@@ -416,9 +416,9 @@ static void RC_cmd_to_calibrate(void)
         rc_cmd_time = 0;
         //send CAN reset ID cmd to M3508
         //发送CAN重设ID命令到3508
-        CAN_cmd_chassis_reset_ID();
-        CAN_cmd_chassis_reset_ID();
-        CAN_cmd_chassis_reset_ID();
+//        CAN_cmd_chassis_reset_ID();
+//        CAN_cmd_chassis_reset_ID();
+//        CAN_cmd_chassis_reset_ID();
         cali_buzzer_off();
     }
 
@@ -433,7 +433,7 @@ static void RC_cmd_to_calibrate(void)
         //two rockers set '\/', hold for 2 seconds
         //两个摇杆打成'\/',保持2s
         rc_cmd_time++;
-        rc_action_flag = GIMBAL_FLAG;
+        rc_action_flag = launcher_FLAG;
     }
     else if (calibrate_RC->rc.ch[0] > RC_CALI_VALUE_HOLE && calibrate_RC->rc.ch[1] < -RC_CALI_VALUE_HOLE && calibrate_RC->rc.ch[2] < -RC_CALI_VALUE_HOLE && calibrate_RC->rc.ch[3] < -RC_CALI_VALUE_HOLE && switch_is_down(calibrate_RC->rc.s[0]) && switch_is_down(calibrate_RC->rc.s[1]) && rc_action_flag != 0)
     {
@@ -488,12 +488,12 @@ static void RC_cmd_to_calibrate(void)
 }
 
 /**
-  * @brief          use remote control to begin a calibrate,such as gyro, gimbal, chassis
+  * @brief          use remote control to begin a calibrate,such as gyro, launcher, chassis
   * @param[in]      none
   * @retval         none
   */
 /**
-  * @brief          使用遥控器开始校准，例如陀螺仪，云台，底盘
+  * @brief          使用遥控器开始校准，例如陀螺仪，发射架，底盘
   * @param[in]      none
   * @retval         none
   */
@@ -693,8 +693,8 @@ static bool_t cali_gyro_hook(uint32_t *cali, bool_t cmd)
 }
 
 /**
-  * @brief          gimbal cali function
-  * @param[in][out] cali:the point to gimbal data, when cmd == CALI_FUNC_CMD_INIT, param is [in],cmd == CALI_FUNC_CMD_ON, param is [out]
+  * @brief          launcher cali function
+  * @param[in][out] cali:the point to launcher data, when cmd == CALI_FUNC_CMD_INIT, param is [in],cmd == CALI_FUNC_CMD_ON, param is [out]
   * @param[in]      cmd: 
                     CALI_FUNC_CMD_INIT: means to use cali data to initialize original data
                     CALI_FUNC_CMD_ON: means need to calibrate
@@ -702,31 +702,31 @@ static bool_t cali_gyro_hook(uint32_t *cali, bool_t cmd)
                     1:means cali task has been done
   */
 /**
-  * @brief          云台设备校准
-  * @param[in][out] cali:指针指向云台数据,当cmd为CALI_FUNC_CMD_INIT, 参数是输入,CALI_FUNC_CMD_ON,参数是输出
+  * @brief          发射架设备校准
+  * @param[in][out] cali:指针指向发射架数据,当cmd为CALI_FUNC_CMD_INIT, 参数是输入,CALI_FUNC_CMD_ON,参数是输出
   * @param[in]      cmd: 
                     CALI_FUNC_CMD_INIT: 代表用校准数据初始化原始数据
                     CALI_FUNC_CMD_ON: 代表需要校准
   * @retval         0:校准任务还没有完
                     1:校准任务已经完成
   */
-static bool_t cali_gimbal_hook(uint32_t *cali, bool_t cmd)
+static bool_t cali_launcher_hook(uint32_t *cali, bool_t cmd)
 {
 
-    gimbal_cali_t *local_cali_t = (gimbal_cali_t *)cali;
+    launcher_cali_t *local_cali_t = (launcher_cali_t *)cali;
     if (cmd == CALI_FUNC_CMD_INIT)
     {
-        set_cali_gimbal_hook(local_cali_t->yaw_offset, local_cali_t->pitch_offset,
+        set_cali_launcher_hook(local_cali_t->yaw_offset, local_cali_t->spring_offset,
                              local_cali_t->yaw_max_angle, local_cali_t->yaw_min_angle,
-                             local_cali_t->pitch_max_angle, local_cali_t->pitch_min_angle);
+                             local_cali_t->spring_max_angle, local_cali_t->spring_min_angle);
         
         return 0;
     }
     else if (cmd == CALI_FUNC_CMD_ON)
     {
-        if (cmd_cali_gimbal_hook(&local_cali_t->yaw_offset, &local_cali_t->pitch_offset,
+        if (cmd_cali_launcher_hook(&local_cali_t->yaw_offset, &local_cali_t->spring_offset,
                                  &local_cali_t->yaw_max_angle, &local_cali_t->yaw_min_angle,
-                                 &local_cali_t->pitch_max_angle, &local_cali_t->pitch_min_angle))
+                                 &local_cali_t->spring_max_angle, &local_cali_t->spring_min_angle))
         {
             cali_buzzer_off();
             
@@ -734,7 +734,7 @@ static bool_t cali_gimbal_hook(uint32_t *cali, bool_t cmd)
         }
         else
         {
-            gimbal_start_buzzer();
+            launcher_start_buzzer();
             
             return 0;
         }

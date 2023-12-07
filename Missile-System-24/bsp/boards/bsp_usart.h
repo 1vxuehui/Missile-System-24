@@ -4,9 +4,9 @@
 
 typedef struct {
 	int32_t yaw_fifo;//YAW信息
-	int32_t pitch_fifo;//PITCH信息
+	int32_t spring_fifo;//spring信息
 	int32_t yaw_speed_fifo;//YAW速度信息
-	int32_t pitch_speed_fifo;//PITCH速度信息
+	int32_t spring_speed_fifo;//spring速度信息
 	int32_t distance_fifo;
 	bool_t rx_change_flag;//识别目标切换
 	bool_t rx_flag;//识别到目标
@@ -14,20 +14,20 @@ typedef struct {
 	bool_t rx_update_flag;//视觉更新
 	
 	fp32 yaw_add;//YAW信息
-	fp32 pitch_add;//PITCH信息
+	fp32 spring_add;//spring信息
 	fp32 distance;
 	fp32 rev;
 	bool_t change_flag;
 	bool_t success_flag;//识别成功标志
 	
 	fp32 yaw_add_last;//YAW信息
-	fp32 pitch_add_last;//PITCH信息
+	fp32 spring_add_last;//spring信息
 	fp32 distance_last;
 	bool_t change_flag_last;
 	bool_t success_flag_last;//识别成功标志
 	
 	fp32 yaw_add_new;//YAW信息
-	fp32 pitch_add_new;//PITCH信息
+	fp32 spring_add_new;//spring信息
 	fp32 distance_new;
 	bool_t change_flag_new;
 	bool_t success_flag_new;//识别成功标志
@@ -43,7 +43,7 @@ typedef struct {
 #define HEAD0_BASE 0
 #define HEAD1_BASE 4
 #define YAW_FIFO_BASE 8
-#define PITCH_FIFO_BASE 12
+#define spring_FIFO_BASE 12
 #define DISTANCE 16
 #define REV 20
 #define CHANGE_FLAG_FIFO_BASE 21

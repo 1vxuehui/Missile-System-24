@@ -1,6 +1,6 @@
 #include "vision.h"
 #include "math.h"
-#include "gimbal_task.h"
+#include "launcher_task.h"
 
 #define G 9.8f
 #define H 0.45f
@@ -9,13 +9,13 @@ fp32 Filter(fp32 get_ad);
 fp32 distance_x;               	//水平距离
 fp32 a,b,c,x1,x2,angle_set;			//一元二次方程系数、结果、目标角度
 
-extern gimbal_control_t gimbal_control;
+extern launcher_control_t launcher_control;
 
 void vision_loop(vision_rxfifo_t *vision_rx)
 {
 		//接收更新
 		vision_rx->yaw_add_new = (fp32)vision_rx->yaw_fifo/ 10000.0f - 180.0f;
-		vision_rx->pitch_add_new = (fp32)vision_rx->pitch_fifo/ 10000.0f - 180.0f;
+		vision_rx->spring_add_new = (fp32)vision_rx->spring_fifo/ 10000.0f - 180.0f;
 		vision_rx->distance_new = (fp32)vision_rx->distance_fifo/ 10000.0f;
 		vision_rx->rev = (fp32)vision_rx->rev/ 10000.0f;
 		vision_rx->change_flag_new = vision_rx->rx_change_flag;
@@ -77,7 +77,7 @@ void vision_loop(vision_rxfifo_t *vision_rx)
 		if(vision_rx->rx_update_flag)
 		{
 				vision_rx->yaw_add = vision_rx->yaw_add_new * 0.003f;
-				vision_rx->pitch_add = angle_set;
+				vision_rx->spring_add = angle_set;
 			
 				vision_rx->rx_update_flag = 0;
 		}
@@ -86,18 +86,18 @@ void vision_loop(vision_rxfifo_t *vision_rx)
 		if(vision_rx->change_flag)
 		{
 				vision_rx->yaw_add = 0.0f;
-				vision_rx->pitch_add = 0.0f;
+				vision_rx->spring_add = 0.0f;
 		}
 		else if(!vision_rx->rx_flag)
 		{
 				vision_rx->yaw_add = 0.0f;
-				vision_rx->pitch_add = 0.0f;
+				vision_rx->spring_add = 0.0f;
 		}
 		
 		vision_rx->yaw_add = Filter(vision_rx->yaw_add);
 		
 		vision_rx->yaw_add_last = vision_rx->yaw_add_new;
-		vision_rx->pitch_add_last = vision_rx->pitch_add_new;
+		vision_rx->spring_add_last = vision_rx->spring_add_new;
 		vision_rx->distance_last = vision_rx->distance_new;
 		vision_rx->change_flag_last = vision_rx->change_flag_new;
 		vision_rx->success_flag_last = vision_rx->success_flag_new;

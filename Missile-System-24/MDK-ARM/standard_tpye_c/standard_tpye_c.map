@@ -170,7 +170,7 @@ Section Cross References
     freertos.o(.constdata) refers to calibrate_task.o(i.calibrate_task) for calibrate_task
     freertos.o(.constdata) refers to chassis_task.o(i.chassis_task) for chassis_task
     freertos.o(.constdata) refers to detect_task.o(i.detect_task) for detect_task
-    freertos.o(.constdata) refers to gimbal_task.o(i.gimbal_task) for gimbal_task
+    freertos.o(.constdata) refers to launcher_task.o(i.launcher_task) for launcher_task
     freertos.o(.constdata) refers to ins_task.o(i.INS_task) for INS_task
     freertos.o(.constdata) refers to led_flow_task.o(i.led_RGB_flow_task) for led_RGB_flow_task
     freertos.o(.constdata) refers to referee_usart_task.o(i.referee_usart_task) for referee_usart_task
@@ -1910,8 +1910,8 @@ Section Cross References
     chassis_task.o(i.chassis_feedback_update) refers to user_lib.o(i.loop_fp32_constrain) for loop_fp32_constrain
     chassis_task.o(i.chassis_init) refers to remote_control.o(i.get_remote_control_point) for get_remote_control_point
     chassis_task.o(i.chassis_init) refers to ins_task.o(i.get_INS_angle_point) for get_INS_angle_point
-    chassis_task.o(i.chassis_init) refers to gimbal_task.o(i.get_yaw_motor_point) for get_yaw_motor_point
-    chassis_task.o(i.chassis_init) refers to gimbal_task.o(i.get_pitch_motor_point) for get_pitch_motor_point
+    chassis_task.o(i.chassis_init) refers to launcher_task.o(i.get_yaw_motor_point) for get_yaw_motor_point
+    chassis_task.o(i.chassis_init) refers to launcher_task.o(i.get_pitch_motor_point) for get_pitch_motor_point
     chassis_task.o(i.chassis_init) refers to can_receive.o(i.get_chassis_motor_measure_point) for get_chassis_motor_measure_point
     chassis_task.o(i.chassis_init) refers to pid.o(i.PID_init) for PID_init
     chassis_task.o(i.chassis_init) refers to user_lib.o(i.first_order_filter_init) for first_order_filter_init
@@ -1949,10 +1949,10 @@ Section Cross References
     can_receive.o(i.CAN_cmd_chassis_reset_ID) refers to can_receive.o(.bss) for .bss
     can_receive.o(i.CAN_cmd_chassis_reset_ID) refers to can_receive.o(.data) for .data
     can_receive.o(i.CAN_cmd_chassis_reset_ID) refers to can.o(.bss) for hcan1
-    can_receive.o(i.CAN_cmd_gimbal) refers to stm32f4xx_hal_can.o(i.HAL_CAN_AddTxMessage) for HAL_CAN_AddTxMessage
-    can_receive.o(i.CAN_cmd_gimbal) refers to can_receive.o(.bss) for .bss
-    can_receive.o(i.CAN_cmd_gimbal) refers to can_receive.o(.data) for .data
-    can_receive.o(i.CAN_cmd_gimbal) refers to can.o(.bss) for hcan1
+    can_receive.o(i.CAN_cmd_launcher) refers to stm32f4xx_hal_can.o(i.HAL_CAN_AddTxMessage) for HAL_CAN_AddTxMessage
+    can_receive.o(i.CAN_cmd_launcher) refers to can_receive.o(.bss) for .bss
+    can_receive.o(i.CAN_cmd_launcher) refers to can_receive.o(.data) for .data
+    can_receive.o(i.CAN_cmd_launcher) refers to can.o(.bss) for hcan1
     can_receive.o(i.CAN_cmd_shoot) refers to stm32f4xx_hal_can.o(i.HAL_CAN_AddTxMessage) for HAL_CAN_AddTxMessage
     can_receive.o(i.CAN_cmd_shoot) refers to can_receive.o(.bss) for .bss
     can_receive.o(i.CAN_cmd_shoot) refers to can_receive.o(.data) for .data
@@ -1966,13 +1966,13 @@ Section Cross References
     can_receive.o(i.get_can_3508_left_measure_point) refers to can_receive.o(.bss) for .bss
     can_receive.o(i.get_can_3508_right_measure_point) refers to can_receive.o(.bss) for .bss
     can_receive.o(i.get_chassis_motor_measure_point) refers to can_receive.o(.bss) for .bss
-    can_receive.o(i.get_pitch_gimbal_motor_measure_point) refers to can_receive.o(.bss) for .bss
+    can_receive.o(i.get_pitch_launcher_motor_measure_point) refers to can_receive.o(.bss) for .bss
     can_receive.o(i.get_trigger_motor_measure_point) refers to can_receive.o(.bss) for .bss
-    can_receive.o(i.get_yaw_gimbal_motor_measure_point) refers to can_receive.o(.bss) for .bss
+    can_receive.o(i.get_yaw_launcher_motor_measure_point) refers to can_receive.o(.bss) for .bss
     chassis_behaviour.o(i.chassis_behaviour_control_set) refers to chassis_behaviour.o(i.chassis_bpin_yaw_control) for chassis_bpin_yaw_control
     chassis_behaviour.o(i.chassis_behaviour_control_set) refers to chassis_behaviour.o(i.chassis_zero_force_control) for chassis_zero_force_control
     chassis_behaviour.o(i.chassis_behaviour_control_set) refers to chassis_behaviour.o(i.chassis_no_move_control) for chassis_no_move_control
-    chassis_behaviour.o(i.chassis_behaviour_control_set) refers to chassis_behaviour.o(i.chassis_infantry_follow_gimbal_yaw_control) for chassis_infantry_follow_gimbal_yaw_control
+    chassis_behaviour.o(i.chassis_behaviour_control_set) refers to chassis_behaviour.o(i.chassis_infantry_follow_launcher_yaw_control) for chassis_infantry_follow_launcher_yaw_control
     chassis_behaviour.o(i.chassis_behaviour_control_set) refers to chassis_behaviour.o(i.chassis_engineer_follow_chassis_yaw_control) for chassis_engineer_follow_chassis_yaw_control
     chassis_behaviour.o(i.chassis_behaviour_control_set) refers to chassis_behaviour.o(i.chassis_no_follow_yaw_control) for chassis_no_follow_yaw_control
     chassis_behaviour.o(i.chassis_behaviour_control_set) refers to chassis_behaviour.o(i.chassis_open_set_control) for chassis_open_set_control
@@ -1982,7 +1982,7 @@ Section Cross References
     chassis_behaviour.o(i.chassis_bpin_yaw_control) refers to referee.o(.bss) for robot_state
     chassis_behaviour.o(i.chassis_engineer_follow_chassis_yaw_control) refers to chassis_task.o(i.chassis_rc_to_control_vector) for chassis_rc_to_control_vector
     chassis_behaviour.o(i.chassis_engineer_follow_chassis_yaw_control) refers to user_lib.o(i.loop_fp32_constrain) for loop_fp32_constrain
-    chassis_behaviour.o(i.chassis_infantry_follow_gimbal_yaw_control) refers to chassis_task.o(i.chassis_rc_to_control_vector) for chassis_rc_to_control_vector
+    chassis_behaviour.o(i.chassis_infantry_follow_launcher_yaw_control) refers to chassis_task.o(i.chassis_rc_to_control_vector) for chassis_rc_to_control_vector
     chassis_behaviour.o(i.chassis_no_follow_yaw_control) refers to chassis_task.o(i.chassis_rc_to_control_vector) for chassis_rc_to_control_vector
     calibrate_task.o(i.RC_cmd_to_calibrate) refers to tasks.o(i.xTaskGetTickCount) for xTaskGetTickCount
     calibrate_task.o(i.RC_cmd_to_calibrate) refers to bsp_buzzer.o(i.buzzer_off) for buzzer_off
@@ -1997,10 +1997,10 @@ Section Cross References
     calibrate_task.o(i.cali_data_write) refers to bsp_flash.o(i.flash_erase_address) for flash_erase_address
     calibrate_task.o(i.cali_data_write) refers to bsp_flash.o(i.flash_write_single_address) for flash_write_single_address
     calibrate_task.o(i.cali_data_write) refers to calibrate_task.o(.bss) for .bss
-    calibrate_task.o(i.cali_gimbal_hook) refers to gimbal_task.o(i.set_cali_gimbal_hook) for set_cali_gimbal_hook
-    calibrate_task.o(i.cali_gimbal_hook) refers to gimbal_task.o(i.cmd_cali_gimbal_hook) for cmd_cali_gimbal_hook
-    calibrate_task.o(i.cali_gimbal_hook) refers to bsp_buzzer.o(i.buzzer_off) for buzzer_off
-    calibrate_task.o(i.cali_gimbal_hook) refers to bsp_buzzer.o(i.buzzer_on) for buzzer_on
+    calibrate_task.o(i.cali_launcher_hook) refers to launcher_task.o(i.set_cali_launcher_hook) for set_cali_launcher_hook
+    calibrate_task.o(i.cali_launcher_hook) refers to launcher_task.o(i.cmd_cali_launcher_hook) for cmd_cali_launcher_hook
+    calibrate_task.o(i.cali_launcher_hook) refers to bsp_buzzer.o(i.buzzer_off) for buzzer_off
+    calibrate_task.o(i.cali_launcher_hook) refers to bsp_buzzer.o(i.buzzer_on) for buzzer_on
     calibrate_task.o(i.cali_gyro_hook) refers to ins_task.o(i.INS_set_cali_gyro) for INS_set_cali_gyro
     calibrate_task.o(i.cali_gyro_hook) refers to ins_task.o(i.INS_cali_gyro) for INS_cali_gyro
     calibrate_task.o(i.cali_gyro_hook) refers to bsp_buzzer.o(i.buzzer_off) for buzzer_off
@@ -2023,83 +2023,83 @@ Section Cross References
     calibrate_task.o(i.get_control_temperature) refers to calibrate_task.o(.data) for .data
     calibrate_task.o(i.get_flash_latitude) refers to calibrate_task.o(.bss) for .bss
     calibrate_task.o(i.get_flash_latitude) refers to calibrate_task.o(.data) for .data
-    calibrate_task.o(.data) refers to calibrate_task.o(.bss) for gimbal_cali
+    calibrate_task.o(.data) refers to calibrate_task.o(.bss) for launcher_cali
     calibrate_task.o(.data) refers to calibrate_task.o(.bss) for gyro_cali
     calibrate_task.o(.data) refers to calibrate_task.o(.bss) for accel_cali
     calibrate_task.o(.data) refers to calibrate_task.o(.bss) for mag_cali
     calibrate_task.o(.data) refers to calibrate_task.o(i.cali_head_hook) for cali_head_hook
-    calibrate_task.o(.data) refers to calibrate_task.o(i.cali_gimbal_hook) for cali_gimbal_hook
+    calibrate_task.o(.data) refers to calibrate_task.o(i.cali_launcher_hook) for cali_launcher_hook
     calibrate_task.o(.data) refers to calibrate_task.o(i.cali_gyro_hook) for cali_gyro_hook
-    gimbal_behaviour.o(i.gimbal_absolute_angle_control) refers to gimbal_behaviour.o(.data) for .data
-    gimbal_behaviour.o(i.gimbal_absolute_spin_angle_control) refers to gimbal_behaviour.o(.data) for .data
-    gimbal_behaviour.o(i.gimbal_behaviour_control_set) refers to gimbal_behaviour.o(i.gimbal_zero_force_control) for gimbal_zero_force_control
-    gimbal_behaviour.o(i.gimbal_behaviour_control_set) refers to gimbal_behaviour.o(i.gimbal_init_control) for gimbal_init_control
-    gimbal_behaviour.o(i.gimbal_behaviour_control_set) refers to gimbal_behaviour.o(i.gimbal_cali_control) for gimbal_cali_control
-    gimbal_behaviour.o(i.gimbal_behaviour_control_set) refers to gimbal_behaviour.o(i.gimbal_absolute_angle_control) for gimbal_absolute_angle_control
-    gimbal_behaviour.o(i.gimbal_behaviour_control_set) refers to gimbal_behaviour.o(i.gimbal_relative_angle_control) for gimbal_relative_angle_control
-    gimbal_behaviour.o(i.gimbal_behaviour_control_set) refers to gimbal_behaviour.o(i.gimbal_motionless_control) for gimbal_motionless_control
-    gimbal_behaviour.o(i.gimbal_behaviour_control_set) refers to gimbal_behaviour.o(i.gimbal_absolute_spin_angle_control) for gimbal_absolute_spin_angle_control
-    gimbal_behaviour.o(i.gimbal_behaviour_control_set) refers to vision.o(i.vision_loop) for vision_loop
-    gimbal_behaviour.o(i.gimbal_behaviour_control_set) refers to gimbal_behaviour.o(.data) for .data
-    gimbal_behaviour.o(i.gimbal_behaviour_control_set) refers to gimbal_task.o(.data) for vision_rx
-    gimbal_behaviour.o(i.gimbal_behaviour_mode_set) refers to gimbal_behaviour.o(i.gimbal_behavour_set) for gimbal_behavour_set
-    gimbal_behaviour.o(i.gimbal_behaviour_mode_set) refers to gimbal_behaviour.o(.data) for .data
-    gimbal_behaviour.o(i.gimbal_behavour_set) refers to detect_task.o(i.toe_is_error) for toe_is_error
-    gimbal_behaviour.o(i.gimbal_behavour_set) refers to gimbal_behaviour.o(.data) for .data
-    gimbal_behaviour.o(i.gimbal_behavour_set) refers to referee.o(.bss) for robot_state
-    gimbal_behaviour.o(i.gimbal_cali_control) refers to gimbal_behaviour.o(.data) for .data
-    gimbal_behaviour.o(i.gimbal_cmd_to_chassis_stop) refers to gimbal_behaviour.o(.data) for .data
-    gimbal_behaviour.o(i.gimbal_cmd_to_shoot_stop) refers to gimbal_behaviour.o(.data) for .data
-    gimbal_behaviour.o(i.gimbal_init_control) refers to f2d.o(x$fpl$f2d) for __aeabi_f2d
-    gimbal_behaviour.o(i.gimbal_init_control) refers to fabs.o(i.__hardfp_fabs) for __hardfp_fabs
-    gimbal_behaviour.o(i.gimbal_init_control) refers to drleqf.o(x$fpl$drleqf) for __aeabi_cdrcmple
-    gimbal_behaviour.o(i.gimbal_relative_angle_control) refers to gimbal_behaviour.o(.data) for .data
-    gimbal_task.o(i.cmd_cali_gimbal_hook) refers to gimbal_task.o(i.calc_gimbal_cali) for calc_gimbal_cali
-    gimbal_task.o(i.cmd_cali_gimbal_hook) refers to gimbal_task.o(.bss) for .bss
-    gimbal_task.o(i.get_pitch_motor_point) refers to gimbal_task.o(.bss) for .bss
-    gimbal_task.o(i.get_yaw_motor_point) refers to gimbal_task.o(.bss) for .bss
-    gimbal_task.o(i.gimbal_control_loop) refers to f2d.o(x$fpl$f2d) for __aeabi_f2d
-    gimbal_task.o(i.gimbal_control_loop) refers to stm32.o(i.stm32_step_yaw) for stm32_step_yaw
-    gimbal_task.o(i.gimbal_control_loop) refers to dfix.o(x$fpl$dfix) for __aeabi_d2iz
-    gimbal_task.o(i.gimbal_control_loop) refers to stm32.o(i.stm32_step_pitch) for stm32_step_pitch
-    gimbal_task.o(i.gimbal_control_loop) refers to stm32.o(.bss) for stm32_Y_yaw
-    gimbal_task.o(i.gimbal_feedback_update) refers to gimbal_task.o(i.motor_ecd_to_angle_change) for motor_ecd_to_angle_change
-    gimbal_task.o(i.gimbal_feedback_update) refers to arm_cos_f32.o(.text) for arm_cos_f32
-    gimbal_task.o(i.gimbal_feedback_update) refers to arm_sin_f32.o(.text) for arm_sin_f32
-    gimbal_task.o(i.gimbal_init) refers to stm32f4xx_hal_gpio.o(i.HAL_GPIO_WritePin) for HAL_GPIO_WritePin
-    gimbal_task.o(i.gimbal_init) refers to can_receive.o(i.get_yaw_gimbal_motor_measure_point) for get_yaw_gimbal_motor_measure_point
-    gimbal_task.o(i.gimbal_init) refers to can_receive.o(i.get_pitch_gimbal_motor_measure_point) for get_pitch_gimbal_motor_measure_point
-    gimbal_task.o(i.gimbal_init) refers to bsp_usart.o(i.get_vision_fifo) for get_vision_fifo
-    gimbal_task.o(i.gimbal_init) refers to ins_task.o(i.get_INS_angle_point) for get_INS_angle_point
-    gimbal_task.o(i.gimbal_init) refers to ins_task.o(i.get_gyro_data_point) for get_gyro_data_point
-    gimbal_task.o(i.gimbal_init) refers to remote_control.o(i.get_remote_control_point) for get_remote_control_point
-    gimbal_task.o(i.gimbal_init) refers to stm32.o(i.stm32_pid_yaw_init) for stm32_pid_yaw_init
-    gimbal_task.o(i.gimbal_init) refers to stm32.o(i.stm32_pid_pitch_init) for stm32_pid_pitch_init
-    gimbal_task.o(i.gimbal_init) refers to gimbal_task.o(i.gimbal_feedback_update) for gimbal_feedback_update
-    gimbal_task.o(i.gimbal_init) refers to gimbal_task.o(.data) for .data
-    gimbal_task.o(i.gimbal_pitch_absolute_angle_limit) refers to user_lib.o(i.loop_fp32_constrain) for loop_fp32_constrain
-    gimbal_task.o(i.gimbal_pitch_absolute_angle_limit) refers to gimbal_task.o(.data) for .data
-    gimbal_task.o(i.gimbal_set_control) refers to gimbal_behaviour.o(i.gimbal_behaviour_control_set) for gimbal_behaviour_control_set
-    gimbal_task.o(i.gimbal_set_control) refers to gimbal_task.o(i.gimbal_yaw_absolute_angle_limit) for gimbal_yaw_absolute_angle_limit
-    gimbal_task.o(i.gimbal_set_control) refers to gimbal_task.o(i.gimbal_yaw_relative_angle_limit) for gimbal_yaw_relative_angle_limit
-    gimbal_task.o(i.gimbal_set_control) refers to gimbal_task.o(i.gimbal_pitch_absolute_angle_limit) for gimbal_pitch_absolute_angle_limit
-    gimbal_task.o(i.gimbal_set_control) refers to gimbal_task.o(i.gimbal_pitch_relative_angle_limit) for gimbal_pitch_relative_angle_limit
-    gimbal_task.o(i.gimbal_set_mode) refers to gimbal_behaviour.o(i.gimbal_behaviour_mode_set) for gimbal_behaviour_mode_set
-    gimbal_task.o(i.gimbal_task) refers to tasks.o(i.vTaskDelay) for vTaskDelay
-    gimbal_task.o(i.gimbal_task) refers to gimbal_task.o(i.gimbal_init) for gimbal_init
-    gimbal_task.o(i.gimbal_task) refers to gimbal_task.o(i.gimbal_feedback_update) for gimbal_feedback_update
-    gimbal_task.o(i.gimbal_task) refers to detect_task.o(i.toe_is_error) for toe_is_error
-    gimbal_task.o(i.gimbal_task) refers to can_receive.o(i.CAN_cmd_gimbal) for CAN_cmd_gimbal
-    gimbal_task.o(i.gimbal_task) refers to tasks.o(i.uxTaskGetStackHighWaterMark) for uxTaskGetStackHighWaterMark
-    gimbal_task.o(i.gimbal_task) refers to gimbal_task.o(i.gimbal_set_mode) for gimbal_set_mode
-    gimbal_task.o(i.gimbal_task) refers to gimbal_task.o(i.gimbal_mode_change_control_transit) for gimbal_mode_change_control_transit
-    gimbal_task.o(i.gimbal_task) refers to gimbal_task.o(i.gimbal_set_control) for gimbal_set_control
-    gimbal_task.o(i.gimbal_task) refers to gimbal_task.o(i.gimbal_control_loop) for gimbal_control_loop
-    gimbal_task.o(i.gimbal_task) refers to gimbal_task.o(.bss) for .bss
-    gimbal_task.o(i.gimbal_task) refers to gimbal_task.o(.data) for .data
-    gimbal_task.o(i.gimbal_yaw_absolute_angle_limit) refers to user_lib.o(i.loop_fp32_constrain) for loop_fp32_constrain
-    gimbal_task.o(i.gimbal_yaw_absolute_angle_limit) refers to gimbal_task.o(.data) for .data
-    gimbal_task.o(i.set_cali_gimbal_hook) refers to gimbal_task.o(.bss) for .bss
+    launcher_behaviour.o(i.launcher_absolute_angle_control) refers to launcher_behaviour.o(.data) for .data
+    launcher_behaviour.o(i.launcher_absolute_spin_angle_control) refers to launcher_behaviour.o(.data) for .data
+    launcher_behaviour.o(i.launcher_behaviour_control_set) refers to launcher_behaviour.o(i.launcher_zero_force_control) for launcher_zero_force_control
+    launcher_behaviour.o(i.launcher_behaviour_control_set) refers to launcher_behaviour.o(i.launcher_init_control) for launcher_init_control
+    launcher_behaviour.o(i.launcher_behaviour_control_set) refers to launcher_behaviour.o(i.launcher_cali_control) for launcher_cali_control
+    launcher_behaviour.o(i.launcher_behaviour_control_set) refers to launcher_behaviour.o(i.launcher_absolute_angle_control) for launcher_absolute_angle_control
+    launcher_behaviour.o(i.launcher_behaviour_control_set) refers to launcher_behaviour.o(i.launcher_relative_angle_control) for launcher_relative_angle_control
+    launcher_behaviour.o(i.launcher_behaviour_control_set) refers to launcher_behaviour.o(i.launcher_motionless_control) for launcher_motionless_control
+    launcher_behaviour.o(i.launcher_behaviour_control_set) refers to launcher_behaviour.o(i.launcher_absolute_spin_angle_control) for launcher_absolute_spin_angle_control
+    launcher_behaviour.o(i.launcher_behaviour_control_set) refers to vision.o(i.vision_loop) for vision_loop
+    launcher_behaviour.o(i.launcher_behaviour_control_set) refers to launcher_behaviour.o(.data) for .data
+    launcher_behaviour.o(i.launcher_behaviour_control_set) refers to launcher_task.o(.data) for vision_rx
+    launcher_behaviour.o(i.launcher_behaviour_mode_set) refers to launcher_behaviour.o(i.launcher_behavour_set) for launcher_behavour_set
+    launcher_behaviour.o(i.launcher_behaviour_mode_set) refers to launcher_behaviour.o(.data) for .data
+    launcher_behaviour.o(i.launcher_behavour_set) refers to detect_task.o(i.toe_is_error) for toe_is_error
+    launcher_behaviour.o(i.launcher_behavour_set) refers to launcher_behaviour.o(.data) for .data
+    launcher_behaviour.o(i.launcher_behavour_set) refers to referee.o(.bss) for robot_state
+    launcher_behaviour.o(i.launcher_cali_control) refers to launcher_behaviour.o(.data) for .data
+    launcher_behaviour.o(i.launcher_cmd_to_chassis_stop) refers to launcher_behaviour.o(.data) for .data
+    launcher_behaviour.o(i.launcher_cmd_to_shoot_stop) refers to launcher_behaviour.o(.data) for .data
+    launcher_behaviour.o(i.launcher_init_control) refers to f2d.o(x$fpl$f2d) for __aeabi_f2d
+    launcher_behaviour.o(i.launcher_init_control) refers to fabs.o(i.__hardfp_fabs) for __hardfp_fabs
+    launcher_behaviour.o(i.launcher_init_control) refers to drleqf.o(x$fpl$drleqf) for __aeabi_cdrcmple
+    launcher_behaviour.o(i.launcher_relative_angle_control) refers to launcher_behaviour.o(.data) for .data
+    launcher_task.o(i.cmd_cali_launcher_hook) refers to launcher_task.o(i.calc_launcher_cali) for calc_launcher_cali
+    launcher_task.o(i.cmd_cali_launcher_hook) refers to launcher_task.o(.bss) for .bss
+    launcher_task.o(i.get_pitch_motor_point) refers to launcher_task.o(.bss) for .bss
+    launcher_task.o(i.get_yaw_motor_point) refers to launcher_task.o(.bss) for .bss
+    launcher_task.o(i.launcher_control_loop) refers to f2d.o(x$fpl$f2d) for __aeabi_f2d
+    launcher_task.o(i.launcher_control_loop) refers to stm32.o(i.stm32_step_yaw) for stm32_step_yaw
+    launcher_task.o(i.launcher_control_loop) refers to dfix.o(x$fpl$dfix) for __aeabi_d2iz
+    launcher_task.o(i.launcher_control_loop) refers to stm32.o(i.stm32_step_pitch) for stm32_step_pitch
+    launcher_task.o(i.launcher_control_loop) refers to stm32.o(.bss) for stm32_Y_yaw
+    launcher_task.o(i.launcher_feedback_update) refers to launcher_task.o(i.motor_ecd_to_angle_change) for motor_ecd_to_angle_change
+    launcher_task.o(i.launcher_feedback_update) refers to arm_cos_f32.o(.text) for arm_cos_f32
+    launcher_task.o(i.launcher_feedback_update) refers to arm_sin_f32.o(.text) for arm_sin_f32
+    launcher_task.o(i.launcher_init) refers to stm32f4xx_hal_gpio.o(i.HAL_GPIO_WritePin) for HAL_GPIO_WritePin
+    launcher_task.o(i.launcher_init) refers to can_receive.o(i.get_yaw_launcher_motor_measure_point) for get_yaw_launcher_motor_measure_point
+    launcher_task.o(i.launcher_init) refers to can_receive.o(i.get_pitch_launcher_motor_measure_point) for get_pitch_launcher_motor_measure_point
+    launcher_task.o(i.launcher_init) refers to bsp_usart.o(i.get_vision_fifo) for get_vision_fifo
+    launcher_task.o(i.launcher_init) refers to ins_task.o(i.get_INS_angle_point) for get_INS_angle_point
+    launcher_task.o(i.launcher_init) refers to ins_task.o(i.get_gyro_data_point) for get_gyro_data_point
+    launcher_task.o(i.launcher_init) refers to remote_control.o(i.get_remote_control_point) for get_remote_control_point
+    launcher_task.o(i.launcher_init) refers to stm32.o(i.stm32_pid_yaw_init) for stm32_pid_yaw_init
+    launcher_task.o(i.launcher_init) refers to stm32.o(i.stm32_pid_pitch_init) for stm32_pid_pitch_init
+    launcher_task.o(i.launcher_init) refers to launcher_task.o(i.launcher_feedback_update) for launcher_feedback_update
+    launcher_task.o(i.launcher_init) refers to launcher_task.o(.data) for .data
+    launcher_task.o(i.launcher_pitch_absolute_angle_limit) refers to user_lib.o(i.loop_fp32_constrain) for loop_fp32_constrain
+    launcher_task.o(i.launcher_pitch_absolute_angle_limit) refers to launcher_task.o(.data) for .data
+    launcher_task.o(i.launcher_set_control) refers to launcher_behaviour.o(i.launcher_behaviour_control_set) for launcher_behaviour_control_set
+    launcher_task.o(i.launcher_set_control) refers to launcher_task.o(i.launcher_yaw_absolute_angle_limit) for launcher_yaw_absolute_angle_limit
+    launcher_task.o(i.launcher_set_control) refers to launcher_task.o(i.launcher_yaw_relative_angle_limit) for launcher_yaw_relative_angle_limit
+    launcher_task.o(i.launcher_set_control) refers to launcher_task.o(i.launcher_pitch_absolute_angle_limit) for launcher_pitch_absolute_angle_limit
+    launcher_task.o(i.launcher_set_control) refers to launcher_task.o(i.launcher_pitch_relative_angle_limit) for launcher_pitch_relative_angle_limit
+    launcher_task.o(i.launcher_set_mode) refers to launcher_behaviour.o(i.launcher_behaviour_mode_set) for launcher_behaviour_mode_set
+    launcher_task.o(i.launcher_task) refers to tasks.o(i.vTaskDelay) for vTaskDelay
+    launcher_task.o(i.launcher_task) refers to launcher_task.o(i.launcher_init) for launcher_init
+    launcher_task.o(i.launcher_task) refers to launcher_task.o(i.launcher_feedback_update) for launcher_feedback_update
+    launcher_task.o(i.launcher_task) refers to detect_task.o(i.toe_is_error) for toe_is_error
+    launcher_task.o(i.launcher_task) refers to can_receive.o(i.CAN_cmd_launcher) for CAN_cmd_launcher
+    launcher_task.o(i.launcher_task) refers to tasks.o(i.uxTaskGetStackHighWaterMark) for uxTaskGetStackHighWaterMark
+    launcher_task.o(i.launcher_task) refers to launcher_task.o(i.launcher_set_mode) for launcher_set_mode
+    launcher_task.o(i.launcher_task) refers to launcher_task.o(i.launcher_mode_change_control_transit) for launcher_mode_change_control_transit
+    launcher_task.o(i.launcher_task) refers to launcher_task.o(i.launcher_set_control) for launcher_set_control
+    launcher_task.o(i.launcher_task) refers to launcher_task.o(i.launcher_control_loop) for launcher_control_loop
+    launcher_task.o(i.launcher_task) refers to launcher_task.o(.bss) for .bss
+    launcher_task.o(i.launcher_task) refers to launcher_task.o(.data) for .data
+    launcher_task.o(i.launcher_yaw_absolute_angle_limit) refers to user_lib.o(i.loop_fp32_constrain) for loop_fp32_constrain
+    launcher_task.o(i.launcher_yaw_absolute_angle_limit) refers to launcher_task.o(.data) for .data
+    launcher_task.o(i.set_cali_launcher_hook) refers to launcher_task.o(.bss) for .bss
     ins_task.o(i.DMA2_Stream2_IRQHandler) refers to spi.o(.bss) for hspi1
     ins_task.o(i.DMA2_Stream2_IRQHandler) refers to stm32f4xx_hal_gpio.o(i.HAL_GPIO_WritePin) for HAL_GPIO_WritePin
     ins_task.o(i.DMA2_Stream2_IRQHandler) refers to ins_task.o(i.imu_cmd_spi_dma) for imu_cmd_spi_dma
@@ -4160,14 +4160,14 @@ Removing Unused input sections from the image.
     Removing calibrate_task.o(.revsh_text), (4 bytes).
     Removing calibrate_task.o(.rrx_text), (6 bytes).
     Removing calibrate_task.o(i.get_flash_latitude), (40 bytes).
-    Removing gimbal_behaviour.o(.rev16_text), (4 bytes).
-    Removing gimbal_behaviour.o(.revsh_text), (4 bytes).
-    Removing gimbal_behaviour.o(.rrx_text), (6 bytes).
-    Removing gimbal_behaviour.o(i.gimbal_cmd_to_chassis_stop), (32 bytes).
-    Removing gimbal_behaviour.o(i.gimbal_cmd_to_shoot_stop), (28 bytes).
-    Removing gimbal_task.o(.rev16_text), (4 bytes).
-    Removing gimbal_task.o(.revsh_text), (4 bytes).
-    Removing gimbal_task.o(.rrx_text), (6 bytes).
+    Removing launcher_behaviour.o(.rev16_text), (4 bytes).
+    Removing launcher_behaviour.o(.revsh_text), (4 bytes).
+    Removing launcher_behaviour.o(.rrx_text), (6 bytes).
+    Removing launcher_behaviour.o(i.launcher_cmd_to_chassis_stop), (32 bytes).
+    Removing launcher_behaviour.o(i.launcher_cmd_to_shoot_stop), (28 bytes).
+    Removing launcher_task.o(.rev16_text), (4 bytes).
+    Removing launcher_task.o(.revsh_text), (4 bytes).
+    Removing launcher_task.o(.rrx_text), (6 bytes).
     Removing ins_task.o(.rev16_text), (4 bytes).
     Removing ins_task.o(.revsh_text), (4 bytes).
     Removing ins_task.o(.rrx_text), (6 bytes).
@@ -4763,8 +4763,8 @@ Image Symbol Table
     ..\\application\\calibrate_task.c        0x00000000   Number         0  calibrate_task.o ABSOLUTE
     ..\\application\\chassis_behaviour.c     0x00000000   Number         0  chassis_behaviour.o ABSOLUTE
     ..\\application\\chassis_task.c          0x00000000   Number         0  chassis_task.o ABSOLUTE
-    ..\\application\\gimbal_behaviour.c      0x00000000   Number         0  gimbal_behaviour.o ABSOLUTE
-    ..\\application\\gimbal_task.c           0x00000000   Number         0  gimbal_task.o ABSOLUTE
+    ..\\application\\launcher_behaviour.c      0x00000000   Number         0  launcher_behaviour.o ABSOLUTE
+    ..\\application\\launcher_task.c           0x00000000   Number         0  launcher_task.o ABSOLUTE
     ..\\application\\led_flow_task.c         0x00000000   Number         0  led_flow_task.o ABSOLUTE
     ..\\application\\referee.c               0x00000000   Number         0  referee.o ABSOLUTE
     ..\\application\\referee_usart_task.c    0x00000000   Number         0  referee_usart_task.o ABSOLUTE
@@ -4805,8 +4805,8 @@ Image Symbol Table
     ..\application\chassis_behaviour.c       0x00000000   Number         0  chassis_behaviour.o ABSOLUTE
     ..\application\chassis_task.c            0x00000000   Number         0  chassis_task.o ABSOLUTE
     ..\application\detect_task.c             0x00000000   Number         0  detect_task.o ABSOLUTE
-    ..\application\gimbal_behaviour.c        0x00000000   Number         0  gimbal_behaviour.o ABSOLUTE
-    ..\application\gimbal_task.c             0x00000000   Number         0  gimbal_task.o ABSOLUTE
+    ..\application\launcher_behaviour.c        0x00000000   Number         0  launcher_behaviour.o ABSOLUTE
+    ..\application\launcher_task.c             0x00000000   Number         0  launcher_task.o ABSOLUTE
     ..\application\led_flow_task.c           0x00000000   Number         0  led_flow_task.o ABSOLUTE
     ..\application\referee.c                 0x00000000   Number         0  referee.o ABSOLUTE
     ..\application\referee_usart_task.c      0x00000000   Number         0  referee_usart_task.o ABSOLUTE
@@ -5031,7 +5031,7 @@ Image Symbol Table
     i.CAN2_RX0_IRQHandler                    0x08002c5c   Section        0  stm32f4xx_it.o(i.CAN2_RX0_IRQHandler)
     i.CAN_cmd_chassis                        0x08002c68   Section        0  can_receive.o(i.CAN_cmd_chassis)
     i.CAN_cmd_chassis_reset_ID               0x08002cb0   Section        0  can_receive.o(i.CAN_cmd_chassis_reset_ID)
-    i.CAN_cmd_gimbal                         0x08002cf0   Section        0  can_receive.o(i.CAN_cmd_gimbal)
+    i.CAN_cmd_launcher                         0x08002cf0   Section        0  can_receive.o(i.CAN_cmd_launcher)
     i.CDC_Control_FS                         0x08002d38   Section        0  usbd_cdc_if.o(i.CDC_Control_FS)
     CDC_Control_FS                           0x08002d39   Thumb Code     8  usbd_cdc_if.o(i.CDC_Control_FS)
     i.CDC_DeInit_FS                          0x08002d40   Section        0  usbd_cdc_if.o(i.CDC_DeInit_FS)
@@ -5453,14 +5453,14 @@ Image Symbol Table
     i.buzzer_on                              0x0800eb98   Section        0  bsp_buzzer.o(i.buzzer_on)
     i.calc_battery_percentage                0x0800eba8   Section        0  voltage_task.o(i.calc_battery_percentage)
     calc_battery_percentage                  0x0800eba9   Thumb Code   156  voltage_task.o(i.calc_battery_percentage)
-    i.calc_gimbal_cali                       0x0800ec74   Section        0  gimbal_task.o(i.calc_gimbal_cali)
-    calc_gimbal_cali                         0x0800ec75   Thumb Code     2  gimbal_task.o(i.calc_gimbal_cali)
+    i.calc_launcher_cali                       0x0800ec74   Section        0  launcher_task.o(i.calc_launcher_cali)
+    calc_launcher_cali                         0x0800ec75   Thumb Code     2  launcher_task.o(i.calc_launcher_cali)
     i.cali_data_read                         0x0800ec78   Section        0  calibrate_task.o(i.cali_data_read)
     cali_data_read                           0x0800ec79   Thumb Code   130  calibrate_task.o(i.cali_data_read)
     i.cali_data_write                        0x0800ed04   Section        0  calibrate_task.o(i.cali_data_write)
     cali_data_write                          0x0800ed05   Thumb Code   100  calibrate_task.o(i.cali_data_write)
-    i.cali_gimbal_hook                       0x0800ed70   Section        0  calibrate_task.o(i.cali_gimbal_hook)
-    cali_gimbal_hook                         0x0800ed71   Thumb Code    86  calibrate_task.o(i.cali_gimbal_hook)
+    i.cali_launcher_hook                       0x0800ed70   Section        0  calibrate_task.o(i.cali_launcher_hook)
+    cali_launcher_hook                         0x0800ed71   Thumb Code    86  calibrate_task.o(i.cali_launcher_hook)
     i.cali_gyro_hook                         0x0800edc8   Section        0  calibrate_task.o(i.cali_gyro_hook)
     cali_gyro_hook                           0x0800edc9   Thumb Code    84  calibrate_task.o(i.cali_gyro_hook)
     i.cali_head_hook                         0x0800ee20   Section        0  calibrate_task.o(i.cali_head_hook)
@@ -5478,8 +5478,8 @@ Image Symbol Table
     chassis_engineer_follow_chassis_yaw_control 0x0800f455   Thumb Code    72  chassis_behaviour.o(i.chassis_engineer_follow_chassis_yaw_control)
     i.chassis_feedback_update                0x0800f4a8   Section        0  chassis_task.o(i.chassis_feedback_update)
     chassis_feedback_update                  0x0800f4a9   Thumb Code   256  chassis_task.o(i.chassis_feedback_update)
-    i.chassis_infantry_follow_gimbal_yaw_control 0x0800f5bc   Section        0  chassis_behaviour.o(i.chassis_infantry_follow_gimbal_yaw_control)
-    chassis_infantry_follow_gimbal_yaw_control 0x0800f5bd   Thumb Code    36  chassis_behaviour.o(i.chassis_infantry_follow_gimbal_yaw_control)
+    i.chassis_infantry_follow_launcher_yaw_control 0x0800f5bc   Section        0  chassis_behaviour.o(i.chassis_infantry_follow_launcher_yaw_control)
+    chassis_infantry_follow_launcher_yaw_control 0x0800f5bd   Thumb Code    36  chassis_behaviour.o(i.chassis_infantry_follow_launcher_yaw_control)
     i.chassis_init                           0x0800f5e4   Section        0  chassis_task.o(i.chassis_init)
     chassis_init                             0x0800f5e5   Thumb Code   202  chassis_task.o(i.chassis_init)
     i.chassis_mode_change_control_transit    0x0800f6c4   Section        0  chassis_task.o(i.chassis_mode_change_control_transit)
@@ -5500,7 +5500,7 @@ Image Symbol Table
     chassis_vector_to_mecanum_wheel_speed    0x0800fbf9   Thumb Code    62  chassis_task.o(i.chassis_vector_to_mecanum_wheel_speed)
     i.chassis_zero_force_control             0x0800fc40   Section        0  chassis_behaviour.o(i.chassis_zero_force_control)
     chassis_zero_force_control               0x0800fc41   Thumb Code    34  chassis_behaviour.o(i.chassis_zero_force_control)
-    i.cmd_cali_gimbal_hook                   0x0800fc68   Section        0  gimbal_task.o(i.cmd_cali_gimbal_hook)
+    i.cmd_cali_launcher_hook                   0x0800fc68   Section        0  launcher_task.o(i.cmd_cali_launcher_hook)
     i.delay_init                             0x0800fd58   Section        0  bsp_delay.o(i.delay_init)
     i.delay_us                               0x0800fd80   Section        0  bsp_delay.o(i.delay_us)
     i.detect_hook                            0x0800fdb8   Section        0  detect_task.o(i.detect_hook)
@@ -5531,52 +5531,52 @@ Image Symbol Table
     i.get_error_list_point                   0x08010438   Section        0  detect_task.o(i.get_error_list_point)
     i.get_gyro_data_point                    0x08010440   Section        0  ins_task.o(i.get_gyro_data_point)
     i.get_next_flash_address                 0x08010448   Section        0  bsp_flash.o(i.get_next_flash_address)
-    i.get_pitch_gimbal_motor_measure_point   0x0801051c   Section        0  can_receive.o(i.get_pitch_gimbal_motor_measure_point)
-    i.get_pitch_motor_point                  0x08010524   Section        0  gimbal_task.o(i.get_pitch_motor_point)
+    i.get_pitch_launcher_motor_measure_point   0x0801051c   Section        0  can_receive.o(i.get_pitch_launcher_motor_measure_point)
+    i.get_pitch_motor_point                  0x08010524   Section        0  launcher_task.o(i.get_pitch_motor_point)
     i.get_remote_control_point               0x0801052c   Section        0  remote_control.o(i.get_remote_control_point)
     i.get_temprate                           0x08010534   Section        0  bsp_adc.o(i.get_temprate)
     i.get_vision_fifo                        0x08010578   Section        0  bsp_usart.o(i.get_vision_fifo)
-    i.get_yaw_gimbal_motor_measure_point     0x08010580   Section        0  can_receive.o(i.get_yaw_gimbal_motor_measure_point)
-    i.get_yaw_motor_point                    0x08010588   Section        0  gimbal_task.o(i.get_yaw_motor_point)
-    i.gimbal_absolute_angle_control          0x08010590   Section        0  gimbal_behaviour.o(i.gimbal_absolute_angle_control)
-    gimbal_absolute_angle_control            0x08010591   Thumb Code   144  gimbal_behaviour.o(i.gimbal_absolute_angle_control)
-    i.gimbal_absolute_spin_angle_control     0x08010630   Section        0  gimbal_behaviour.o(i.gimbal_absolute_spin_angle_control)
-    gimbal_absolute_spin_angle_control       0x08010631   Thumb Code   144  gimbal_behaviour.o(i.gimbal_absolute_spin_angle_control)
-    i.gimbal_behaviour_control_set           0x080106d0   Section        0  gimbal_behaviour.o(i.gimbal_behaviour_control_set)
-    i.gimbal_behaviour_mode_set              0x080107a8   Section        0  gimbal_behaviour.o(i.gimbal_behaviour_mode_set)
-    i.gimbal_behavour_set                    0x08010824   Section        0  gimbal_behaviour.o(i.gimbal_behavour_set)
-    gimbal_behavour_set                      0x08010825   Thumb Code   184  gimbal_behaviour.o(i.gimbal_behavour_set)
-    i.gimbal_cali_control                    0x080108e4   Section        0  gimbal_behaviour.o(i.gimbal_cali_control)
-    gimbal_cali_control                      0x080108e5   Thumb Code   282  gimbal_behaviour.o(i.gimbal_cali_control)
-    i.gimbal_control_loop                    0x08010a14   Section        0  gimbal_task.o(i.gimbal_control_loop)
-    gimbal_control_loop                      0x08010a15   Thumb Code   376  gimbal_task.o(i.gimbal_control_loop)
-    i.gimbal_feedback_update                 0x08010b9c   Section        0  gimbal_task.o(i.gimbal_feedback_update)
-    gimbal_feedback_update                   0x08010b9d   Thumb Code   122  gimbal_task.o(i.gimbal_feedback_update)
-    i.gimbal_init                            0x08010c18   Section        0  gimbal_task.o(i.gimbal_init)
-    gimbal_init                              0x08010c19   Thumb Code   186  gimbal_task.o(i.gimbal_init)
-    i.gimbal_init_control                    0x08010cec   Section        0  gimbal_behaviour.o(i.gimbal_init_control)
-    gimbal_init_control                      0x08010ced   Thumb Code   126  gimbal_behaviour.o(i.gimbal_init_control)
-    i.gimbal_mode_change_control_transit     0x08010d80   Section        0  gimbal_task.o(i.gimbal_mode_change_control_transit)
-    gimbal_mode_change_control_transit       0x08010d81   Thumb Code   178  gimbal_task.o(i.gimbal_mode_change_control_transit)
-    i.gimbal_motionless_control              0x08010e34   Section        0  gimbal_behaviour.o(i.gimbal_motionless_control)
-    gimbal_motionless_control                0x08010e35   Thumb Code    26  gimbal_behaviour.o(i.gimbal_motionless_control)
-    i.gimbal_pitch_absolute_angle_limit      0x08010e54   Section        0  gimbal_task.o(i.gimbal_pitch_absolute_angle_limit)
-    gimbal_pitch_absolute_angle_limit        0x08010e55   Thumb Code   166  gimbal_task.o(i.gimbal_pitch_absolute_angle_limit)
-    i.gimbal_pitch_relative_angle_limit      0x08010f18   Section        0  gimbal_task.o(i.gimbal_pitch_relative_angle_limit)
-    gimbal_pitch_relative_angle_limit        0x08010f19   Thumb Code    56  gimbal_task.o(i.gimbal_pitch_relative_angle_limit)
-    i.gimbal_relative_angle_control          0x08010f60   Section        0  gimbal_behaviour.o(i.gimbal_relative_angle_control)
-    gimbal_relative_angle_control            0x08010f61   Thumb Code   144  gimbal_behaviour.o(i.gimbal_relative_angle_control)
-    i.gimbal_set_control                     0x08011000   Section        0  gimbal_task.o(i.gimbal_set_control)
-    gimbal_set_control                       0x08011001   Thumb Code   146  gimbal_task.o(i.gimbal_set_control)
-    i.gimbal_set_mode                        0x08011098   Section        0  gimbal_task.o(i.gimbal_set_mode)
-    gimbal_set_mode                          0x08011099   Thumb Code    10  gimbal_task.o(i.gimbal_set_mode)
-    i.gimbal_task                            0x080110a4   Section        0  gimbal_task.o(i.gimbal_task)
-    i.gimbal_yaw_absolute_angle_limit        0x08011148   Section        0  gimbal_task.o(i.gimbal_yaw_absolute_angle_limit)
-    gimbal_yaw_absolute_angle_limit          0x08011149   Thumb Code    36  gimbal_task.o(i.gimbal_yaw_absolute_angle_limit)
-    i.gimbal_yaw_relative_angle_limit        0x08011178   Section        0  gimbal_task.o(i.gimbal_yaw_relative_angle_limit)
-    gimbal_yaw_relative_angle_limit          0x08011179   Thumb Code    18  gimbal_task.o(i.gimbal_yaw_relative_angle_limit)
-    i.gimbal_zero_force_control              0x0801118c   Section        0  gimbal_behaviour.o(i.gimbal_zero_force_control)
-    gimbal_zero_force_control                0x0801118d   Thumb Code    26  gimbal_behaviour.o(i.gimbal_zero_force_control)
+    i.get_yaw_launcher_motor_measure_point     0x08010580   Section        0  can_receive.o(i.get_yaw_launcher_motor_measure_point)
+    i.get_yaw_motor_point                    0x08010588   Section        0  launcher_task.o(i.get_yaw_motor_point)
+    i.launcher_absolute_angle_control          0x08010590   Section        0  launcher_behaviour.o(i.launcher_absolute_angle_control)
+    launcher_absolute_angle_control            0x08010591   Thumb Code   144  launcher_behaviour.o(i.launcher_absolute_angle_control)
+    i.launcher_absolute_spin_angle_control     0x08010630   Section        0  launcher_behaviour.o(i.launcher_absolute_spin_angle_control)
+    launcher_absolute_spin_angle_control       0x08010631   Thumb Code   144  launcher_behaviour.o(i.launcher_absolute_spin_angle_control)
+    i.launcher_behaviour_control_set           0x080106d0   Section        0  launcher_behaviour.o(i.launcher_behaviour_control_set)
+    i.launcher_behaviour_mode_set              0x080107a8   Section        0  launcher_behaviour.o(i.launcher_behaviour_mode_set)
+    i.launcher_behavour_set                    0x08010824   Section        0  launcher_behaviour.o(i.launcher_behavour_set)
+    launcher_behavour_set                      0x08010825   Thumb Code   184  launcher_behaviour.o(i.launcher_behavour_set)
+    i.launcher_cali_control                    0x080108e4   Section        0  launcher_behaviour.o(i.launcher_cali_control)
+    launcher_cali_control                      0x080108e5   Thumb Code   282  launcher_behaviour.o(i.launcher_cali_control)
+    i.launcher_control_loop                    0x08010a14   Section        0  launcher_task.o(i.launcher_control_loop)
+    launcher_control_loop                      0x08010a15   Thumb Code   376  launcher_task.o(i.launcher_control_loop)
+    i.launcher_feedback_update                 0x08010b9c   Section        0  launcher_task.o(i.launcher_feedback_update)
+    launcher_feedback_update                   0x08010b9d   Thumb Code   122  launcher_task.o(i.launcher_feedback_update)
+    i.launcher_init                            0x08010c18   Section        0  launcher_task.o(i.launcher_init)
+    launcher_init                              0x08010c19   Thumb Code   186  launcher_task.o(i.launcher_init)
+    i.launcher_init_control                    0x08010cec   Section        0  launcher_behaviour.o(i.launcher_init_control)
+    launcher_init_control                      0x08010ced   Thumb Code   126  launcher_behaviour.o(i.launcher_init_control)
+    i.launcher_mode_change_control_transit     0x08010d80   Section        0  launcher_task.o(i.launcher_mode_change_control_transit)
+    launcher_mode_change_control_transit       0x08010d81   Thumb Code   178  launcher_task.o(i.launcher_mode_change_control_transit)
+    i.launcher_motionless_control              0x08010e34   Section        0  launcher_behaviour.o(i.launcher_motionless_control)
+    launcher_motionless_control                0x08010e35   Thumb Code    26  launcher_behaviour.o(i.launcher_motionless_control)
+    i.launcher_pitch_absolute_angle_limit      0x08010e54   Section        0  launcher_task.o(i.launcher_pitch_absolute_angle_limit)
+    launcher_pitch_absolute_angle_limit        0x08010e55   Thumb Code   166  launcher_task.o(i.launcher_pitch_absolute_angle_limit)
+    i.launcher_pitch_relative_angle_limit      0x08010f18   Section        0  launcher_task.o(i.launcher_pitch_relative_angle_limit)
+    launcher_pitch_relative_angle_limit        0x08010f19   Thumb Code    56  launcher_task.o(i.launcher_pitch_relative_angle_limit)
+    i.launcher_relative_angle_control          0x08010f60   Section        0  launcher_behaviour.o(i.launcher_relative_angle_control)
+    launcher_relative_angle_control            0x08010f61   Thumb Code   144  launcher_behaviour.o(i.launcher_relative_angle_control)
+    i.launcher_set_control                     0x08011000   Section        0  launcher_task.o(i.launcher_set_control)
+    launcher_set_control                       0x08011001   Thumb Code   146  launcher_task.o(i.launcher_set_control)
+    i.launcher_set_mode                        0x08011098   Section        0  launcher_task.o(i.launcher_set_mode)
+    launcher_set_mode                          0x08011099   Thumb Code    10  launcher_task.o(i.launcher_set_mode)
+    i.launcher_task                            0x080110a4   Section        0  launcher_task.o(i.launcher_task)
+    i.launcher_yaw_absolute_angle_limit        0x08011148   Section        0  launcher_task.o(i.launcher_yaw_absolute_angle_limit)
+    launcher_yaw_absolute_angle_limit          0x08011149   Thumb Code    36  launcher_task.o(i.launcher_yaw_absolute_angle_limit)
+    i.launcher_yaw_relative_angle_limit        0x08011178   Section        0  launcher_task.o(i.launcher_yaw_relative_angle_limit)
+    launcher_yaw_relative_angle_limit          0x08011179   Thumb Code    18  launcher_task.o(i.launcher_yaw_relative_angle_limit)
+    i.launcher_zero_force_control              0x0801118c   Section        0  launcher_behaviour.o(i.launcher_zero_force_control)
+    launcher_zero_force_control                0x0801118d   Thumb Code    26  launcher_behaviour.o(i.launcher_zero_force_control)
     i.gyro_offset_calc                       0x080111ac   Section        0  ins_task.o(i.gyro_offset_calc)
     i.imu_cali_slove                         0x080111f8   Section        0  ins_task.o(i.imu_cali_slove)
     imu_cali_slove                           0x080111f9   Thumb Code   228  ins_task.o(i.imu_cali_slove)
@@ -5600,8 +5600,8 @@ Image Symbol Table
     i.main                                   0x080117aa   Section        0  main.o(i.main)
     i.makeFreeRtosPriority                   0x0801182c   Section        0  cmsis_os.o(i.makeFreeRtosPriority)
     makeFreeRtosPriority                     0x0801182d   Thumb Code    12  cmsis_os.o(i.makeFreeRtosPriority)
-    i.motor_ecd_to_angle_change              0x08011838   Section        0  gimbal_task.o(i.motor_ecd_to_angle_change)
-    motor_ecd_to_angle_change                0x08011839   Thumb Code    46  gimbal_task.o(i.motor_ecd_to_angle_change)
+    i.motor_ecd_to_angle_change              0x08011838   Section        0  launcher_task.o(i.motor_ecd_to_angle_change)
+    motor_ecd_to_angle_change                0x08011839   Thumb Code    46  launcher_task.o(i.motor_ecd_to_angle_change)
     i.osDelay                                0x0801186c   Section        0  cmsis_os.o(i.osDelay)
     i.osKernelStart                          0x0801187c   Section        0  cmsis_os.o(i.osKernelStart)
     i.osSystickHandler                       0x08011886   Section        0  cmsis_os.o(i.osSystickHandler)
@@ -5675,7 +5675,7 @@ Image Symbol Table
     i.sbus_to_rc                             0x0801259c   Section        0  remote_control.o(i.sbus_to_rc)
     sbus_to_rc                               0x0801259d   Thumb Code   180  remote_control.o(i.sbus_to_rc)
     i.sbus_to_usart1                         0x08012650   Section        0  remote_control.o(i.sbus_to_usart1)
-    i.set_cali_gimbal_hook                   0x08012694   Section        0  gimbal_task.o(i.set_cali_gimbal_hook)
+    i.set_cali_launcher_hook                   0x08012694   Section        0  launcher_task.o(i.set_cali_launcher_hook)
     i.sqrt                                   0x080126b4   Section        0  sqrt_full.o(i.sqrt)
     i.sqrtf                                  0x08012722   Section        0  sqrtf_full.o(i.sqrtf)
     i.stm32_pid_pitch_init                   0x08012760   Section        0  stm32.o(i.stm32_pid_pitch_init)
@@ -5944,7 +5944,7 @@ Image Symbol Table
     .data                                    0x20000260   Section        4  chassis_task.o(.data)
     .data                                    0x20000264   Section       42  can_receive.o(.data)
     i                                        0x20000264   Data           1  can_receive.o(.data)
-    gimbal_can_send_data                     0x20000265   Data           8  can_receive.o(.data)
+    launcher_can_send_data                     0x20000265   Data           8  can_receive.o(.data)
     chassis_can_send_data                    0x2000026d   Data           8  can_receive.o(.data)
     shoot_can_send_data                      0x20000275   Data           8  can_receive.o(.data)
     cap_can_send_data                        0x20000286   Data           8  can_receive.o(.data)
@@ -5963,22 +5963,22 @@ Image Symbol Table
     cali_sensor_size                         0x200002b4   Data           5  calibrate_task.o(.data)
     head_cali                                0x200002b9   Data           8  calibrate_task.o(.data)
     cali_sensor_buf                          0x200002c4   Data          20  calibrate_task.o(.data)
-    .data                                    0x200002ec   Section       24  gimbal_behaviour.o(.data)
-    last_gimbal_behaviour                    0x200002ed   Data           1  gimbal_behaviour.o(.data)
-    last_key_G                               0x200002ee   Data           2  gimbal_behaviour.o(.data)
-    move                                     0x200002f0   Data           2  gimbal_behaviour.o(.data)
-    cali_time                                0x200002f2   Data           2  gimbal_behaviour.o(.data)
-    yaw_channel                              0x200002f4   Data           2  gimbal_behaviour.o(.data)
-    pitch_channel                            0x200002f6   Data           2  gimbal_behaviour.o(.data)
-    yaw_channel                              0x200002f8   Data           2  gimbal_behaviour.o(.data)
-    pitch_channel                            0x200002fa   Data           2  gimbal_behaviour.o(.data)
-    yaw_channel                              0x200002fc   Data           2  gimbal_behaviour.o(.data)
-    pitch_channel                            0x200002fe   Data           2  gimbal_behaviour.o(.data)
-    mode                                     0x20000300   Data           4  gimbal_behaviour.o(.data)
-    .data                                    0x20000304   Section       20  gimbal_task.o(.data)
-    angle_set                                0x20000304   Data           4  gimbal_task.o(.data)
-    bias_angle                               0x20000308   Data           4  gimbal_task.o(.data)
-    angle_set                                0x2000030c   Data           4  gimbal_task.o(.data)
+    .data                                    0x200002ec   Section       24  launcher_behaviour.o(.data)
+    last_launcher_behaviour                    0x200002ed   Data           1  launcher_behaviour.o(.data)
+    last_key_G                               0x200002ee   Data           2  launcher_behaviour.o(.data)
+    move                                     0x200002f0   Data           2  launcher_behaviour.o(.data)
+    cali_time                                0x200002f2   Data           2  launcher_behaviour.o(.data)
+    yaw_channel                              0x200002f4   Data           2  launcher_behaviour.o(.data)
+    pitch_channel                            0x200002f6   Data           2  launcher_behaviour.o(.data)
+    yaw_channel                              0x200002f8   Data           2  launcher_behaviour.o(.data)
+    pitch_channel                            0x200002fa   Data           2  launcher_behaviour.o(.data)
+    yaw_channel                              0x200002fc   Data           2  launcher_behaviour.o(.data)
+    pitch_channel                            0x200002fe   Data           2  launcher_behaviour.o(.data)
+    mode                                     0x20000300   Data           4  launcher_behaviour.o(.data)
+    .data                                    0x20000304   Section       20  launcher_task.o(.data)
+    angle_set                                0x20000304   Data           4  launcher_task.o(.data)
+    bias_angle                               0x20000308   Data           4  launcher_task.o(.data)
+    angle_set                                0x2000030c   Data           4  launcher_task.o(.data)
     .data                                    0x20000318   Section      160  ins_task.o(.data)
     temp_constant_time                       0x2000031d   Data           1  ins_task.o(.data)
     first_temperate                          0x2000031e   Data           1  ins_task.o(.data)
@@ -6047,12 +6047,12 @@ Image Symbol Table
     .bss                                     0x20008f56   Section      648  detect_task.o(.bss)
     .bss                                     0x200091e0   Section      600  chassis_task.o(.bss)
     .bss                                     0x20009438   Section      196  can_receive.o(.bss)
-    gimbal_tx_message                        0x2000949c   Data          24  can_receive.o(.bss)
+    launcher_tx_message                        0x2000949c   Data          24  can_receive.o(.bss)
     chassis_tx_message                       0x200094b4   Data          24  can_receive.o(.bss)
     shoot_tx_message                         0x200094cc   Data          24  can_receive.o(.bss)
     cap_tx_message                           0x200094e4   Data          24  can_receive.o(.bss)
     .bss                                     0x200094fc   Section       20  calibrate_task.o(.bss)
-    gimbal_cali                              0x200094fc   Data          20  calibrate_task.o(.bss)
+    launcher_cali                              0x200094fc   Data          20  calibrate_task.o(.bss)
     .bss                                     0x20009510   Section       24  calibrate_task.o(.bss)
     accel_cali                               0x20009510   Data          24  calibrate_task.o(.bss)
     .bss                                     0x20009528   Section       24  calibrate_task.o(.bss)
@@ -6061,7 +6061,7 @@ Image Symbol Table
     mag_cali                                 0x20009540   Data          24  calibrate_task.o(.bss)
     .bss                                     0x20009558   Section      185  calibrate_task.o(.bss)
     flash_write_buf                          0x20009558   Data         120  calibrate_task.o(.bss)
-    .bss                                     0x20009618   Section     1040  gimbal_task.o(.bss)
+    .bss                                     0x20009618   Section     1040  launcher_task.o(.bss)
     .bss                                     0x20009a28   Section      284  ins_task.o(.bss)
     accel_fliter_1                           0x20009a28   Data          12  ins_task.o(.bss)
     accel_fliter_2                           0x20009a34   Data          12  ins_task.o(.bss)
@@ -6409,7 +6409,7 @@ Image Symbol Table
     CAN2_RX0_IRQHandler                      0x08002c5d   Thumb Code     6  stm32f4xx_it.o(i.CAN2_RX0_IRQHandler)
     CAN_cmd_chassis                          0x08002c69   Thumb Code    60  can_receive.o(i.CAN_cmd_chassis)
     CAN_cmd_chassis_reset_ID                 0x08002cb1   Thumb Code    52  can_receive.o(i.CAN_cmd_chassis_reset_ID)
-    CAN_cmd_gimbal                           0x08002cf1   Thumb Code    60  can_receive.o(i.CAN_cmd_gimbal)
+    CAN_cmd_launcher                           0x08002cf1   Thumb Code    60  can_receive.o(i.CAN_cmd_launcher)
     CDC_Transmit_FS                          0x08002d81   Thumb Code    40  usbd_cdc_if.o(i.CDC_Transmit_FS)
     DMA1_Stream7_IRQHandler                  0x08002dad   Thumb Code    76  bsp_i2c.o(i.DMA1_Stream7_IRQHandler)
     DMA2_Stream1_IRQHandler                  0x08002e05   Thumb Code     6  stm32f4xx_it.o(i.DMA2_Stream1_IRQHandler)
@@ -6710,7 +6710,7 @@ Image Symbol Table
     chassis_behaviour_mode_set               0x0800f029   Thumb Code   156  chassis_behaviour.o(i.chassis_behaviour_mode_set)
     chassis_rc_to_control_vector             0x0800f7dd   Thumb Code   222  chassis_task.o(i.chassis_rc_to_control_vector)
     chassis_task                             0x0800fb29   Thumb Code   200  chassis_task.o(i.chassis_task)
-    cmd_cali_gimbal_hook                     0x0800fc69   Thumb Code   226  gimbal_task.o(i.cmd_cali_gimbal_hook)
+    cmd_cali_launcher_hook                     0x0800fc69   Thumb Code   226  launcher_task.o(i.cmd_cali_launcher_hook)
     delay_init                               0x0800fd59   Thumb Code    26  bsp_delay.o(i.delay_init)
     delay_us                                 0x0800fd81   Thumb Code    50  bsp_delay.o(i.delay_us)
     detect_hook                              0x0800fdb9   Thumb Code    88  detect_task.o(i.detect_hook)
@@ -6737,16 +6737,16 @@ Image Symbol Table
     get_error_list_point                     0x08010439   Thumb Code     4  detect_task.o(i.get_error_list_point)
     get_gyro_data_point                      0x08010441   Thumb Code     4  ins_task.o(i.get_gyro_data_point)
     get_next_flash_address                   0x08010449   Thumb Code   168  bsp_flash.o(i.get_next_flash_address)
-    get_pitch_gimbal_motor_measure_point     0x0801051d   Thumb Code     4  can_receive.o(i.get_pitch_gimbal_motor_measure_point)
-    get_pitch_motor_point                    0x08010525   Thumb Code     4  gimbal_task.o(i.get_pitch_motor_point)
+    get_pitch_launcher_motor_measure_point     0x0801051d   Thumb Code     4  can_receive.o(i.get_pitch_launcher_motor_measure_point)
+    get_pitch_motor_point                    0x08010525   Thumb Code     4  launcher_task.o(i.get_pitch_motor_point)
     get_remote_control_point                 0x0801052d   Thumb Code     4  remote_control.o(i.get_remote_control_point)
     get_temprate                             0x08010535   Thumb Code    50  bsp_adc.o(i.get_temprate)
     get_vision_fifo                          0x08010579   Thumb Code     4  bsp_usart.o(i.get_vision_fifo)
-    get_yaw_gimbal_motor_measure_point       0x08010581   Thumb Code     4  can_receive.o(i.get_yaw_gimbal_motor_measure_point)
-    get_yaw_motor_point                      0x08010589   Thumb Code     4  gimbal_task.o(i.get_yaw_motor_point)
-    gimbal_behaviour_control_set             0x080106d1   Thumb Code   204  gimbal_behaviour.o(i.gimbal_behaviour_control_set)
-    gimbal_behaviour_mode_set                0x080107a9   Thumb Code   120  gimbal_behaviour.o(i.gimbal_behaviour_mode_set)
-    gimbal_task                              0x080110a5   Thumb Code   154  gimbal_task.o(i.gimbal_task)
+    get_yaw_launcher_motor_measure_point       0x08010581   Thumb Code     4  can_receive.o(i.get_yaw_launcher_motor_measure_point)
+    get_yaw_motor_point                      0x08010589   Thumb Code     4  launcher_task.o(i.get_yaw_motor_point)
+    launcher_behaviour_control_set             0x080106d1   Thumb Code   204  launcher_behaviour.o(i.launcher_behaviour_control_set)
+    launcher_behaviour_mode_set                0x080107a9   Thumb Code   120  launcher_behaviour.o(i.launcher_behaviour_mode_set)
+    launcher_task                              0x080110a5   Thumb Code   154  launcher_task.o(i.launcher_task)
     gyro_offset_calc                         0x080111ad   Thumb Code    72  ins_task.o(i.gyro_offset_calc)
     imu_pwm_set                              0x080113ed   Thumb Code     8  bsp_imu_pwm.o(i.imu_pwm_set)
     init_referee_struct_data                 0x080114a1   Thumb Code   118  referee.o(i.init_referee_struct_data)
@@ -6773,7 +6773,7 @@ Image Symbol Table
     referee_usart_task                       0x08012559   Thumb Code    44  referee_usart_task.o(i.referee_usart_task)
     remote_control_init                      0x0801258d   Thumb Code    12  remote_control.o(i.remote_control_init)
     sbus_to_usart1                           0x08012651   Thumb Code    58  remote_control.o(i.sbus_to_usart1)
-    set_cali_gimbal_hook                     0x08012695   Thumb Code    28  gimbal_task.o(i.set_cali_gimbal_hook)
+    set_cali_launcher_hook                     0x08012695   Thumb Code    28  launcher_task.o(i.set_cali_launcher_hook)
     sqrt                                     0x080126b5   Thumb Code   110  sqrt_full.o(i.sqrt)
     sqrtf                                    0x08012723   Thumb Code    62  sqrtf_full.o(i.sqrtf)
     stm32_pid_pitch_init                     0x08012761   Thumb Code    60  stm32.o(i.stm32_pid_pitch_init)
@@ -6904,7 +6904,7 @@ Image Symbol Table
     calibrate_tast_handle                    0x2000000c   Data           4  freertos.o(.data)
     chassisTaskHandle                        0x20000010   Data           4  freertos.o(.data)
     detect_handle                            0x20000014   Data           4  freertos.o(.data)
-    gimbalTaskHandle                         0x20000018   Data           4  freertos.o(.data)
+    launcherTaskHandle                         0x20000018   Data           4  freertos.o(.data)
     imuTaskHandle                            0x2000001c   Data           4  freertos.o(.data)
     led_RGB_flow_handle                      0x20000020   Data           4  freertos.o(.data)
     referee_usart_task_handle                0x20000024   Data           4  freertos.o(.data)
@@ -6931,9 +6931,9 @@ Image Symbol Table
     chassis_behaviour_mode                   0x20000290   Data           1  chassis_behaviour.o(.data)
     calibrate_task_stack                     0x200002a8   Data           4  calibrate_task.o(.data)
     cali_hook_fun                            0x200002d8   Data          20  calibrate_task.o(.data)
-    gimbal_behaviour                         0x200002ec   Data           1  gimbal_behaviour.o(.data)
-    gimbal_high_water                        0x20000310   Data           4  gimbal_task.o(.data)
-    vision_rx                                0x20000314   Data           4  gimbal_task.o(.data)
+    launcher_behaviour                         0x200002ec   Data           1  launcher_behaviour.o(.data)
+    launcher_high_water                        0x20000310   Data           4  launcher_task.o(.data)
+    vision_rx                                0x20000314   Data           4  launcher_task.o(.data)
     gyro_update_flag                         0x20000318   Data           1  ins_task.o(.data)
     accel_update_flag                        0x20000319   Data           1  ins_task.o(.data)
     accel_temp_update_flag                   0x2000031a   Data           1  ins_task.o(.data)
@@ -7017,7 +7017,7 @@ Image Symbol Table
     chassis_move                             0x200091e0   Data         600  chassis_task.o(.bss)
     motor_chassis                            0x20009438   Data         100  can_receive.o(.bss)
     cali_sensor                              0x200095d0   Data          65  calibrate_task.o(.bss)
-    gimbal_control                           0x20009618   Data        1040  gimbal_task.o(.bss)
+    launcher_control                           0x20009618   Data        1040  launcher_task.o(.bss)
     INS_angle                                0x20009a80   Data          12  ins_task.o(.bss)
     accel_dma_rx_buf                         0x20009a8c   Data           9  ins_task.o(.bss)
     bmi088_real_data                         0x20009a98   Data          36  ins_task.o(.bss)
@@ -7261,7 +7261,7 @@ Memory Map of the image
     0x08002c5c   0x08002c5c   0x0000000c   Code   RO         1316    i.CAN2_RX0_IRQHandler  stm32f4xx_it.o
     0x08002c68   0x08002c68   0x00000048   Code   RO         9223    i.CAN_cmd_chassis   can_receive.o
     0x08002cb0   0x08002cb0   0x00000040   Code   RO         9224    i.CAN_cmd_chassis_reset_ID  can_receive.o
-    0x08002cf0   0x08002cf0   0x00000048   Code   RO         9225    i.CAN_cmd_gimbal    can_receive.o
+    0x08002cf0   0x08002cf0   0x00000048   Code   RO         9225    i.CAN_cmd_launcher    can_receive.o
     0x08002d38   0x08002d38   0x00000008   Code   RO         1262    i.CDC_Control_FS    usbd_cdc_if.o
     0x08002d40   0x08002d40   0x00000004   Code   RO         1263    i.CDC_DeInit_FS     usbd_cdc_if.o
     0x08002d44   0x08002d44   0x00000024   Code   RO         1264    i.CDC_Init_FS       usbd_cdc_if.o
@@ -7643,11 +7643,11 @@ Memory Map of the image
     0x0800eb88   0x0800eb88   0x00000010   Code   RO         8404    i.buzzer_off        bsp_buzzer.o
     0x0800eb98   0x0800eb98   0x00000010   Code   RO         8405    i.buzzer_on         bsp_buzzer.o
     0x0800eba8   0x0800eba8   0x000000cc   Code   RO         9895    i.calc_battery_percentage  voltage_task.o
-    0x0800ec74   0x0800ec74   0x00000002   Code   RO         9598    i.calc_gimbal_cali  gimbal_task.o
+    0x0800ec74   0x0800ec74   0x00000002   Code   RO         9598    i.calc_launcher_cali  launcher_task.o
     0x0800ec76   0x0800ec76   0x00000002   PAD
     0x0800ec78   0x0800ec78   0x0000008c   Code   RO         9403    i.cali_data_read    calibrate_task.o
     0x0800ed04   0x0800ed04   0x0000006c   Code   RO         9404    i.cali_data_write   calibrate_task.o
-    0x0800ed70   0x0800ed70   0x00000056   Code   RO         9405    i.cali_gimbal_hook  calibrate_task.o
+    0x0800ed70   0x0800ed70   0x00000056   Code   RO         9405    i.cali_launcher_hook  calibrate_task.o
     0x0800edc6   0x0800edc6   0x00000002   PAD
     0x0800edc8   0x0800edc8   0x00000058   Code   RO         9406    i.cali_gyro_hook    calibrate_task.o
     0x0800ee20   0x0800ee20   0x00000044   Code   RO         9407    i.cali_head_hook    calibrate_task.o
@@ -7660,7 +7660,7 @@ Memory Map of the image
     0x0800f1d4   0x0800f1d4   0x00000280   Code   RO         9114    i.chassis_control_loop  chassis_task.o
     0x0800f454   0x0800f454   0x00000054   Code   RO         9334    i.chassis_engineer_follow_chassis_yaw_control  chassis_behaviour.o
     0x0800f4a8   0x0800f4a8   0x00000114   Code   RO         9115    i.chassis_feedback_update  chassis_task.o
-    0x0800f5bc   0x0800f5bc   0x00000028   Code   RO         9335    i.chassis_infantry_follow_gimbal_yaw_control  chassis_behaviour.o
+    0x0800f5bc   0x0800f5bc   0x00000028   Code   RO         9335    i.chassis_infantry_follow_launcher_yaw_control  chassis_behaviour.o
     0x0800f5e4   0x0800f5e4   0x000000e0   Code   RO         9116    i.chassis_init      chassis_task.o
     0x0800f6c4   0x0800f6c4   0x00000048   Code   RO         9117    i.chassis_mode_change_control_transit  chassis_task.o
     0x0800f70c   0x0800f70c   0x0000004c   Code   RO         9336    i.chassis_no_follow_yaw_control  chassis_behaviour.o
@@ -7674,7 +7674,7 @@ Memory Map of the image
     0x0800fb28   0x0800fb28   0x000000d0   Code   RO         9121    i.chassis_task      chassis_task.o
     0x0800fbf8   0x0800fbf8   0x00000048   Code   RO         9122    i.chassis_vector_to_mecanum_wheel_speed  chassis_task.o
     0x0800fc40   0x0800fc40   0x00000028   Code   RO         9339    i.chassis_zero_force_control  chassis_behaviour.o
-    0x0800fc68   0x0800fc68   0x000000f0   Code   RO         9599    i.cmd_cali_gimbal_hook  gimbal_task.o
+    0x0800fc68   0x0800fc68   0x000000f0   Code   RO         9599    i.cmd_cali_launcher_hook  launcher_task.o
     0x0800fd58   0x0800fd58   0x00000028   Code   RO         8504    i.delay_init        bsp_delay.o
     0x0800fd80   0x0800fd80   0x00000038   Code   RO         8506    i.delay_us          bsp_delay.o
     0x0800fdb8   0x0800fdb8   0x0000005c   Code   RO         9043    i.detect_hook       detect_task.o
@@ -7704,38 +7704,38 @@ Memory Map of the image
     0x08010438   0x08010438   0x00000008   Code   RO         9046    i.get_error_list_point  detect_task.o
     0x08010440   0x08010440   0x00000008   Code   RO         9721    i.get_gyro_data_point  ins_task.o
     0x08010448   0x08010448   0x000000d4   Code   RO         8547    i.get_next_flash_address  bsp_flash.o
-    0x0801051c   0x0801051c   0x00000008   Code   RO         9232    i.get_pitch_gimbal_motor_measure_point  can_receive.o
-    0x08010524   0x08010524   0x00000008   Code   RO         9600    i.get_pitch_motor_point  gimbal_task.o
+    0x0801051c   0x0801051c   0x00000008   Code   RO         9232    i.get_pitch_launcher_motor_measure_point  can_receive.o
+    0x08010524   0x08010524   0x00000008   Code   RO         9600    i.get_pitch_motor_point  launcher_task.o
     0x0801052c   0x0801052c   0x00000008   Code   RO         8964    i.get_remote_control_point  remote_control.o
     0x08010534   0x08010534   0x00000044   Code   RO         8260    i.get_temprate      bsp_adc.o
     0x08010578   0x08010578   0x00000008   Code   RO         8866    i.get_vision_fifo   bsp_usart.o
-    0x08010580   0x08010580   0x00000008   Code   RO         9234    i.get_yaw_gimbal_motor_measure_point  can_receive.o
-    0x08010588   0x08010588   0x00000008   Code   RO         9601    i.get_yaw_motor_point  gimbal_task.o
-    0x08010590   0x08010590   0x000000a0   Code   RO         9502    i.gimbal_absolute_angle_control  gimbal_behaviour.o
-    0x08010630   0x08010630   0x000000a0   Code   RO         9503    i.gimbal_absolute_spin_angle_control  gimbal_behaviour.o
-    0x080106d0   0x080106d0   0x000000d8   Code   RO         9504    i.gimbal_behaviour_control_set  gimbal_behaviour.o
-    0x080107a8   0x080107a8   0x0000007c   Code   RO         9505    i.gimbal_behaviour_mode_set  gimbal_behaviour.o
-    0x08010824   0x08010824   0x000000c0   Code   RO         9506    i.gimbal_behavour_set  gimbal_behaviour.o
-    0x080108e4   0x080108e4   0x00000130   Code   RO         9507    i.gimbal_cali_control  gimbal_behaviour.o
-    0x08010a14   0x08010a14   0x00000188   Code   RO         9602    i.gimbal_control_loop  gimbal_task.o
-    0x08010b9c   0x08010b9c   0x0000007a   Code   RO         9603    i.gimbal_feedback_update  gimbal_task.o
+    0x08010580   0x08010580   0x00000008   Code   RO         9234    i.get_yaw_launcher_motor_measure_point  can_receive.o
+    0x08010588   0x08010588   0x00000008   Code   RO         9601    i.get_yaw_motor_point  launcher_task.o
+    0x08010590   0x08010590   0x000000a0   Code   RO         9502    i.launcher_absolute_angle_control  launcher_behaviour.o
+    0x08010630   0x08010630   0x000000a0   Code   RO         9503    i.launcher_absolute_spin_angle_control  launcher_behaviour.o
+    0x080106d0   0x080106d0   0x000000d8   Code   RO         9504    i.launcher_behaviour_control_set  launcher_behaviour.o
+    0x080107a8   0x080107a8   0x0000007c   Code   RO         9505    i.launcher_behaviour_mode_set  launcher_behaviour.o
+    0x08010824   0x08010824   0x000000c0   Code   RO         9506    i.launcher_behavour_set  launcher_behaviour.o
+    0x080108e4   0x080108e4   0x00000130   Code   RO         9507    i.launcher_cali_control  launcher_behaviour.o
+    0x08010a14   0x08010a14   0x00000188   Code   RO         9602    i.launcher_control_loop  launcher_task.o
+    0x08010b9c   0x08010b9c   0x0000007a   Code   RO         9603    i.launcher_feedback_update  launcher_task.o
     0x08010c16   0x08010c16   0x00000002   PAD
-    0x08010c18   0x08010c18   0x000000d4   Code   RO         9604    i.gimbal_init       gimbal_task.o
-    0x08010cec   0x08010cec   0x00000094   Code   RO         9510    i.gimbal_init_control  gimbal_behaviour.o
-    0x08010d80   0x08010d80   0x000000b2   Code   RO         9605    i.gimbal_mode_change_control_transit  gimbal_task.o
+    0x08010c18   0x08010c18   0x000000d4   Code   RO         9604    i.launcher_init       launcher_task.o
+    0x08010cec   0x08010cec   0x00000094   Code   RO         9510    i.launcher_init_control  launcher_behaviour.o
+    0x08010d80   0x08010d80   0x000000b2   Code   RO         9605    i.launcher_mode_change_control_transit  launcher_task.o
     0x08010e32   0x08010e32   0x00000002   PAD
-    0x08010e34   0x08010e34   0x00000020   Code   RO         9511    i.gimbal_motionless_control  gimbal_behaviour.o
-    0x08010e54   0x08010e54   0x000000c4   Code   RO         9606    i.gimbal_pitch_absolute_angle_limit  gimbal_task.o
-    0x08010f18   0x08010f18   0x00000048   Code   RO         9607    i.gimbal_pitch_relative_angle_limit  gimbal_task.o
-    0x08010f60   0x08010f60   0x000000a0   Code   RO         9512    i.gimbal_relative_angle_control  gimbal_behaviour.o
-    0x08011000   0x08011000   0x00000098   Code   RO         9608    i.gimbal_set_control  gimbal_task.o
-    0x08011098   0x08011098   0x0000000a   Code   RO         9609    i.gimbal_set_mode   gimbal_task.o
+    0x08010e34   0x08010e34   0x00000020   Code   RO         9511    i.launcher_motionless_control  launcher_behaviour.o
+    0x08010e54   0x08010e54   0x000000c4   Code   RO         9606    i.launcher_pitch_absolute_angle_limit  launcher_task.o
+    0x08010f18   0x08010f18   0x00000048   Code   RO         9607    i.launcher_pitch_relative_angle_limit  launcher_task.o
+    0x08010f60   0x08010f60   0x000000a0   Code   RO         9512    i.launcher_relative_angle_control  launcher_behaviour.o
+    0x08011000   0x08011000   0x00000098   Code   RO         9608    i.launcher_set_control  launcher_task.o
+    0x08011098   0x08011098   0x0000000a   Code   RO         9609    i.launcher_set_mode   launcher_task.o
     0x080110a2   0x080110a2   0x00000002   PAD
-    0x080110a4   0x080110a4   0x000000a4   Code   RO         9610    i.gimbal_task       gimbal_task.o
-    0x08011148   0x08011148   0x00000030   Code   RO         9611    i.gimbal_yaw_absolute_angle_limit  gimbal_task.o
-    0x08011178   0x08011178   0x00000012   Code   RO         9612    i.gimbal_yaw_relative_angle_limit  gimbal_task.o
+    0x080110a4   0x080110a4   0x000000a4   Code   RO         9610    i.launcher_task       launcher_task.o
+    0x08011148   0x08011148   0x00000030   Code   RO         9611    i.launcher_yaw_absolute_angle_limit  launcher_task.o
+    0x08011178   0x08011178   0x00000012   Code   RO         9612    i.launcher_yaw_relative_angle_limit  launcher_task.o
     0x0801118a   0x0801118a   0x00000002   PAD
-    0x0801118c   0x0801118c   0x00000020   Code   RO         9513    i.gimbal_zero_force_control  gimbal_behaviour.o
+    0x0801118c   0x0801118c   0x00000020   Code   RO         9513    i.launcher_zero_force_control  launcher_behaviour.o
     0x080111ac   0x080111ac   0x0000004c   Code   RO         9723    i.gyro_offset_calc  ins_task.o
     0x080111f8   0x080111f8   0x000000ec   Code   RO         9724    i.imu_cali_slove    ins_task.o
     0x080112e4   0x080112e4   0x00000108   Code   RO         9725    i.imu_cmd_spi_dma   ins_task.o
@@ -7757,7 +7757,7 @@ Memory Map of the image
     0x08011764   0x08011764   0x00000046   Code   RO        10813    i.loop_fp32_constrain  user_lib.o
     0x080117aa   0x080117aa   0x00000082   Code   RO           15    i.main              main.o
     0x0801182c   0x0801182c   0x0000000c   Code   RO         7350    i.makeFreeRtosPriority  cmsis_os.o
-    0x08011838   0x08011838   0x00000034   Code   RO         9613    i.motor_ecd_to_angle_change  gimbal_task.o
+    0x08011838   0x08011838   0x00000034   Code   RO         9613    i.motor_ecd_to_angle_change  launcher_task.o
     0x0801186c   0x0801186c   0x00000010   Code   RO         7352    i.osDelay           cmsis_os.o
     0x0801187c   0x0801187c   0x0000000a   Code   RO         7355    i.osKernelStart     cmsis_os.o
     0x08011886   0x08011886   0x00000014   Code   RO         7388    i.osSystickHandler  cmsis_os.o
@@ -7805,7 +7805,7 @@ Memory Map of the image
     0x0801258c   0x0801258c   0x00000010   Code   RO         8965    i.remote_control_init  remote_control.o
     0x0801259c   0x0801259c   0x000000b4   Code   RO         8966    i.sbus_to_rc        remote_control.o
     0x08012650   0x08012650   0x00000044   Code   RO         8967    i.sbus_to_usart1    remote_control.o
-    0x08012694   0x08012694   0x00000020   Code   RO         9614    i.set_cali_gimbal_hook  gimbal_task.o
+    0x08012694   0x08012694   0x00000020   Code   RO         9614    i.set_cali_launcher_hook  launcher_task.o
     0x080126b4   0x080126b4   0x0000006e   Code   RO        11782    i.sqrt              m_wm.l(sqrt_full.o)
     0x08012722   0x08012722   0x0000003e   Code   RO        11788    i.sqrtf             m_wm.l(sqrtf_full.o)
     0x08012760   0x08012760   0x00000070   Code   RO        11272    i.stm32_pid_pitch_init  stm32.o
@@ -7980,8 +7980,8 @@ Memory Map of the image
     0x2000028e   COMPRESSED   0x00000002   PAD
     0x20000290   COMPRESSED   0x00000008   Data   RW         9340    .data               chassis_behaviour.o
     0x20000298   COMPRESSED   0x00000054   Data   RW         9418    .data               calibrate_task.o
-    0x200002ec   COMPRESSED   0x00000018   Data   RW         9514    .data               gimbal_behaviour.o
-    0x20000304   COMPRESSED   0x00000014   Data   RW         9616    .data               gimbal_task.o
+    0x200002ec   COMPRESSED   0x00000018   Data   RW         9514    .data               launcher_behaviour.o
+    0x20000304   COMPRESSED   0x00000014   Data   RW         9616    .data               launcher_task.o
     0x20000318   COMPRESSED   0x000000a0   Data   RW         9732    .data               ins_task.o
     0x200003b8   COMPRESSED   0x0000002c   Data   RW         9839    .data               referee.o
     0x200003e4   COMPRESSED   0x00000008   Data   RW         9897    .data               voltage_task.o
@@ -8026,7 +8026,7 @@ Memory Map of the image
     0x20009540        -       0x00000018   Zero   RW         9415    .bss                calibrate_task.o
     0x20009558        -       0x000000b9   Zero   RW         9416    .bss                calibrate_task.o
     0x20009611   COMPRESSED   0x00000007   PAD
-    0x20009618        -       0x00000410   Zero   RW         9615    .bss                gimbal_task.o
+    0x20009618        -       0x00000410   Zero   RW         9615    .bss                launcher_task.o
     0x20009a28        -       0x0000011c   Zero   RW         9727    .bss                ins_task.o
     0x20009b44        -       0x00000072   Zero   RW         9838    .bss                referee.o
     0x20009bb6        -       0x00000100   Zero   RW         9934    .bss                usb_task.o
@@ -8047,101 +8047,101 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
 
-       324         40          0          0        144       2398   adc.o
-        70          6          0          0          0       5224   ahrs_middleware.o
-      2144         36         18         44          0      11191   bmi088driver.o
-       108         28          0          0          0       4804   bmi088middleware.o
-       240         50          0          4         16     629552   bsp_adc.o
-        32         10          0          0          0       1029   bsp_buzzer.o
-        88          8          0          0          0        602   bsp_can.o
-        96         20          0          8          0       1340   bsp_delay.o
-       574         96          0         16          0       4365   bsp_flash.o
-       164         28          0          0          0       1616   bsp_i2c.o
-        12          4          0          0          0        518   bsp_imu_pwm.o
-        60          8          0          8          0        632   bsp_led.o
-       188         28          0          0          0       2079   bsp_rc.o
-      6488         86          0          0          0       5462   bsp_spi.o
-       752         86          0          0        192       5555   bsp_usart.o
-      1326         66         15         84        277      10374   calibrate_task.o
-       392         42          0          4         80       2554   can.o
-       868         72          0         42        196       7160   can_receive.o
-       898         54          0          8          0       8582   chassis_behaviour.o
-      2334        118         32          4        600      20121   chassis_task.o
-       146          0          0          0          0      22834   cmsis_os.o
-        76         18          0          8          0       1571   crc.o
-       186         12        768          2          0       3921   crc8_crc16.o
-       540         40        102         12        648       9393   detect_task.o
-       172          4          0          0          0        882   dma.o
-         0          0          0          0          0      17900   event_groups.o
-       204          0          0          0          0       8715   fifo.o
-       260         20        336         36       1704       3945   freertos.o
-      1528        128          0         24          0       8914   gimbal_behaviour.o
-      1906        148          0         20       1040      12411   gimbal_task.o
-       508         28          0          0          0       1311   gpio.o
-       464         22          0         24      24576       5015   heap_4.o
-       580         82          0          0        348       3268   i2c.o
-      2876        156         12        160        284      13724   ins_task.o
-       124          4         12          0          0       1555   ist8310driver.o
-       112         22          0          0          0       4007   ist8310driver_middleware.o
-       280         10          0         28          0       1973   led_flow_task.o
-       138          0          0          0          0       3682   list.o
-       312         14          0          0          0     800307   main.o
-        36          8          0          8          0       1681   oled.o
-       444         10          0          0          0       1994   pid.o
-       786         84          0         12          0      12189   port.o
-      1552         20          0          0         64      15304   queue.o
-       460         18          0         44        114       8397   referee.o
-       548         46          0          2       2209       4240   referee_usart_task.o
-       496         44          0          4        114       7882   remote_control.o
-        76         18          0          0         16       1571   rng.o
-        80         18          0          0         32       1519   rtc.o
-       492         44          0          0        368       2684   spi.o
-        64         26        392          0      16384        864   startup_stm32f407xx.o
-      1948        194          0          0        744       5844   stm32.o
-       184         28          0         12          0       4717   stm32f4xx_hal.o
-      1160         50          0          0          0       5310   stm32f4xx_hal_adc.o
-      1768          6          0          0          0      15043   stm32f4xx_hal_can.o
-       198         14          0          0          0      34163   stm32f4xx_hal_cortex.o
-        40          0          0          0          0       1099   stm32f4xx_hal_crc.o
-       876         14          8          0          0       5087   stm32f4xx_hal_dma.o
-       520         66          0          0         32       6302   stm32f4xx_hal_flash.o
-       364         24          0          0          0       3446   stm32f4xx_hal_flash_ex.o
-       490         52          0          0          0       3195   stm32f4xx_hal_gpio.o
-      2440         48          0          0          0      12570   stm32f4xx_hal_i2c.o
-        56          4          0          0          0        870   stm32f4xx_hal_msp.o
-      2342         20          0          0          0      13689   stm32f4xx_hal_pcd.o
-        76          0          0          0          0       2581   stm32f4xx_hal_pcd_ex.o
-      1420         72          0          0          0       6340   stm32f4xx_hal_rcc.o
-       328         22          0          0          0       1540   stm32f4xx_hal_rcc_ex.o
-        52          0          0          0          0       1127   stm32f4xx_hal_rng.o
-       292          4          0          0          0       2792   stm32f4xx_hal_rtc.o
-       852         10          0          0          0       4665   stm32f4xx_hal_spi.o
-      1414         90          0          0          0      13679   stm32f4xx_hal_tim.o
-       150          0          0          0          0       2228   stm32f4xx_hal_tim_ex.o
-      1494         12          0          0          0       8259   stm32f4xx_hal_uart.o
-       314         60          0          2          0       9632   stm32f4xx_it.o
-      2596        140          0          0          0      23934   stm32f4xx_ll_usb.o
-         0          0          0          0          0        388   stream_buffer.o
-        84         18         24          4          0       1219   system_stm32f4xx.o
-      2832        206          0         60        240      31969   tasks.o
-      1424        124          0          0        320       5982   tim.o
-       976         86          0         20        272      27739   timers.o
-       920         78          0          0        672       3823   usart.o
-        84         18          0          0        668       2571   usb_device.o
-       288         20        304          8        256       2630   usb_task.o
-       830         16          0        271          0      14046   usbd_cdc.o
-       116         20          0         16       4096       3564   usbd_cdc_if.o
-       648         18          0          0       1032      15472   usbd_conf.o
-       726          0          0          0          0      13333   usbd_core.o
-      1616         30          0          1          0      11956   usbd_ctlreq.o
-       358        112          0         78        512       6857   usbd_desc.o
-       132          0          0          0          0       4660   usbd_ioreq.o
-       198          0          0          0          0       3323   user_lib.o
-      1246        100          0         80         52       2542   vision.o
-       284         64          0          8          0       2329   voltage_task.o
+       324         40          0          0        144       2334   adc.o
+        70          6          0          0          0       5112   ahrs_middleware.o
+      2144         36         18         44          0      10999   bmi088driver.o
+       108         28          0          0          0       4688   bmi088middleware.o
+       240         50          0          4         16     629364   bsp_adc.o
+        32         10          0          0          0       1001   bsp_buzzer.o
+        88          8          0          0          0        590   bsp_can.o
+        96         20          0          8          0       1300   bsp_delay.o
+       574         96          0         16          0       4293   bsp_flash.o
+       164         28          0          0          0       1576   bsp_i2c.o
+        12          4          0          0          0        506   bsp_imu_pwm.o
+        60          8          0          8          0        620   bsp_led.o
+       188         28          0          0          0       2023   bsp_rc.o
+      6488         86          0          0          0       5434   bsp_spi.o
+       752         86          0          0        192       5439   bsp_usart.o
+      1326         66         15         84        277      10214   calibrate_task.o
+       392         42          0          4         80       2490   can.o
+       868         72          0         42        196       7028   can_receive.o
+       898         54          0          8          0       8430   chassis_behaviour.o
+      2334        118         32          4        600      19889   chassis_task.o
+       146          0          0          0          0      22694   cmsis_os.o
+        76         18          0          8          0       1511   crc.o
+       186         12        768          2          0       3845   crc8_crc16.o
+       540         40        102         12        648       9277   detect_task.o
+       172          4          0          0          0        854   dma.o
+         0          0          0          0          0      17852   event_groups.o
+       204          0          0          0          0       8643   fifo.o
+       260         20        336         36       1704       3885   freertos.o
+      1528        128          0         24          0       8766   launcher_behaviour.o
+      1906        148          0         20       1040      12151   launcher_task.o
+       508         28          0          0          0       1287   gpio.o
+       464         22          0         24      24576       4947   heap_4.o
+       580         82          0          0        348       3192   i2c.o
+      2876        156         12        160        284      13536   ins_task.o
+       124          4         12          0          0       1515   ist8310driver.o
+       112         22          0          0          0       3923   ist8310driver_middleware.o
+       280         10          0         28          0       1933   led_flow_task.o
+       138          0          0          0          0       3606   list.o
+       312         14          0          0          0     799803   main.o
+        36          8          0          8          0       1641   oled.o
+       444         10          0          0          0       1958   pid.o
+       786         84          0         12          0      12037   port.o
+      1552         20          0          0         64      15108   queue.o
+       460         18          0         44        114       8325   referee.o
+       548         46          0          2       2209       4172   referee_usart_task.o
+       496         44          0          4        114       7754   remote_control.o
+        76         18          0          0         16       1511   rng.o
+        80         18          0          0         32       1463   rtc.o
+       492         44          0          0        368       2620   spi.o
+        64         26        392          0      16384        852   startup_stm32f407xx.o
+      1948        194          0          0        744       5736   stm32.o
+       184         28          0         12          0       4625   stm32f4xx_hal.o
+      1160         50          0          0          0       5214   stm32f4xx_hal_adc.o
+      1768          6          0          0          0      14787   stm32f4xx_hal_can.o
+       198         14          0          0          0      34087   stm32f4xx_hal_cortex.o
+        40          0          0          0          0       1071   stm32f4xx_hal_crc.o
+       876         14          8          0          0       5011   stm32f4xx_hal_dma.o
+       520         66          0          0         32       6170   stm32f4xx_hal_flash.o
+       364         24          0          0          0       3374   stm32f4xx_hal_flash_ex.o
+       490         52          0          0          0       3147   stm32f4xx_hal_gpio.o
+      2440         48          0          0          0      12410   stm32f4xx_hal_i2c.o
+        56          4          0          0          0        842   stm32f4xx_hal_msp.o
+      2342         20          0          0          0      13493   stm32f4xx_hal_pcd.o
+        76          0          0          0          0       2525   stm32f4xx_hal_pcd_ex.o
+      1420         72          0          0          0       6248   stm32f4xx_hal_rcc.o
+       328         22          0          0          0       1508   stm32f4xx_hal_rcc_ex.o
+        52          0          0          0          0       1103   stm32f4xx_hal_rng.o
+       292          4          0          0          0       2744   stm32f4xx_hal_rtc.o
+       852         10          0          0          0       4601   stm32f4xx_hal_spi.o
+      1414         90          0          0          0      13443   stm32f4xx_hal_tim.o
+       150          0          0          0          0       2184   stm32f4xx_hal_tim_ex.o
+      1494         12          0          0          0       8091   stm32f4xx_hal_uart.o
+       314         60          0          2          0       9400   stm32f4xx_it.o
+      2596        140          0          0          0      23538   stm32f4xx_ll_usb.o
+         0          0          0          0          0        392   stream_buffer.o
+        84         18         24          4          0       1179   system_stm32f4xx.o
+      2832        206          0         60        240      31529   tasks.o
+      1424        124          0          0        320       5866   tim.o
+       976         86          0         20        272      27511   timers.o
+       920         78          0          0        672       3751   usart.o
+        84         18          0          0        668       2535   usb_device.o
+       288         20        304          8        256       2586   usb_task.o
+       830         16          0        271          0      13818   usbd_cdc.o
+       116         20          0         16       4096       3472   usbd_cdc_if.o
+       648         18          0          0       1032      15144   usbd_conf.o
+       726          0          0          0          0      13081   usbd_core.o
+      1616         30          0          1          0      11776   usbd_ctlreq.o
+       358        112          0         78        512       6713   usbd_desc.o
+       132          0          0          0          0       4568   usbd_ioreq.o
+       198          0          0          0          0       3259   user_lib.o
+      1246        100          0         80         52       2494   vision.o
+       284         64          0          8          0       2273   voltage_task.o
 
     ----------------------------------------------------------------------
-     66838       3770       2060       1180      58316    2051326   Object Totals
+     66838       3770       2060       1180      58316    2041290   Object Totals
          0          0         32          0          0          0   (incl. Generated)
         98          0          5         14         14          0   (incl. Padding)
 
@@ -8318,8 +8318,8 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-     90980       5270       4980       1196      58412    2032436   Grand Totals
-     90980       5270       4980        388      58412    2032436   ELF Image Totals (compressed)
+     90980       5270       4980       1196      58412    2022400   Grand Totals
+     90980       5270       4980        388      58412    2022400   ELF Image Totals (compressed)
      90980       5270       4980        388          0          0   ROM Totals
 
 ==============================================================================

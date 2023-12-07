@@ -31,11 +31,11 @@ extern bool_t AHRS_update(fp32 quat[4], const fp32 timing_time, const fp32 gyro[
 extern fp32 get_yaw(const fp32 quat[4]);
 
 /**
-  * @brief          根据四元数大小计算对应的欧拉角俯仰角 pitch
+  * @brief          根据四元数大小计算对应的欧拉角俯仰角 spring
   * @param[in]      四元数数组，不为NULL
-  * @retval         返回的俯仰角 pitch 单位 rad
+  * @retval         返回的俯仰角 spring 单位 rad
   */
-extern fp32 get_pitch(const fp32 quat[4]);
+extern fp32 get_spring(const fp32 quat[4]);
 /**
   * @brief          根据四元数大小计算对应的欧拉角横滚角 roll
   * @param[in]      四元数数组，不为NULL
@@ -44,13 +44,13 @@ extern fp32 get_pitch(const fp32 quat[4]);
 extern fp32 get_roll(const fp32 quat[4]);
 
 /**
-  * @brief          根据四元数大小计算对应的欧拉角yaw，pitch，roll
+  * @brief          根据四元数大小计算对应的欧拉角yaw，spring，roll
   * @param[in]      四元数数组，不为NULL
   * @param[in]      返回的偏航角yaw 单位 rad
-  * @param[in]      返回的俯仰角pitch  单位 rad
+  * @param[in]      返回的俯仰角spring  单位 rad
   * @param[in]      返回的横滚角roll 单位 rad
   */
-extern void get_angle(const fp32 quat[4], fp32 *yaw, fp32 *pitch, fp32 *roll);
+extern void get_angle(const fp32 quat[4], fp32 *yaw, fp32 *spring, fp32 *roll);
 /**
   * @brief          返回当前的重力加速度
   * @param[in]      空

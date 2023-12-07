@@ -40,13 +40,15 @@ extern CAN_HandleTypeDef hcan2;
         (ptr)->temperate = (data)[6];                                   \
     }
 /*
-电机数据, 0:发射架yaw轴电机 M15电机, 1:发射架弹簧电机 3508电机,2:发射电机 发射3508电机,3：发射电机 换弹6020电机*/
-motor_measure_t motor_chassis[10];
+电机数据, 0:发射架yaw轴电机 3508电机,1:发射架弹簧电机 3508电机；  2:拨弹电机 3508电机,3:发射电机 4 3508电机;*/
+motor_measure_t motor_launcher[10];
 static CAN_TxHeaderTypeDef  launcher_tx_message;
 static uint8_t              launcher_can_send_data[8];
+
 static CAN_TxHeaderTypeDef  shoot_tx_message;
 static uint8_t              shoot_can_send_data[8];
-		
+
+
 fp32 angle;
 /**
   * @brief          hal库CAN回调函数,接收电机数据
@@ -64,16 +66,14 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 		{	
 			switch (rx_header.StdId)
 			{
-					case CAN_M15_ID:
-          {
-							get_motor_measure(&motor_chassis[0], rx_data);
-							detect_hook(LAUNCHER_M15_TOE);
-							break;
-					}
+					case CAN_YAW_3508_ID:
 					case CAN_3508_ID:
 					{
-							get_motor_measure(&motor_chassis[1], rx_data);
-							detect_hook(LAUNCHER_3508_TOE);
+							static uint8_t i = 0;
+							//get motor id
+							i = rx_header.StdId - CAN_YAW_3508_ID;
+							get_motor_measure(&motor_launcher[i], rx_data);
+							detect_hook(LAUNCHER_MOTOR1_TOE + i);
 							break;
 					}
 					default:
@@ -86,16 +86,16 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 		{
 			switch (rx_header.StdId)
 			{
-				case CAN_3508_SHOOT_ID:
+				case CAN_SHOOT_MOTOR_ID:
 				{
-						get_motor_measure(&motor_chassis[2], rx_data);
-						detect_hook(SHOOT_RELOAD_TOE);
+						get_motor_measure(&motor_launcher[2], rx_data);
+						detect_hook(SHOOT_MOTOR_TOE);
 						break;
 				}
-				case CAN_6020_RELOAD_ID:
+				case CAN_RELOAD_MOTOR_ID:
 				{
-						get_motor_measure(&motor_chassis[3], rx_data);
-						detect_hook(SHOOT_SHOOT_TOE);
+						get_motor_measure(&motor_launcher[3], rx_data);
+						detect_hook(RELOAD_MOTOR_TOE);
 						break;
 				}
 				default:
@@ -106,94 +106,31 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 		}
 }
 
-/**
-  * @brief          发送ID为0x700的CAN包,它会设置3508电机进入快速设置ID
-  * @param[in]      none
-  * @retval         none
-  */
-void CAN_cmd_chassis_reset_ID(void)
-{
-    uint32_t send_mail_box;
-    launcher_tx_message.StdId = 0x700;
-    launcher_tx_message.IDE = CAN_ID_STD;
-    launcher_tx_message.RTR = CAN_RTR_DATA;
-    launcher_tx_message.DLC = 0x08;
-    launcher_can_send_data[0] = 0;
-    launcher_can_send_data[1] = 0;
-    launcher_can_send_data[2] = 0;
-    launcher_can_send_data[3] = 0;
-    launcher_can_send_data[4] = 0;
-    launcher_can_send_data[5] = 0;
-    launcher_can_send_data[6] = 0;
-    launcher_can_send_data[7] = 0;
-
-    HAL_CAN_AddTxMessage(&LAUNCHER_CAN, &launcher_tx_message, launcher_can_send_data, &send_mail_box);
-}
 
 /**
-  * @brief          更改M15电机模式
-  * @param[in]      mode_value:模式值，开环：0x00；电流环：0x01；速度环：0x02；位置环：0x03；
+  * @brief          发送电机控制电流(0x205,0x206,0x207,0x208)
+  * @param[in]      yaw: (0x205) 3508电机控制电流, 范围 [-30000,30000]
+  * @param[in]      spring: (0x206) 3508电机控制电流, 范围 [-30000,30000]
   * @retval         none
   */
-void M15_set_mode(int16_t mode_value)
-{
-    uint32_t send_mail_box;
-    launcher_tx_message.StdId = 0x105;
-    launcher_tx_message.IDE = CAN_ID_STD;
-    launcher_tx_message.RTR = CAN_RTR_DATA;
-    launcher_tx_message.DLC = 0x08;
-    launcher_can_send_data[0] = mode_value;
-    launcher_can_send_data[1] = mode_value;
-    launcher_can_send_data[2] = mode_value;
-    launcher_can_send_data[3] = mode_value;
-    launcher_can_send_data[4] = mode_value;
-    launcher_can_send_data[5] = mode_value;
-    launcher_can_send_data[6] = mode_value;
-    launcher_can_send_data[7] = mode_value;
-
-    HAL_CAN_AddTxMessage(&LAUNCHER_CAN, &launcher_tx_message, launcher_can_send_data, &send_mail_box);
-}
-
-/**
-  * @brief          发送M15电机控制电流(0x201,0x202,0x203,0x204)
-  * @param[in]      motor1: (0x201) M15电机控制电流, 范围 [0,32767]
-  * @retval         none
-  */
-void CAN_cmd_M15(int16_t motor1)
-{
-    uint32_t send_mail_box;
-    launcher_tx_message.StdId = 0x32;
-    launcher_tx_message.IDE = CAN_ID_STD;
-    launcher_tx_message.RTR = CAN_RTR_DATA;
-    launcher_tx_message.DLC = 0x08;
-    launcher_can_send_data[0] = motor1 >> 8;
-    launcher_can_send_data[1] = motor1;
-
-    HAL_CAN_AddTxMessage(&LAUNCHER_CAN, &launcher_tx_message, launcher_can_send_data, &send_mail_box);
-}
-
-/**
-  * @brief          发送3508电机控制电流(0x201,0x202,0x203,0x204)
-  * @param[in]      motor2: (0x202) 3508电机控制电流, 范围 [-16384,16384]
-  * @retval         none
-  */
-void CAN_cmd_3508(int16_t motor2)
+void CAN_cmd_launcher(int16_t yaw, int16_t spring)
 {
     uint32_t send_mail_box;
     launcher_tx_message.StdId = CAN_LAUNCHER_ALL_ID;
     launcher_tx_message.IDE = CAN_ID_STD;
     launcher_tx_message.RTR = CAN_RTR_DATA;
     launcher_tx_message.DLC = 0x08;
-    launcher_can_send_data[2] = motor2 >> 8;
-    launcher_can_send_data[3] = motor2;
-
+    launcher_can_send_data[0] = (yaw >> 8);
+    launcher_can_send_data[1] = yaw;
+    launcher_can_send_data[2] = (spring >> 8);
+    launcher_can_send_data[3] = spring;
     HAL_CAN_AddTxMessage(&LAUNCHER_CAN, &launcher_tx_message, launcher_can_send_data, &send_mail_box);
 }
 
 /**
   * @brief          发送电机控制电流(0x205,0x206,0x207,0x208)
-  * @param[in]      shoot: (0x201) 3508电机控制电流, 范围 [-16384,16384]
-  * @param[in]      reload: (0x202) 6020电机控制电流, 范围 [-16384,16384]
+  * @param[in]      shoot: (0x201) 2006电机控制电流, 范围 [-16384,16384]
+  * @param[in]      reload: (0x202) 3508电机控制电流, 范围 [-16384,16384]
   * @retval         none
   */
 void CAN_cmd_shoot(int16_t shoot, int16_t reload)
@@ -211,14 +148,15 @@ void CAN_cmd_shoot(int16_t shoot, int16_t reload)
     HAL_CAN_AddTxMessage(&SHOOT_CAN, &shoot_tx_message, shoot_can_send_data, &send_mail_box);
 }
 
+
 /**
-  * @brief          返回yaw M15电机数据指针
+  * @brief          返回yaw 3508电机数据指针
   * @param[in]      none
   * @retval         电机数据指针
   */
-const motor_measure_t *get_yaw_M15_motor_measure_point(void)
+const motor_measure_t *get_yaw_motor_measure_point(void)
 {
-    return &motor_chassis[0];
+    return &motor_launcher[0];
 }
 
 /**
@@ -228,7 +166,17 @@ const motor_measure_t *get_yaw_M15_motor_measure_point(void)
   */
 const motor_measure_t *get_spring_motor_measure_point(void)
 {
-    return &motor_chassis[1];
+    return &motor_launcher[1];
+}
+
+/**
+  * @brief          返回换弹 3508电机数据指针
+  * @param[in]      none
+  * @retval         电机数据指针
+  */
+const motor_measure_t *get_reload_measure_point(void)
+{
+    return &motor_launcher[2];
 }
 
 /**
@@ -236,19 +184,7 @@ const motor_measure_t *get_spring_motor_measure_point(void)
   * @param[in]      none
   * @retval         电机数据指针
   */
-const motor_measure_t *get_can_2006_measure_point(void)
+const motor_measure_t *get_shoot_measure_point(void)
 {
-    return &motor_chassis[2];
+    return &motor_launcher[3];
 }
-
-/**
-  * @brief          返回换弹 6020电机数据指针
-  * @param[in]      none
-  * @retval         电机数据指针
-  */
-const motor_measure_t *get_can_3508_left_measure_point(void)
-{
-    return &motor_chassis[3];
-}
- 
- 

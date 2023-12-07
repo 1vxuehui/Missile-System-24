@@ -65,8 +65,8 @@ standard_tpye_c\ui_task.o: ..\application\remote_control.h
 standard_tpye_c\ui_task.o: ..\bsp\boards\bsp_rc.h
 standard_tpye_c\ui_task.o: ..\application\referee.h
 standard_tpye_c\ui_task.o: ..\application\protocol\protocol.h
-standard_tpye_c\ui_task.o: ..\application\gimbal_behaviour.h
-standard_tpye_c\ui_task.o: ..\application\gimbal_task.h
+standard_tpye_c\ui_task.o: ..\application\launcher_behaviour.h
+standard_tpye_c\ui_task.o: ..\application\launcher_task.h
 standard_tpye_c\ui_task.o: ..\components\controller\pid.h
 standard_tpye_c\ui_task.o: ..\components\controller\stm32.h
 standard_tpye_c\ui_task.o: ..\components\controller\STM32_Config.h

@@ -2,7 +2,7 @@ standard_tpye_c\shoot.o: ..\application\shoot.c
 standard_tpye_c\shoot.o: ..\application\shoot.h
 standard_tpye_c\shoot.o: ..\application\struct_typedef.h
 standard_tpye_c\shoot.o: ..\application\CAN_receive.h
-standard_tpye_c\shoot.o: ..\application\gimbal_task.h
+standard_tpye_c\shoot.o: ..\application\launcher_task.h
 standard_tpye_c\shoot.o: ..\components\controller\pid.h
 standard_tpye_c\shoot.o: ..\application\remote_control.h
 standard_tpye_c\shoot.o: ..\bsp\boards\bsp_rc.h
@@ -74,5 +74,5 @@ standard_tpye_c\shoot.o: E:\Keil_5\ARM\ARMCC\Bin\..\include\string.h
 standard_tpye_c\shoot.o: E:\Keil_5\ARM\ARMCC\Bin\..\include\math.h
 standard_tpye_c\shoot.o: ..\application\referee.h
 standard_tpye_c\shoot.o: ..\application\protocol\protocol.h
-standard_tpye_c\shoot.o: ..\application\gimbal_behaviour.h
+standard_tpye_c\shoot.o: ..\application\launcher_behaviour.h
 standard_tpye_c\shoot.o: ..\application\detect_task.h

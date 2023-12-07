@@ -265,7 +265,7 @@ static void detect_init(uint32_t time)
             {10, 10, 5},    //motor3
             {10, 10, 4},    //motor4
             {2, 3, 10},     //yaw
-            {2, 3, 9},     //pitch
+            {2, 3, 9},     //spring
             {10, 10, 8},   //trigger
 						{10, 10, 11},		//fric_left
 						{10, 10, 12},		//fric_right

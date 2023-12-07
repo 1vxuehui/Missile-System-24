@@ -265,7 +265,7 @@ void INS_task(void const *pvParameters)
 
 
         AHRS_update(INS_quat, timing_time, INS_gyro, accel_fliter_3, INS_mag);
-        get_angle(INS_quat, INS_angle + INS_YAW_ADDRESS_OFFSET, INS_angle + INS_PITCH_ADDRESS_OFFSET, INS_angle + INS_ROLL_ADDRESS_OFFSET);
+        get_angle(INS_quat, INS_angle + INS_YAW_ADDRESS_OFFSET, INS_angle + INS_spring_ADDRESS_OFFSET, INS_angle + INS_ROLL_ADDRESS_OFFSET);
 
 
         //because no use ist8310 and save time, no use
@@ -452,12 +452,12 @@ const fp32 *get_INS_quat_point(void)
     return INS_quat;
 }
 /**
-  * @brief          get the euler angle, 0:yaw, 1:pitch, 2:roll unit rad
+  * @brief          get the euler angle, 0:yaw, 1:spring, 2:roll unit rad
   * @param[in]      none
   * @retval         the point of INS_angle
   */
 /**
-  * @brief          获取欧拉角, 0:yaw, 1:pitch, 2:roll 单位 rad
+  * @brief          获取欧拉角, 0:yaw, 1:spring, 2:roll 单位 rad
   * @param[in]      none
   * @retval         INS_angle的指针
   */

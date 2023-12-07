@@ -825,19 +825,9 @@
               <FilePath>..\application\detect_task.c</FilePath>
             </File>
             <File>
-              <FileName>chassis_task.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\application\chassis_task.c</FilePath>
-            </File>
-            <File>
               <FileName>CAN_receive.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\application\CAN_receive.c</FilePath>
-            </File>
-            <File>
-              <FileName>chassis_behaviour.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\application\chassis_behaviour.c</FilePath>
             </File>
             <File>
               <FileName>calibrate_task.c</FileName>
@@ -845,14 +835,14 @@
               <FilePath>..\application\calibrate_task.c</FilePath>
             </File>
             <File>
-              <FileName>gimbal_behaviour.c</FileName>
+              <FileName>launcher_behaviour.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\application\gimbal_behaviour.c</FilePath>
+              <FilePath>..\application\launcher_behaviour.c</FilePath>
             </File>
             <File>
-              <FileName>gimbal_task.c</FileName>
+              <FileName>launcher_task.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\application\gimbal_task.c</FilePath>
+              <FilePath>..\application\launcher_task.c</FilePath>
             </File>
             <File>
               <FileName>INS_task.c</FileName>

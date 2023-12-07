@@ -109,7 +109,7 @@ typedef __packed struct //0x0201
 		uint16_t shooter_id1_42mm_cooling_limit;
 		uint16_t shooter_id1_42mm_speed_limit;
 		uint16_t chassis_power_limit;
-		uint8_t mains_power_gimbal_output : 1;
+		uint8_t mains_power_launcher_output : 1;
 		uint8_t mains_power_chassis_output : 1;
 		uint8_t mains_power_shooter_output : 1;
 } ext_game_robot_state_t;

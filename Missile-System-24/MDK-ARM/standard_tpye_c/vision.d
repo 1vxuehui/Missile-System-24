@@ -49,7 +49,7 @@ standard_tpye_c\vision.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd.
 standard_tpye_c\vision.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h
 standard_tpye_c\vision.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h
 standard_tpye_c\vision.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
-standard_tpye_c\vision.o: ..\application\gimbal_task.h
+standard_tpye_c\vision.o: ..\application\launcher_task.h
 standard_tpye_c\vision.o: ..\application\CAN_receive.h
 standard_tpye_c\vision.o: ..\components\controller\pid.h
 standard_tpye_c\vision.o: ..\components\controller\stm32.h

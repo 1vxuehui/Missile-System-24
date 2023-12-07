@@ -59,8 +59,8 @@ void vision_rx_decode(uint8_t *test_code)
 			vision_rxfifo.rx_flag = 1;
 			vision_rxfifo.yaw_fifo 	 = (test_code[YAW_FIFO_BASE+0] << 8*3) | (test_code[YAW_FIFO_BASE+1] << 8*2)
 															 | (test_code[YAW_FIFO_BASE+2] << 8*1) | (test_code[YAW_FIFO_BASE+3] << 8*0);
-			vision_rxfifo.pitch_fifo = (test_code[PITCH_FIFO_BASE+0] << 8*3) | (test_code[PITCH_FIFO_BASE+1] << 8*2)
-															 | (test_code[PITCH_FIFO_BASE+2] << 8*1) | (test_code[PITCH_FIFO_BASE+3] << 8*0);
+			vision_rxfifo.spring_fifo = (test_code[spring_FIFO_BASE+0] << 8*3) | (test_code[spring_FIFO_BASE+1] << 8*2)
+															 | (test_code[spring_FIFO_BASE+2] << 8*1) | (test_code[spring_FIFO_BASE+3] << 8*0);
 			vision_rxfifo.distance_fifo  = (test_code[DISTANCE+0] << 8*3) | (test_code[DISTANCE+1] << 8*2)
 																		| (test_code[DISTANCE+2] << 8*1) | (test_code[DISTANCE+3] << 8*0);
 			vision_rxfifo.rev  = (test_code[REV+0] << 8*3) | (test_code[REV+1] << 8*2)
@@ -78,7 +78,7 @@ void vision_rx_decode(uint8_t *test_code)
 		{
 			vision_rxfifo.rx_flag 					= 0;
 			vision_rxfifo.yaw_fifo 					= 1800000;
-			vision_rxfifo.pitch_fifo  			= 1800000;
+			vision_rxfifo.spring_fifo  			= 1800000;
 			vision_rxfifo.rx_change_flag		= 0;
 			
 			vision_rxfifo.rx_update_flag = 1;

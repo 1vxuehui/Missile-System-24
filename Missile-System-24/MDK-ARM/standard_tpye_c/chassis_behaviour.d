@@ -3,7 +3,7 @@ standard_tpye_c\chassis_behaviour.o: ..\application\chassis_behaviour.h
 standard_tpye_c\chassis_behaviour.o: ..\application\struct_typedef.h
 standard_tpye_c\chassis_behaviour.o: ..\application\chassis_task.h
 standard_tpye_c\chassis_behaviour.o: ..\application\CAN_receive.h
-standard_tpye_c\chassis_behaviour.o: ..\application\gimbal_task.h
+standard_tpye_c\chassis_behaviour.o: ..\application\launcher_task.h
 standard_tpye_c\chassis_behaviour.o: ..\components\controller\pid.h
 standard_tpye_c\chassis_behaviour.o: ..\components\controller\stm32.h
 standard_tpye_c\chassis_behaviour.o: ..\components\controller\STM32_Config.h
@@ -77,6 +77,6 @@ standard_tpye_c\chassis_behaviour.o: ..\components\algorithm\Include\arm_math.h
 standard_tpye_c\chassis_behaviour.o: ../Drivers/CMSIS/Include/core_cm4.h
 standard_tpye_c\chassis_behaviour.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 standard_tpye_c\chassis_behaviour.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
-standard_tpye_c\chassis_behaviour.o: ..\application\gimbal_behaviour.h
+standard_tpye_c\chassis_behaviour.o: ..\application\launcher_behaviour.h
 standard_tpye_c\chassis_behaviour.o: ..\application\referee.h
 standard_tpye_c\chassis_behaviour.o: ..\application\protocol\protocol.h

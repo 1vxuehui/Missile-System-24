@@ -2,7 +2,7 @@ standard_tpye_c\shoot_task.o: ..\application\shoot_task.c
 standard_tpye_c\shoot_task.o: ..\application\shoot_task.h
 standard_tpye_c\shoot_task.o: ..\application\struct_typedef.h
 standard_tpye_c\shoot_task.o: ..\application\CAN_receive.h
-standard_tpye_c\shoot_task.o: ..\application\gimbal_task.h
+standard_tpye_c\shoot_task.o: ..\application\launcher_task.h
 standard_tpye_c\shoot_task.o: ..\components\controller\pid.h
 standard_tpye_c\shoot_task.o: ..\components\controller\stm32.h
 standard_tpye_c\shoot_task.o: ..\components\controller\STM32_Config.h
@@ -80,6 +80,6 @@ standard_tpye_c\shoot_task.o: E:\Keil_v5\ARM\5.06\Bin\..\include\string.h
 standard_tpye_c\shoot_task.o: E:\Keil_v5\ARM\5.06\Bin\..\include\math.h
 standard_tpye_c\shoot_task.o: ..\application\referee.h
 standard_tpye_c\shoot_task.o: ..\application\protocol\protocol.h
-standard_tpye_c\shoot_task.o: ..\application\gimbal_behaviour.h
+standard_tpye_c\shoot_task.o: ..\application\launcher_behaviour.h
 standard_tpye_c\shoot_task.o: ..\application\detect_task.h
 standard_tpye_c\shoot_task.o: ../Inc/tim.h

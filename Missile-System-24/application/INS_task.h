@@ -57,7 +57,7 @@
 #define INS_TASK_INIT_TIME 7 //任务开始初期 delay 一段时间
 
 #define INS_YAW_ADDRESS_OFFSET    0
-#define INS_PITCH_ADDRESS_OFFSET  1
+#define INS_spring_ADDRESS_OFFSET  1
 #define INS_ROLL_ADDRESS_OFFSET   2
 
 #define INS_GYRO_X_ADDRESS_OFFSET 0
@@ -128,12 +128,12 @@ extern const fp32 *get_INS_quat_point(void);
 
 
 /**
-  * @brief          get the euler angle, 0:yaw, 1:pitch, 2:roll unit rad
+  * @brief          get the euler angle, 0:yaw, 1:spring, 2:roll unit rad
   * @param[in]      none
   * @retval         the point of INS_angle
   */
 /**
-  * @brief          获取欧拉角, 0:yaw, 1:pitch, 2:roll 单位 rad
+  * @brief          获取欧拉角, 0:yaw, 1:spring, 2:roll 单位 rad
   * @param[in]      none
   * @retval         INS_angle的指针
   */

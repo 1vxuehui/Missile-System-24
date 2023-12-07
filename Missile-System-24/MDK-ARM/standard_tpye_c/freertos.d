@@ -60,9 +60,9 @@ standard_tpye_c\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/s
 standard_tpye_c\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h
 standard_tpye_c\freertos.o: ..\application\calibrate_task.h
 standard_tpye_c\freertos.o: ..\application\struct_typedef.h
-standard_tpye_c\freertos.o: ..\application\chassis_task.h
+standard_tpye_c\freertos.o: ..\application\detect_task.h
+standard_tpye_c\freertos.o: ..\application\launcher_task.h
 standard_tpye_c\freertos.o: ..\application\CAN_receive.h
-standard_tpye_c\freertos.o: ..\application\gimbal_task.h
 standard_tpye_c\freertos.o: ..\components\controller\pid.h
 standard_tpye_c\freertos.o: ..\components\controller\stm32.h
 standard_tpye_c\freertos.o: ..\components\controller\STM32_Config.h
@@ -71,10 +71,8 @@ standard_tpye_c\freertos.o: ..\components\controller\stm32_External_Functions.h
 standard_tpye_c\freertos.o: ..\components\controller\stm32_types.h
 standard_tpye_c\freertos.o: ..\application\remote_control.h
 standard_tpye_c\freertos.o: ..\bsp\boards\bsp_rc.h
-standard_tpye_c\freertos.o: ..\components\algorithm\user_lib.h
-standard_tpye_c\freertos.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
-standard_tpye_c\freertos.o: ..\application\detect_task.h
 standard_tpye_c\freertos.o: ..\application\shoot_task.h
+standard_tpye_c\freertos.o: ..\components\algorithm\user_lib.h
 standard_tpye_c\freertos.o: ..\application\INS_task.h
 standard_tpye_c\freertos.o: ..\application\led_flow_task.h
 standard_tpye_c\freertos.o: ..\application\oled_task.h
