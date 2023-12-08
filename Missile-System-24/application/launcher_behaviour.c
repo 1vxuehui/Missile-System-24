@@ -225,23 +225,6 @@ static void launcher_init_control(fp32 *yaw, fp32 *spring, launcher_control_t *l
 static void launcher_cali_control(fp32 *yaw, fp32 *spring, launcher_control_t *launcher_control_set);
 
 /**
-  * @brief          when launcher behaviour mode is launcher_ABSOLUTE_ANGLE, the function is called
-  *                 and launcher control mode is gyro mode. 
-  * @param[out]     yaw: yaw axia absolute angle increment, unit rad
-  * @param[out]     spring: spring axia absolute angle increment,unit rad
-  * @param[in]      launcher_control_set: launcher data
-  * @retval         none
-  */
-/**
-  * @brief          发射架陀螺仪控制，电机是陀螺仪角度控制，
-  * @param[out]     yaw: yaw轴角度控制，为角度的增量 单位 rad
-  * @param[out]     spring:spring轴角度控制，为角度的增量 单位 rad
-  * @param[in]      launcher_control_set:发射架数据指针
-  * @retval         none
-  */
-static void launcher_absolute_angle_control(fp32 *yaw, fp32 *spring, launcher_control_t *launcher_control_set);
-
-/**
   * @brief          when launcher behaviour mode is launcher_RELATIVE_ANGLE, the function is called
   *                 and launcher control mode is encode mode. 
   * @param[out]     yaw: yaw axia relative angle increment, unit rad
@@ -258,31 +241,6 @@ static void launcher_absolute_angle_control(fp32 *yaw, fp32 *spring, launcher_co
   */
 static void launcher_relative_angle_control(fp32 *yaw, fp32 *spring, launcher_control_t *launcher_control_set);
 
-/**
-  * @brief          when launcher behaviour mode is launcher_MOTIONLESS, the function is called
-  *                 and launcher control mode is encode mode. 
-  * @param[out]     yaw: yaw axia relative angle increment,  unit rad
-  * @param[out]     spring: spring axia relative angle increment, unit rad
-  * @param[in]      launcher_control_set: launcher data
-  * @retval         none
-  */
-/**
-  * @brief          发射架进入遥控器无输入控制，电机是相对角度控制，
-  * @author         RM
-  * @param[in]      yaw: yaw轴角度控制，为角度的增量 单位 rad
-  * @param[in]      spring: spring轴角度控制，为角度的增量 单位 rad
-  * @param[in]      launcher_control_set:发射架数据指针
-  * @retval         none
-  */
-static void launcher_motionless_control(fp32 *yaw, fp32 *spring, launcher_control_t *launcher_control_set);
-/**
-  * @brief          陀螺模式
-  * @param[in]      yaw: 绝对角度控制
-  * @param[in]      spring: 相对角度控制
-  * @param[in]      launcher_control_set: 发射架数据指针
-  * @retval         none
-  */
-static void launcher_absolute_spin_angle_control(fp32 *yaw, fp32 *spring, launcher_control_t *launcher_control_set);
 //发射架行为状态机
 launcher_behaviour_e launcher_behaviour = launcher_ZERO_FORCE;
 
@@ -332,19 +290,9 @@ void launcher_behaviour_mode_set(launcher_control_t *launcher_mode_set)
         launcher_mode_set->launcher_yaw_motor.launcher_motor_mode = launcher_MOTOR_ENCONDE;
         launcher_mode_set->launcher_spring_motor.launcher_motor_mode = launcher_MOTOR_ENCONDE;
     }
-    else if (launcher_behaviour == launcher_ABSOLUTE_ANGLE)
-    {
-        launcher_mode_set->launcher_yaw_motor.launcher_motor_mode = launcher_MOTOR_GYRO;
-        launcher_mode_set->launcher_spring_motor.launcher_motor_mode = launcher_MOTOR_ENCONDE;
-    }
     else if (launcher_behaviour == launcher_MOTIONLESS)
     {
         launcher_mode_set->launcher_yaw_motor.launcher_motor_mode = launcher_MOTOR_ENCONDE;
-        launcher_mode_set->launcher_spring_motor.launcher_motor_mode = launcher_MOTOR_ENCONDE;
-    }
-		else if (launcher_behaviour == launcher_ABSOLUTE_SPIN)
-    {
-        launcher_mode_set->launcher_yaw_motor.launcher_motor_mode = launcher_MOTOR_GYRO;
         launcher_mode_set->launcher_spring_motor.launcher_motor_mode = launcher_MOTOR_ENCONDE;
     }
 }
@@ -384,23 +332,10 @@ void launcher_behaviour_control_set(fp32 *add_yaw, fp32 *add_spring, launcher_co
     {
         launcher_cali_control(add_yaw, add_spring, launcher_control_set);
     }
-    else if (launcher_behaviour == launcher_ABSOLUTE_ANGLE)
-    {
-        launcher_absolute_angle_control(add_yaw, add_spring, launcher_control_set);
-    }
     else if (launcher_behaviour == launcher_RELATIVE_ANGLE)
     {
         launcher_relative_angle_control(add_yaw, add_spring, launcher_control_set);
     }
-    else if (launcher_behaviour == launcher_MOTIONLESS)
-    {
-        launcher_motionless_control(add_yaw, add_spring, launcher_control_set);
-    }
-		else if (launcher_behaviour == launcher_ABSOLUTE_SPIN)
-    {
-				launcher_absolute_spin_angle_control(add_yaw, add_spring, launcher_control_set);
-		}
-		
 		vision_loop(vision_rx);
 		if(!launcher_control_set->launcher_rc_ctrl->mouse.press_r)
 		{
@@ -476,58 +411,7 @@ static void launcher_behavour_set(launcher_control_t *launcher_mode_set)
     {
         return;
     }
-//    //in cali mode, return
-//    //校准行为，return 不会设置其他的模式
-//    if (launcher_behaviour == launcher_CALI && launcher_mode_set->launcher_cali.step != launcher_CALI_END_STEP)
-//    {
-//        return;
-//    }
-//    //if other operate make step change to start, means enter cali mode
-//    //如果外部使得校准步骤从0 变成 start，则进入校准模式
-//    if (launcher_mode_set->launcher_cali.step == launcher_CALI_START_STEP && !toe_is_error(DBUS_TOE))
-//    {
-//        launcher_behaviour = launcher_CALI;
-//        return;
-//    }
 
-//    //init mode, judge if launcher is in middle place
-//    //初始化模式判断是否到达中值位置
-//    if (launcher_behaviour == launcher_INIT)
-//    {
-//        static uint16_t init_time = 0;
-//        static uint16_t init_stop_time = 0;
-//        init_time++;
-//        
-//        if ((fabs(launcher_mode_set->launcher_yaw_motor.relative_angle - INIT_YAW_SET) < launcher_INIT_ANGLE_ERROR &&
-//             fabs(launcher_mode_set->launcher_spring_motor.absolute_angle - INIT_spring_SET) < launcher_INIT_ANGLE_ERROR))
-//        {
-//            
-//            if (init_stop_time < launcher_INIT_STOP_TIME)
-//            {
-//                init_stop_time++;
-//            }
-//        }
-//        else
-//        {
-//            
-//            if (init_time < launcher_INIT_TIME)
-//            {
-//                init_time++;
-//            }
-//        }
-
-//        //超过初始化最大时间，或者已经稳定到中值一段时间，退出初始化状态开关打下档，或者掉线
-//        if (init_time < launcher_INIT_TIME && init_stop_time < launcher_INIT_STOP_TIME &&
-//            !switch_is_down(launcher_mode_set->launcher_rc_ctrl->rc.s[0]) && !toe_is_error(DBUS_TOE))
-//        {
-//            return;
-//        }
-//        else
-//        {
-//            init_stop_time = 0;
-//            init_time = 0;
-//        }
-//    }
 		static int16_t last_key_G = 0;
 		static int16_t move = 0;
 		
@@ -549,38 +433,38 @@ static void launcher_behavour_set(launcher_control_t *launcher_mode_set)
     //开关控制 发射架状态
 		if (!switch_is_down(launcher_mode_set->launcher_rc_ctrl->rc.s[1]))
 		{
-				if (switch_is_down(launcher_mode_set->launcher_rc_ctrl->rc.s[0]))
-				{
-						launcher_behaviour = launcher_ABSOLUTE_ANGLE;
-				}
-				else if (switch_is_mid(launcher_mode_set->launcher_rc_ctrl->rc.s[0]))
-				{
-						launcher_behaviour = launcher_ABSOLUTE_ANGLE;
-				}
-				else if (switch_is_up(launcher_mode_set->launcher_rc_ctrl->rc.s[0]))
-				{
-						launcher_behaviour = launcher_ABSOLUTE_SPIN;
-				}
+				// if (switch_is_down(launcher_mode_set->launcher_rc_ctrl->rc.s[0]))
+				// {
+				// 		launcher_behaviour = launcher_ABSOLUTE_ANGLE;
+				// }
+				// else if (switch_is_mid(launcher_mode_set->launcher_rc_ctrl->rc.s[0]))
+				// {
+				// 		launcher_behaviour = launcher_ABSOLUTE_ANGLE;
+				// }
+				// else if (switch_is_up(launcher_mode_set->launcher_rc_ctrl->rc.s[0]))
+				// {
+				// 		launcher_behaviour = launcher_ABSOLUTE_SPIN;
+				// }
 		}
 		else if(switch_is_down(launcher_mode_set->launcher_rc_ctrl->rc.s[1]) && move)
 		{
-				if (mode == 1)
-				{
-						launcher_behaviour = launcher_ABSOLUTE_ANGLE;
-				}
-				else if (mode == 2)
-				{
-						launcher_behaviour = launcher_ABSOLUTE_ANGLE;
+				// if (mode == 1)
+				// {
+				// 		launcher_behaviour = launcher_ABSOLUTE_ANGLE;
+				// }
+				// else if (mode == 2)
+				// {
+				// 		launcher_behaviour = launcher_ABSOLUTE_ANGLE;
 										
-						if(launcher_mode_set->launcher_rc_ctrl->key.v & KEY_PRESSED_OFFSET_SHIFT)
-						{
-								launcher_behaviour = launcher_ABSOLUTE_SPIN;
-						}
-				}
-				else
-				{
+				// 		if(launcher_mode_set->launcher_rc_ctrl->key.v & KEY_PRESSED_OFFSET_SHIFT)
+				// 		{
+				// 				launcher_behaviour = launcher_ABSOLUTE_SPIN;
+				// 		}
+				// }
+				// else
+				// {
 						launcher_behaviour = launcher_ZERO_FORCE;
-				}
+				// }
 		}
 		else
 		{
@@ -748,40 +632,6 @@ static void launcher_cali_control(fp32 *yaw, fp32 *spring, launcher_control_t *l
     }
 }
 
-
-/**
-  * @brief          when launcher behaviour mode is launcher_ABSOLUTE_ANGLE, the function is called
-  *                 and launcher control mode is gyro mode. 
-  * @param[out]     yaw: yaw axia absolute angle increment, unit rad
-  * @param[out]     spring: spring axia absolute angle increment,unit rad
-  * @param[in]      launcher_control_set: launcher data
-  * @retval         none
-  */
-/**
-  * @brief          发射架陀螺仪控制，电机是陀螺仪角度控制，
-  * @param[out]     yaw: yaw轴角度控制，为角度的增量 单位 rad
-  * @param[out]     spring:spring轴角度控制，为角度的增量 单位 rad
-  * @param[in]      launcher_control_set:发射架数据指针
-  * @retval         none
-  */
-static void launcher_absolute_angle_control(fp32 *yaw, fp32 *spring, launcher_control_t *launcher_control_set)
-{
-    if (yaw == NULL || spring == NULL || launcher_control_set == NULL)
-    {
-        return;
-    }
-
-    static int16_t yaw_channel = 0, spring_channel = 0;
-
-    rc_deadband_limit(launcher_control_set->launcher_rc_ctrl->rc.ch[YAW_CHANNEL], yaw_channel, RC_DEADBAND);
-    rc_deadband_limit(launcher_control_set->launcher_rc_ctrl->rc.ch[spring_CHANNEL], spring_channel, RC_DEADBAND);
-
-    *yaw = yaw_channel * YAW_RC_SEN - launcher_control_set->launcher_rc_ctrl->mouse.x * YAW_MOUSE_SEN ;
-    *spring = spring_channel * spring_RC_SEN + launcher_control_set->launcher_rc_ctrl->mouse.y * spring_MOUSE_SEN;
-
-}
-
-
 /**
   * @brief          when launcher behaviour mode is launcher_RELATIVE_ANGLE, the function is called
   *                 and launcher control mode is encode mode. 
@@ -813,28 +663,6 @@ static void launcher_relative_angle_control(fp32 *yaw, fp32 *spring, launcher_co
 
 
 }
-/**
-  * @brief          陀螺模式
-  * @param[in]      yaw: 绝对角度控制
-  * @param[in]      spring: 相对角度控制
-  * @param[in]      launcher_control_set: 发射架数据指针
-  * @retval         none
-  */
-static void launcher_absolute_spin_angle_control(fp32 *yaw, fp32 *spring, launcher_control_t *launcher_control_set)
-{
-     if (yaw == NULL || spring == NULL || launcher_control_set == NULL)
-    {
-        return;
-    }
-
-    static int16_t yaw_channel = 0, spring_channel = 0;
-
-    rc_deadband_limit(launcher_control_set->launcher_rc_ctrl->rc.ch[YAW_CHANNEL], yaw_channel, RC_DEADBAND);
-    rc_deadband_limit(launcher_control_set->launcher_rc_ctrl->rc.ch[spring_CHANNEL], spring_channel, RC_DEADBAND);
-    *yaw = yaw_channel * YAW_RC_SEN - launcher_control_set->launcher_rc_ctrl->mouse.x * YAW_MOUSE_SEN;
-    *spring = spring_channel * spring_RC_SEN + launcher_control_set->launcher_rc_ctrl->mouse.y * spring_MOUSE_SEN;
-
-}
 
 /**
   * @brief          when launcher behaviour mode is launcher_MOTIONLESS, the function is called
@@ -852,12 +680,12 @@ static void launcher_absolute_spin_angle_control(fp32 *yaw, fp32 *spring, launch
   * @param[in]      launcher_control_set:发射架数据指针
   * @retval         none
   */
-static void launcher_motionless_control(fp32 *yaw, fp32 *spring, launcher_control_t *launcher_control_set)
-{
-    if (yaw == NULL || spring == NULL || launcher_control_set == NULL)
-    {
-        return;
-    }
-    *yaw = 0.0f;
-    *spring = 0.0f;
-}
+// static void launcher_motionless_control(fp32 *yaw, fp32 *spring, launcher_control_t *launcher_control_set)
+// {
+//     if (yaw == NULL || spring == NULL || launcher_control_set == NULL)
+//     {
+//         return;
+//     }
+//     *yaw = 0.0f;
+//     *spring = 0.0f;
+// }

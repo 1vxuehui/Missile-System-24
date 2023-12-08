@@ -88,10 +88,8 @@ typedef enum
   launcher_ZERO_FORCE = 0, 
   launcher_INIT,           
   launcher_CALI,           
-  launcher_ABSOLUTE_ANGLE, 
   launcher_RELATIVE_ANGLE, 
   launcher_MOTIONLESS,     
-	launcher_ABSOLUTE_SPIN,
 } launcher_behaviour_e;
 
 /**

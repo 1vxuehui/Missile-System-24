@@ -101,13 +101,7 @@ static void launcher_set_control(launcher_control_t *set_control);
   * @retval         none
   */
 static void launcher_control_loop(launcher_control_t *control_loop);
-/**
-  * @brief          在launcher_MOTOR_GYRO模式，限制角度设定,防止超过最大
-  * @param[out]     launcher_motor:yaw电机或者spring电机
-  * @retval         none
-  */
-static void launcher_yaw_absolute_angle_limit(launcher_motor_t *launcher_motor, fp32 add);
-static void launcher_spring_absolute_angle_limit(launcher_motor_t *launcher_motor, fp32 add);
+
 /**
   * @brief          在launcher_MOTOR_ENCONDE模式，限制角度设定,防止超过最大
   * @param[out]     launcher_motor:yaw电机或者spring电机
@@ -316,28 +310,22 @@ const launcher_motor_t *get_spring_motor_point(void)
 }
 
 /**
-  * @brief          初始化"launcher_control"变量，包括pid初始化， 遥控器指针初始化，发射架电机指针初始化，陀螺仪角度指针初始化
+  * @brief          初始化"launcher_control"变量，包括pid初始化， 遥控器指针初始化，发射架电机指针初始化
   * @param[out]     init:"launcher_control"变量指针.
   * @retval         none
   */
 static void launcher_init(launcher_control_t *init)
 {
-		//继电器控制发射架电源
-		HAL_GPIO_WritePin(GPIOE, GPIO_PIN_11, GPIO_PIN_RESET);
     //电机数据指针获取  
     init->launcher_yaw_motor.launcher_motor_measure = get_yaw_motor_measure_point();
     init->launcher_spring_motor.launcher_motor_measure = get_spring_motor_measure_point();
-    //陀螺仪数据指针获取
-	  vision_rx=get_vision_fifo();
-    init->launcher_INT_angle_point = get_INS_angle_point();
-    init->launcher_INT_gyro_point = get_gyro_data_point();
     //遥控器数据指针获取
     init->launcher_rc_ctrl = get_remote_control_point();
     //初始化电机模式
     init->launcher_yaw_motor.launcher_motor_mode = init->launcher_yaw_motor.last_launcher_motor_mode = launcher_MOTOR_RAW;
     init->launcher_spring_motor.launcher_motor_mode = init->launcher_spring_motor.last_launcher_motor_mode = launcher_MOTOR_RAW;
-		init->launcher_spring_motor.offset_ecd = 1600;
-		init->launcher_yaw_motor.offset_ecd = 1350;
+		init->launcher_spring_motor.offset_ecd = 1600;//中值
+		init->launcher_yaw_motor.offset_ecd = 1350;//中值
     //初始化电机pi
 		stm32_pid_yaw_init();
 		stm32_pid_spring_init();
@@ -487,31 +475,18 @@ static void launcher_set_control(launcher_control_t *set_control)
         //raw模式下，直接发送控制值
         set_control->launcher_yaw_motor.raw_cmd_current = add_yaw_angle;
     }
-    else if (set_control->launcher_yaw_motor.launcher_motor_mode == launcher_MOTOR_GYRO)
-    {
-        //gyro模式下，陀螺仪角度控制
-        launcher_yaw_absolute_angle_limit(&set_control->launcher_yaw_motor, add_yaw_angle);
-    }
     else if (set_control->launcher_yaw_motor.launcher_motor_mode == launcher_MOTOR_ENCONDE)
     {
         //enconde模式下，电机编码角度控制
         launcher_yaw_relative_angle_limit(&set_control->launcher_yaw_motor, add_yaw_angle);
     }
-		else if (set_control->launcher_yaw_motor.launcher_motor_mode == launcher_MOTOR_GYRONOLIMIT)
-    { 
-        launcher_spring_absolute_angle_limit(&set_control->launcher_yaw_motor, add_yaw_angle);
-    }
+
 
     //spring电机模式控制
     if (set_control->launcher_spring_motor.launcher_motor_mode == launcher_MOTOR_RAW)
     {
         //raw模式下，直接发送控制值
         set_control->launcher_spring_motor.raw_cmd_current = add_spring_angle;
-    }
-    else if (set_control->launcher_spring_motor.launcher_motor_mode == launcher_MOTOR_GYRO)
-    {
-        //gyro模式下，陀螺仪角度控制
-        launcher_spring_absolute_angle_limit(&set_control->launcher_spring_motor, add_spring_angle);
     }
     else if (set_control->launcher_spring_motor.launcher_motor_mode == launcher_MOTOR_ENCONDE)
     {
@@ -520,51 +495,7 @@ static void launcher_set_control(launcher_control_t *set_control)
     }
 }
 
-/**
-  * @brief          发射架控制模式:launcher_MOTOR_GYRO，使用陀螺仪计算的欧拉角进行控制
-  * @param[out]     launcher_motor:yaw电机或者spring电机
-  * @retval         none
-  */
-static void launcher_yaw_absolute_angle_limit(launcher_motor_t *launcher_motor, fp32 add)
-{
-    static fp32 angle_set;
-    angle_set = launcher_motor->absolute_angle_set;
-    launcher_motor->absolute_angle_set = rad_format(angle_set + add);
-}
 
-static void launcher_spring_absolute_angle_limit(launcher_motor_t *launcher_motor, fp32 add)
-{
-    static fp32 bias_angle;
-    static fp32 angle_set;
-    if (launcher_motor == NULL)
-    {
-        return;
-    }
-    //now angle error
-    //当前控制误差角度
-    bias_angle = rad_format(launcher_motor->absolute_angle_set - launcher_motor->absolute_angle);
-    //relative angle + angle error + add_angle > max_relative angle
-    //发射架相对角度+ 误差角度 + 新增角度 如果大于 最大机械角度
-    if (launcher_motor->relative_angle + bias_angle + add > 0.80f)
-    {
-        //如果是往最大机械角度控制方向
-        if (add > 0.0f)
-        {
-            //calculate max add_angle
-            //计算出一个最大的添加角度，
-            add = 0.90f - launcher_motor->relative_angle - bias_angle;
-        }
-    }
-    else if (launcher_motor->relative_angle + bias_angle + add < -0.24f)
-    {
-        if (add < 0.0f)
-        {
-            add = -0.24f - launcher_motor->relative_angle - bias_angle;
-        }
-    }
-    angle_set = launcher_motor->absolute_angle_set;
-    launcher_motor->absolute_angle_set = rad_format(angle_set + add);
-}
 
 /**
   * @brief          发射架控制模式:launcher_MOTOR_ENCONDE，使用编码相对角进行控制
@@ -609,16 +540,6 @@ static void launcher_control_loop(launcher_control_t *control_loop)
     {
         return;
     }
-		
-		//继电器控制发射架电源
-   // if(robot_state.mains_power_chassis_output == 1)
-		//{
-		//		HAL_GPIO_WritePin(GPIOE, GPIO_PIN_11, GPIO_PIN_SET);
-		//}
-		//else
-	//	{
-		//		HAL_GPIO_WritePin(GPIOE, GPIO_PIN_11, GPIO_PIN_RESET);
-		//}	
     if (control_loop->launcher_yaw_motor.launcher_motor_mode == launcher_MOTOR_RAW)
     {
 				if (&(control_loop->launcher_yaw_motor) == NULL)
