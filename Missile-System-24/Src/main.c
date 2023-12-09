@@ -41,10 +41,8 @@
 #include "bsp_usart.h"
 #include "remote_control.h"
 
-#include "calibrate_task.h"
 #include "detect_task.h"
 #include "launcher_task.h"
-#include "INS_task.h"
 #include "led_flow_task.h"
 #include "oled_task.h"
 #include "referee_usart_task.h"
@@ -142,7 +140,6 @@ int main(void)
   /* USER CODE BEGIN 2 */
     can_filter_init();
     delay_init();
-    cali_param_init();
     remote_control_init();
     usart1_tx_dma_init();
 		vision_init();

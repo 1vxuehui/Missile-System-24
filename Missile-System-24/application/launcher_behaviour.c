@@ -83,7 +83,6 @@
 #include "arm_math.h"
 #include "bsp_buzzer.h"
 #include "detect_task.h"
-#include "vision.h"
 #include "user_lib.h"
 #include "referee.h"
 
@@ -204,25 +203,6 @@ static void launcher_zero_force_control(fp32 *yaw, fp32 *spring, launcher_contro
   */
 static void launcher_init_control(fp32 *yaw, fp32 *spring, launcher_control_t *launcher_control_set);
 
-/**
-  * @brief          when launcher behaviour mode is launcher_CALI, the function is called
-  *                 and launcher control mode is raw mode. launcher will lift the spring axis, 
-  *                 and then put down the spring axis, and rotate yaw axis counterclockwise,
-  *                 and rotate yaw axis clockwise.
-  * @param[out]     yaw: yaw motor current set, will be sent to CAN bus decretly
-  * @param[out]     spring: spring motor current set, will be sent to CAN bus decretly
-  * @param[in]      launcher_control_set: launcher data
-  * @retval         none
-  */
-/**
-  * @brief          发射架校准控制，电机是raw控制，发射架先抬起spring，放下spring，在正转yaw，最后反转yaw，记录当时的角度和编码值
-  * @author         RM
-  * @param[out]     yaw:发送yaw电机的原始值，会直接通过can 发送到电机
-  * @param[out]     spring:发送spring电机的原始值，会直接通过can 发送到电机
-  * @param[in]      launcher_control_set:发射架数据指针
-  * @retval         none
-  */
-static void launcher_cali_control(fp32 *yaw, fp32 *spring, launcher_control_t *launcher_control_set);
 
 /**
   * @brief          when launcher behaviour mode is launcher_RELATIVE_ANGLE, the function is called
@@ -244,7 +224,7 @@ static void launcher_relative_angle_control(fp32 *yaw, fp32 *spring, launcher_co
 //发射架行为状态机
 launcher_behaviour_e launcher_behaviour = launcher_ZERO_FORCE;
 
-extern vision_rxfifo_t *vision_rx;
+
 
 /**
   * @brief          the function is called by launcher_set_mode function in launcher_task.c
@@ -279,11 +259,6 @@ void launcher_behaviour_mode_set(launcher_control_t *launcher_mode_set)
     {
         launcher_mode_set->launcher_yaw_motor.launcher_motor_mode = launcher_MOTOR_ENCONDE;
         launcher_mode_set->launcher_spring_motor.launcher_motor_mode = launcher_MOTOR_ENCONDE;
-    }
-    else if (launcher_behaviour == launcher_CALI)
-    {
-        launcher_mode_set->launcher_yaw_motor.launcher_motor_mode = launcher_MOTOR_RAW;
-        launcher_mode_set->launcher_spring_motor.launcher_motor_mode = launcher_MOTOR_RAW;
     }
 		else if (launcher_behaviour == launcher_RELATIVE_ANGLE)
     {
@@ -328,24 +303,11 @@ void launcher_behaviour_control_set(fp32 *add_yaw, fp32 *add_spring, launcher_co
     {
         launcher_init_control(add_yaw, add_spring, launcher_control_set);
     }
-    else if (launcher_behaviour == launcher_CALI)
-    {
-        launcher_cali_control(add_yaw, add_spring, launcher_control_set);
-    }
     else if (launcher_behaviour == launcher_RELATIVE_ANGLE)
     {
         launcher_relative_angle_control(add_yaw, add_spring, launcher_control_set);
     }
-		vision_loop(vision_rx);
-		if(!launcher_control_set->launcher_rc_ctrl->mouse.press_r)
-		{
-				vision_rx->yaw_add = 0;
-				vision_rx->spring_add = 0;
-		}
 		
-		
-		*add_yaw -= vision_rx->yaw_add;
-		*add_spring += vision_rx->spring_add;
 }
 
 /**
@@ -361,7 +323,7 @@ void launcher_behaviour_control_set(fp32 *add_yaw, fp32 *add_spring, launcher_co
 
 bool_t launcher_cmd_to_chassis_stop(void)
 {
-    if (launcher_behaviour == launcher_INIT || launcher_behaviour == launcher_CALI || launcher_behaviour == launcher_MOTIONLESS || launcher_behaviour == launcher_ZERO_FORCE)
+    if (launcher_behaviour == launcher_INIT || launcher_behaviour == launcher_MOTIONLESS || launcher_behaviour == launcher_ZERO_FORCE)
     {
         return 1;
     }
@@ -384,7 +346,7 @@ bool_t launcher_cmd_to_chassis_stop(void)
 
 bool_t launcher_cmd_to_shoot_stop(void)
 {
-    if (launcher_behaviour == launcher_INIT || launcher_behaviour == launcher_CALI || launcher_behaviour == launcher_ZERO_FORCE)
+    if (launcher_behaviour == launcher_INIT || launcher_behaviour == launcher_ZERO_FORCE)
     {
         return 1;
     }
@@ -549,86 +511,15 @@ static void launcher_init_control(fp32 *yaw, fp32 *spring, launcher_control_t *l
     }
 
     //初始化状态控制量计算
-    if (fabs(INIT_spring_SET - launcher_control_set->launcher_spring_motor.absolute_angle) > launcher_INIT_ANGLE_ERROR)
+    if (fabs(INIT_spring_SET - launcher_control_set->launcher_spring_motor.relative_angle) > launcher_INIT_ANGLE_ERROR)
     {
-        *spring = (INIT_spring_SET - launcher_control_set->launcher_spring_motor.absolute_angle) * launcher_INIT_spring_SPEED;
+        *spring = (INIT_spring_SET - launcher_control_set->launcher_spring_motor.relative_angle) * launcher_INIT_spring_SPEED;
         *yaw = 0.0f;
     }
     else
     {
-        *spring = (INIT_spring_SET - launcher_control_set->launcher_spring_motor.absolute_angle) * launcher_INIT_spring_SPEED;
+        *spring = (INIT_spring_SET - launcher_control_set->launcher_spring_motor.relative_angle) * launcher_INIT_spring_SPEED;
         *yaw = (INIT_YAW_SET - launcher_control_set->launcher_yaw_motor.relative_angle) * launcher_INIT_YAW_SPEED;
-    }
-}
-
-/**
-  * @brief          when launcher behaviour mode is launcher_CALI, the function is called
-  *                 and launcher control mode is raw mode. launcher will lift the spring axis, 
-  *                 and then put down the spring axis, and rotate yaw axis counterclockwise,
-  *                 and rotate yaw axis clockwise.
-  * @param[out]     yaw: yaw motor current set, will be sent to CAN bus decretly
-  * @param[out]     spring: spring motor current set, will be sent to CAN bus decretly
-  * @param[in]      launcher_control_set: launcher data
-  * @retval         none
-  */
-/**
-  * @brief          发射架校准控制，电机是raw控制，发射架先抬起spring，放下spring，在正转yaw，最后反转yaw，记录当时的角度和编码值
-  * @author         RM
-  * @param[out]     yaw:发送yaw电机的原始值，会直接通过can 发送到电机
-  * @param[out]     spring:发送spring电机的原始值，会直接通过can 发送到电机
-  * @param[in]      launcher_control_set:发射架数据指针
-  * @retval         none
-  */
-static void launcher_cali_control(fp32 *yaw, fp32 *spring, launcher_control_t *launcher_control_set)
-{
-    if (yaw == NULL || spring == NULL || launcher_control_set == NULL)
-    {
-        return;
-    }
-    static uint16_t cali_time = 0;
-
-    if (launcher_control_set->launcher_cali.step == launcher_CALI_spring_MAX_STEP)
-    {
-
-        *spring = launcher_CALI_MOTOR_SET;
-        *yaw = 0;
-
-        //判断陀螺仪数据， 并记录最大最小角度数据
-        launcher_cali_gyro_judge(launcher_control_set->launcher_spring_motor.motor_gyro, cali_time, launcher_control_set->launcher_cali.max_spring,
-                               launcher_control_set->launcher_spring_motor.absolute_angle, launcher_control_set->launcher_cali.max_spring_ecd,
-                               launcher_control_set->launcher_spring_motor.launcher_motor_measure->ecd, launcher_control_set->launcher_cali.step);
-    }
-    else if (launcher_control_set->launcher_cali.step == launcher_CALI_spring_MIN_STEP)
-    {
-        *spring = -launcher_CALI_MOTOR_SET;
-        *yaw = 0;
-
-        launcher_cali_gyro_judge(launcher_control_set->launcher_spring_motor.motor_gyro, cali_time, launcher_control_set->launcher_cali.min_spring,
-                               launcher_control_set->launcher_spring_motor.absolute_angle, launcher_control_set->launcher_cali.min_spring_ecd,
-                               launcher_control_set->launcher_spring_motor.launcher_motor_measure->ecd, launcher_control_set->launcher_cali.step);
-    }
-    else if (launcher_control_set->launcher_cali.step == launcher_CALI_YAW_MAX_STEP)
-    {
-        *spring = 0;
-        *yaw = launcher_CALI_MOTOR_SET;
-
-        launcher_cali_gyro_judge(launcher_control_set->launcher_yaw_motor.motor_gyro, cali_time, launcher_control_set->launcher_cali.max_yaw,
-                               launcher_control_set->launcher_yaw_motor.absolute_angle, launcher_control_set->launcher_cali.max_yaw_ecd,
-                               launcher_control_set->launcher_yaw_motor.launcher_motor_measure->ecd, launcher_control_set->launcher_cali.step);
-    }
-
-    else if (launcher_control_set->launcher_cali.step == launcher_CALI_YAW_MIN_STEP)
-    {
-        *spring = 0;
-        *yaw = -launcher_CALI_MOTOR_SET;
-
-        launcher_cali_gyro_judge(launcher_control_set->launcher_yaw_motor.motor_gyro, cali_time, launcher_control_set->launcher_cali.min_yaw,
-                               launcher_control_set->launcher_yaw_motor.absolute_angle, launcher_control_set->launcher_cali.min_yaw_ecd,
-                               launcher_control_set->launcher_yaw_motor.launcher_motor_measure->ecd, launcher_control_set->launcher_cali.step);
-    }
-    else if (launcher_control_set->launcher_cali.step == launcher_CALI_END_STEP)
-    {
-        cali_time = 0;
     }
 }
 

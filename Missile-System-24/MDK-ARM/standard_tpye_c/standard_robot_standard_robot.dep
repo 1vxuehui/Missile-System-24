@@ -1,7 +1,7 @@
 Dependencies for Project 'standard_robot', Target 'standard_robot': (DO NOT MODIFY !)
 CompilerVersion: 5060960::V5.06 update 7 (build 960)::.\ARMCC
 F (startup_stm32f407xx.s)(0x601A1E58)(--cpu Cortex-M4.fp.sp -g --apcs=interwork -I ..\\Inc-I.\RTE\_standard_robot-ID:\Keil_v5\ARM\PARK\ARM\CMSIS\5.7.0\CMSIS\Core\Include-ID:\Keil_v5\ARM\PARK\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include--pd "__UVISION_VERSION SETA 532" --pd "_RTE_ SETA 1" --pd "STM32F407xx SETA 1" --pd "_RTE_ SETA 1"--list startup_stm32f407xx.lst --xref -o standard_tpye_c\startup_stm32f407xx.o --depend standard_tpye_c\startup_stm32f407xx.d)
-F (../Src/main.c)(0x65719BC7)(--c99 -c --cpu Cortex-M4.fp.sp -g -O1 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ..\application -I ..\bsp\boards -I ..\components\devices -I ..\components\algorithm -I ..\components\algorithm\Include -I ..\components\support -I ..\application\protocol -I ..\components\controller -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc-I.\RTE\_standard_robot-ID:\Keil_v5\ARM\PARK\ARM\CMSIS\5.7.0\CMSIS\Core\Include-ID:\Keil_v5\ARM\PARK\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="532" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__FPU_USED="1U" -D__FPU_PRESENT="1U" -D__CC_ARM -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING-o standard_tpye_c\main.o --omf_browse standard_tpye_c\main.crf --depend standard_tpye_c\main.d)
+F (../Src/main.c)(0x65741477)(--c99 -c --cpu Cortex-M4.fp.sp -g -O1 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ..\application -I ..\bsp\boards -I ..\components\devices -I ..\components\algorithm -I ..\components\algorithm\Include -I ..\components\support -I ..\application\protocol -I ..\components\controller -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc-I.\RTE\_standard_robot-ID:\Keil_v5\ARM\PARK\ARM\CMSIS\5.7.0\CMSIS\Core\Include-ID:\Keil_v5\ARM\PARK\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="532" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__FPU_USED="1U" -D__FPU_PRESENT="1U" -D__CC_ARM -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING-o standard_tpye_c\main.o --omf_browse standard_tpye_c\main.crf --depend standard_tpye_c\main.d)
 I (../Inc/main.h)(0x6247E3AE)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x601A1E58)
 I (../Inc/stm32f4xx_hal_conf.h)(0x601A1E58)
@@ -83,9 +83,8 @@ I (..\bsp\boards\bsp_delay.h)(0x601A1E58)
 I (..\bsp\boards\bsp_usart.h)(0x6571A48F)
 I (..\application\remote_control.h)(0x6232E382)
 I (..\bsp\boards\bsp_rc.h)(0x601A1E58)
-I (..\application\calibrate_task.h)(0x6571A48F)
 I (..\application\detect_task.h)(0x65687F6D)
-I (..\application\launcher_task.h)(0x6571A48E)
+I (..\application\launcher_task.h)(0x657412D8)
 I (..\application\CAN_receive.h)(0x65719C83)
 I (..\components\controller\pid.h)(0x625410FA)
 I (..\components\controller\stm32.h)(0x6571A48F)
@@ -93,7 +92,6 @@ I (..\components\controller\STM32_Config.h)(0x62007D46)
 I (..\components\controller\rtwtypes.h)(0x61FE647E)
 I (..\components\controller\stm32_External_Functions.h)(0x61FE647E)
 I (..\components\controller\stm32_types.h)(0x61FE647E)
-I (..\application\INS_task.h)(0x6571A48F)
 I (..\application\led_flow_task.h)(0x601A1E58)
 I (..\application\oled_task.h)(0x601A1E58)
 I (..\application\referee_usart_task.h)(0x601A1E58)
@@ -375,7 +373,7 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x601A1E58)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd.h)(0x601A1E58)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h)(0x601A1E58)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h)(0x601A1E58)
-F (../Src/freertos.c)(0x65719BC7)(--c99 -c --cpu Cortex-M4.fp.sp -g -O1 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ..\application -I ..\bsp\boards -I ..\components\devices -I ..\components\algorithm -I ..\components\algorithm\Include -I ..\components\support -I ..\application\protocol -I ..\components\controller -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc-I.\RTE\_standard_robot-ID:\Keil_v5\ARM\PARK\ARM\CMSIS\5.7.0\CMSIS\Core\Include-ID:\Keil_v5\ARM\PARK\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="532" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__FPU_USED="1U" -D__FPU_PRESENT="1U" -D__CC_ARM -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING-o standard_tpye_c\freertos.o --omf_browse standard_tpye_c\freertos.crf --depend standard_tpye_c\freertos.d)
+F (../Src/freertos.c)(0x65741498)(--c99 -c --cpu Cortex-M4.fp.sp -g -O1 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ..\application -I ..\bsp\boards -I ..\components\devices -I ..\components\algorithm -I ..\components\algorithm\Include -I ..\components\support -I ..\application\protocol -I ..\components\controller -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc-I.\RTE\_standard_robot-ID:\Keil_v5\ARM\PARK\ARM\CMSIS\5.7.0\CMSIS\Core\Include-ID:\Keil_v5\ARM\PARK\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="532" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__FPU_USED="1U" -D__FPU_PRESENT="1U" -D__CC_ARM -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING-o standard_tpye_c\freertos.o --omf_browse standard_tpye_c\freertos.crf --depend standard_tpye_c\freertos.d)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h)(0x601A1E58)
 I (D:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5F63877C)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5F63877C)
@@ -434,10 +432,9 @@ I (../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h)(0x601A1E58)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h)(0x601A1E58)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h)(0x601A1E58)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h)(0x601A1E58)
-I (..\application\calibrate_task.h)(0x6571A48F)
-I (..\application\struct_typedef.h)(0x601A1E58)
 I (..\application\detect_task.h)(0x65687F6D)
-I (..\application\launcher_task.h)(0x6571A48E)
+I (..\application\struct_typedef.h)(0x601A1E58)
+I (..\application\launcher_task.h)(0x657412D8)
 I (..\application\CAN_receive.h)(0x65719C83)
 I (..\components\controller\pid.h)(0x625410FA)
 I (..\components\controller\stm32.h)(0x6571A48F)
@@ -449,13 +446,11 @@ I (..\application\remote_control.h)(0x6232E382)
 I (..\bsp\boards\bsp_rc.h)(0x601A1E58)
 I (..\application\shoot_task.h)(0x65719E22)
 I (..\components\algorithm\user_lib.h)(0x601A1E58)
-I (..\application\INS_task.h)(0x6571A48F)
 I (..\application\led_flow_task.h)(0x601A1E58)
 I (..\application\oled_task.h)(0x601A1E58)
 I (..\application\referee_usart_task.h)(0x601A1E58)
 I (..\application\usb_task.h)(0x601A1E58)
 I (..\application\voltage_task.h)(0x601A1E58)
-I (..\application\UI_task.h)(0x6234764C)
 F (../Src/i2c.c)(0x601A1E58)(--c99 -c --cpu Cortex-M4.fp.sp -g -O1 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ..\application -I ..\bsp\boards -I ..\components\devices -I ..\components\algorithm -I ..\components\algorithm\Include -I ..\components\support -I ..\application\protocol -I ..\components\controller -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc-I.\RTE\_standard_robot-ID:\Keil_v5\ARM\PARK\ARM\CMSIS\5.7.0\CMSIS\Core\Include-ID:\Keil_v5\ARM\PARK\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="532" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__FPU_USED="1U" -D__FPU_PRESENT="1U" -D__CC_ARM -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING-o standard_tpye_c\i2c.o --omf_browse standard_tpye_c\i2c.crf --depend standard_tpye_c\i2c.d)
 I (../Inc/i2c.h)(0x601A1E58)
 I (../Inc/main.h)(0x6247E3AE)
@@ -3528,86 +3523,10 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h)(0x601A1E58)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h)(0x601A1E58)
 I (..\bsp\boards\bsp_rng.h)(0x601A1E58)
 I (..\application\detect_task.h)(0x65687F6D)
-F (..\application\calibrate_task.c)(0x6571B986)(--c99 -c --cpu Cortex-M4.fp.sp -g -O1 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ..\application -I ..\bsp\boards -I ..\components\devices -I ..\components\algorithm -I ..\components\algorithm\Include -I ..\components\support -I ..\application\protocol -I ..\components\controller -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc-I.\RTE\_standard_robot-ID:\Keil_v5\ARM\PARK\ARM\CMSIS\5.7.0\CMSIS\Core\Include-ID:\Keil_v5\ARM\PARK\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="532" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__FPU_USED="1U" -D__FPU_PRESENT="1U" -D__CC_ARM -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING-o standard_tpye_c\calibrate_task.o --omf_browse standard_tpye_c\calibrate_task.crf --depend standard_tpye_c\calibrate_task.d)
-I (..\application\calibrate_task.h)(0x6571A48F)
+F (..\application\launcher_behaviour.c)(0x657410A1)(--c99 -c --cpu Cortex-M4.fp.sp -g -O1 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ..\application -I ..\bsp\boards -I ..\components\devices -I ..\components\algorithm -I ..\components\algorithm\Include -I ..\components\support -I ..\application\protocol -I ..\components\controller -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc-I.\RTE\_standard_robot-ID:\Keil_v5\ARM\PARK\ARM\CMSIS\5.7.0\CMSIS\Core\Include-ID:\Keil_v5\ARM\PARK\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="532" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__FPU_USED="1U" -D__FPU_PRESENT="1U" -D__CC_ARM -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING-o standard_tpye_c\launcher_behaviour.o --omf_browse standard_tpye_c\launcher_behaviour.crf --depend standard_tpye_c\launcher_behaviour.d)
+I (..\application\launcher_behaviour.h)(0x65741077)
 I (..\application\struct_typedef.h)(0x601A1E58)
-I (D:\Keil_v5\ARM\ARMCC\include\string.h)(0x5F63878A)
-I (../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h)(0x601A1E58)
-I (../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h)(0x601A1E58)
-I (D:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5F63877C)
-I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5F63877C)
-I (../Inc/FreeRTOSConfig.h)(0x601A1E58)
-I (../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h)(0x601A1E58)
-I (../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h)(0x601A1E58)
-I (../Middlewares/Third_Party/FreeRTOS/Source/include/deprecated_definitions.h)(0x601A1E58)
-I (../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F/portmacro.h)(0x601A1E58)
-I (../Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrappers.h)(0x601A1E58)
-I (../Middlewares/Third_Party/FreeRTOS/Source/include/task.h)(0x601A1E58)
-I (../Middlewares/Third_Party/FreeRTOS/Source/include/list.h)(0x601A1E58)
-I (../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h)(0x601A1E58)
-I (../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h)(0x601A1E58)
-I (../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h)(0x601A1E58)
-I (../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h)(0x601A1E58)
-I (..\bsp\boards\bsp_adc.h)(0x601A1E58)
-I (..\bsp\boards\bsp_buzzer.h)(0x601A1E58)
-I (..\bsp\boards\bsp_flash.h)(0x601A1E58)
-I (..\application\can_receive.h)(0x65719C83)
-I (..\application\remote_control.h)(0x6232E382)
-I (..\bsp\boards\bsp_rc.h)(0x601A1E58)
-I (..\application\INS_task.h)(0x6571A48F)
-I (..\application\launcher_task.h)(0x6571A48E)
-I (..\components\controller\pid.h)(0x625410FA)
-I (..\components\controller\stm32.h)(0x6571A48F)
-I (..\components\controller\STM32_Config.h)(0x62007D46)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x601A1E58)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h)(0x601A1E58)
-I (../Drivers/CMSIS/Include/core_cm4.h)(0x601A1E58)
-I (../Drivers/CMSIS/Include/cmsis_version.h)(0x601A1E58)
-I (../Drivers/CMSIS/Include/cmsis_compiler.h)(0x601A1E58)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x601A1E58)
-I (../Drivers/CMSIS/Include/mpu_armv7.h)(0x601A1E58)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x601A1E58)
-I (../Inc/stm32f4xx_hal_conf.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc_ex.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_exti.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc_ex.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_can.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_crc.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c_ex.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rng.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rtc.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rtc_ex.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h)(0x601A1E58)
-I (../Inc/main.h)(0x6247E3AE)
-I (..\components\controller\rtwtypes.h)(0x61FE647E)
-I (..\components\controller\stm32_External_Functions.h)(0x61FE647E)
-I (..\components\controller\stm32_types.h)(0x61FE647E)
-F (..\application\launcher_behaviour.c)(0x6572C1A7)(--c99 -c --cpu Cortex-M4.fp.sp -g -O1 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ..\application -I ..\bsp\boards -I ..\components\devices -I ..\components\algorithm -I ..\components\algorithm\Include -I ..\components\support -I ..\application\protocol -I ..\components\controller -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc-I.\RTE\_standard_robot-ID:\Keil_v5\ARM\PARK\ARM\CMSIS\5.7.0\CMSIS\Core\Include-ID:\Keil_v5\ARM\PARK\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="532" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__FPU_USED="1U" -D__FPU_PRESENT="1U" -D__CC_ARM -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING-o standard_tpye_c\launcher_behaviour.o --omf_browse standard_tpye_c\launcher_behaviour.crf --depend standard_tpye_c\launcher_behaviour.d)
-I (..\application\launcher_behaviour.h)(0x6572C1A7)
-I (..\application\struct_typedef.h)(0x601A1E58)
-I (..\application\launcher_task.h)(0x6571A48E)
+I (..\application\launcher_task.h)(0x657412D8)
 I (..\application\CAN_receive.h)(0x65719C83)
 I (..\components\controller\pid.h)(0x625410FA)
 I (..\components\controller\stm32.h)(0x6571A48F)
@@ -3666,14 +3585,11 @@ I (D:\Keil_v5\ARM\ARMCC\include\string.h)(0x5F63878A)
 I (D:\Keil_v5\ARM\ARMCC\include\math.h)(0x5F63877C)
 I (..\bsp\boards\bsp_buzzer.h)(0x601A1E58)
 I (..\application\detect_task.h)(0x65687F6D)
-I (..\application\vision.h)(0x624966E8)
-I (..\bsp\boards\bsp_usart.h)(0x6571A48F)
-I (../Inc/usart.h)(0x601A1E58)
 I (..\components\algorithm\user_lib.h)(0x601A1E58)
 I (..\application\referee.h)(0x656C6AC5)
 I (..\application\protocol\protocol.h)(0x622C9D40)
-F (..\application\launcher_task.c)(0x6571C918)(--c99 -c --cpu Cortex-M4.fp.sp -g -O1 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ..\application -I ..\bsp\boards -I ..\components\devices -I ..\components\algorithm -I ..\components\algorithm\Include -I ..\components\support -I ..\application\protocol -I ..\components\controller -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc-I.\RTE\_standard_robot-ID:\Keil_v5\ARM\PARK\ARM\CMSIS\5.7.0\CMSIS\Core\Include-ID:\Keil_v5\ARM\PARK\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="532" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__FPU_USED="1U" -D__FPU_PRESENT="1U" -D__CC_ARM -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING-o standard_tpye_c\launcher_task.o --omf_browse standard_tpye_c\launcher_task.crf --depend standard_tpye_c\launcher_task.d)
-I (..\application\launcher_task.h)(0x6571A48E)
+F (..\application\launcher_task.c)(0x65741477)(--c99 -c --cpu Cortex-M4.fp.sp -g -O1 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ..\application -I ..\bsp\boards -I ..\components\devices -I ..\components\algorithm -I ..\components\algorithm\Include -I ..\components\support -I ..\application\protocol -I ..\components\controller -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc-I.\RTE\_standard_robot-ID:\Keil_v5\ARM\PARK\ARM\CMSIS\5.7.0\CMSIS\Core\Include-ID:\Keil_v5\ARM\PARK\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="532" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__FPU_USED="1U" -D__FPU_PRESENT="1U" -D__CC_ARM -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING-o standard_tpye_c\launcher_task.o --omf_browse standard_tpye_c\launcher_task.crf --depend standard_tpye_c\launcher_task.d)
+I (..\application\launcher_task.h)(0x657412D8)
 I (..\application\struct_typedef.h)(0x601A1E58)
 I (..\application\CAN_receive.h)(0x65719C83)
 I (..\components\controller\pid.h)(0x625410FA)
@@ -3747,82 +3663,11 @@ I (D:\Keil_v5\ARM\ARMCC\include\string.h)(0x5F63878A)
 I (D:\Keil_v5\ARM\ARMCC\include\math.h)(0x5F63877C)
 I (..\components\algorithm\user_lib.h)(0x601A1E58)
 I (..\application\detect_task.h)(0x65687F6D)
-I (..\application\launcher_behaviour.h)(0x6572C1A7)
-I (..\application\INS_task.h)(0x6571A48F)
+I (..\application\launcher_behaviour.h)(0x65741077)
 I (..\application\shoot_task.h)(0x65719E22)
 I (..\bsp\boards\bsp_usart.h)(0x6571A48F)
 I (..\application\referee.h)(0x656C6AC5)
 I (..\application\protocol\protocol.h)(0x622C9D40)
-F (..\application\INS_task.c)(0x6571A48F)(--c99 -c --cpu Cortex-M4.fp.sp -g -O1 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ..\application -I ..\bsp\boards -I ..\components\devices -I ..\components\algorithm -I ..\components\algorithm\Include -I ..\components\support -I ..\application\protocol -I ..\components\controller -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc-I.\RTE\_standard_robot-ID:\Keil_v5\ARM\PARK\ARM\CMSIS\5.7.0\CMSIS\Core\Include-ID:\Keil_v5\ARM\PARK\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="532" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__FPU_USED="1U" -D__FPU_PRESENT="1U" -D__CC_ARM -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING-o standard_tpye_c\ins_task.o --omf_browse standard_tpye_c\ins_task.crf --depend standard_tpye_c\ins_task.d)
-I (..\application\INS_task.h)(0x6571A48F)
-I (..\application\struct_typedef.h)(0x601A1E58)
-I (../Inc/main.h)(0x6247E3AE)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x601A1E58)
-I (../Inc/stm32f4xx_hal_conf.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x601A1E58)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x601A1E58)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h)(0x601A1E58)
-I (../Drivers/CMSIS/Include/core_cm4.h)(0x601A1E58)
-I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5F63877C)
-I (../Drivers/CMSIS/Include/cmsis_version.h)(0x601A1E58)
-I (../Drivers/CMSIS/Include/cmsis_compiler.h)(0x601A1E58)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x601A1E58)
-I (../Drivers/CMSIS/Include/mpu_armv7.h)(0x601A1E58)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h)(0x601A1E58)
-I (D:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5F63877C)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc_ex.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_exti.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc_ex.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_can.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_crc.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c_ex.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rng.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rtc.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rtc_ex.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h)(0x601A1E58)
-I (../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h)(0x601A1E58)
-I (../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h)(0x601A1E58)
-I (../Inc/FreeRTOSConfig.h)(0x601A1E58)
-I (../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h)(0x601A1E58)
-I (../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h)(0x601A1E58)
-I (../Middlewares/Third_Party/FreeRTOS/Source/include/deprecated_definitions.h)(0x601A1E58)
-I (../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F/portmacro.h)(0x601A1E58)
-I (../Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrappers.h)(0x601A1E58)
-I (../Middlewares/Third_Party/FreeRTOS/Source/include/task.h)(0x601A1E58)
-I (../Middlewares/Third_Party/FreeRTOS/Source/include/list.h)(0x601A1E58)
-I (../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h)(0x601A1E58)
-I (../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h)(0x601A1E58)
-I (../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h)(0x601A1E58)
-I (../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h)(0x601A1E58)
-I (..\bsp\boards\bsp_imu_pwm.h)(0x601A1E58)
-I (..\bsp\boards\bsp_spi.h)(0x601A1E58)
-I (..\components\devices\bmi088driver.h)(0x601A1E58)
-I (..\components\devices\ist8310driver.h)(0x601A1E58)
-I (..\components\controller\pid.h)(0x625410FA)
-I (..\components\algorithm\ahrs.h)(0x6571A48F)
-I (..\components\algorithm\AHRS_MiddleWare.h)(0x601A1E58)
-I (..\application\calibrate_task.h)(0x6571A48F)
-I (..\application\detect_task.h)(0x65687F6D)
 F (..\application\referee.c)(0x622D82C6)(--c99 -c --cpu Cortex-M4.fp.sp -g -O1 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ..\application -I ..\bsp\boards -I ..\components\devices -I ..\components\algorithm -I ..\components\algorithm\Include -I ..\components\support -I ..\application\protocol -I ..\components\controller -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc-I.\RTE\_standard_robot-ID:\Keil_v5\ARM\PARK\ARM\CMSIS\5.7.0\CMSIS\Core\Include-ID:\Keil_v5\ARM\PARK\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="532" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__FPU_USED="1U" -D__FPU_PRESENT="1U" -D__CC_ARM -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING-o standard_tpye_c\referee.o --omf_browse standard_tpye_c\referee.crf --depend standard_tpye_c\referee.d)
 I (..\application\referee.h)(0x656C6AC5)
 I (../Inc/main.h)(0x6247E3AE)
@@ -4144,114 +3989,6 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x601A1E58)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd.h)(0x601A1E58)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h)(0x601A1E58)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h)(0x601A1E58)
-F (..\application\RM_Cilent_UI.c)(0x62A3419A)(--c99 -c --cpu Cortex-M4.fp.sp -g -O1 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ..\application -I ..\bsp\boards -I ..\components\devices -I ..\components\algorithm -I ..\components\algorithm\Include -I ..\components\support -I ..\application\protocol -I ..\components\controller -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc-I.\RTE\_standard_robot-ID:\Keil_v5\ARM\PARK\ARM\CMSIS\5.7.0\CMSIS\Core\Include-ID:\Keil_v5\ARM\PARK\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="532" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__FPU_USED="1U" -D__FPU_PRESENT="1U" -D__CC_ARM -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING-o standard_tpye_c\rm_cilent_ui.o --omf_browse standard_tpye_c\rm_cilent_ui.crf --depend standard_tpye_c\rm_cilent_ui.d)
-I (..\application\RM_Cilent_UI.h)(0x62A182CC)
-I (../Inc/main.h)(0x6247E3AE)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x601A1E58)
-I (../Inc/stm32f4xx_hal_conf.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x601A1E58)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x601A1E58)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h)(0x601A1E58)
-I (../Drivers/CMSIS/Include/core_cm4.h)(0x601A1E58)
-I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5F63877C)
-I (../Drivers/CMSIS/Include/cmsis_version.h)(0x601A1E58)
-I (../Drivers/CMSIS/Include/cmsis_compiler.h)(0x601A1E58)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x601A1E58)
-I (../Drivers/CMSIS/Include/mpu_armv7.h)(0x601A1E58)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h)(0x601A1E58)
-I (D:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5F63877C)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc_ex.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_exti.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc_ex.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_can.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_crc.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c_ex.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rng.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rtc.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rtc_ex.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h)(0x601A1E58)
-I (D:\Keil_v5\ARM\ARMCC\include\stdarg.h)(0x5F63877C)
-I (../Inc/usart.h)(0x601A1E58)
-F (..\application\vision.c)(0x6571A48F)(--c99 -c --cpu Cortex-M4.fp.sp -g -O1 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ..\application -I ..\bsp\boards -I ..\components\devices -I ..\components\algorithm -I ..\components\algorithm\Include -I ..\components\support -I ..\application\protocol -I ..\components\controller -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc-I.\RTE\_standard_robot-ID:\Keil_v5\ARM\PARK\ARM\CMSIS\5.7.0\CMSIS\Core\Include-ID:\Keil_v5\ARM\PARK\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="532" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__FPU_USED="1U" -D__FPU_PRESENT="1U" -D__CC_ARM -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING-o standard_tpye_c\vision.o --omf_browse standard_tpye_c\vision.crf --depend standard_tpye_c\vision.d)
-I (..\application\vision.h)(0x624966E8)
-I (..\bsp\boards\bsp_usart.h)(0x6571A48F)
-I (..\application\struct_typedef.h)(0x601A1E58)
-I (../Inc/usart.h)(0x601A1E58)
-I (../Inc/main.h)(0x6247E3AE)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x601A1E58)
-I (../Inc/stm32f4xx_hal_conf.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x601A1E58)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x601A1E58)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h)(0x601A1E58)
-I (../Drivers/CMSIS/Include/core_cm4.h)(0x601A1E58)
-I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5F63877C)
-I (../Drivers/CMSIS/Include/cmsis_version.h)(0x601A1E58)
-I (../Drivers/CMSIS/Include/cmsis_compiler.h)(0x601A1E58)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x601A1E58)
-I (../Drivers/CMSIS/Include/mpu_armv7.h)(0x601A1E58)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h)(0x601A1E58)
-I (D:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5F63877C)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc_ex.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_exti.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc_ex.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_can.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_crc.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c_ex.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rng.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rtc.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rtc_ex.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h)(0x601A1E58)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h)(0x601A1E58)
-I (D:\Keil_v5\ARM\ARMCC\include\math.h)(0x5F63877C)
-I (..\application\launcher_task.h)(0x6571A48E)
-I (..\application\CAN_receive.h)(0x65719C83)
-I (..\components\controller\pid.h)(0x625410FA)
-I (..\components\controller\stm32.h)(0x6571A48F)
-I (..\components\controller\STM32_Config.h)(0x62007D46)
-I (..\components\controller\rtwtypes.h)(0x61FE647E)
-I (..\components\controller\stm32_External_Functions.h)(0x61FE647E)
-I (..\components\controller\stm32_types.h)(0x61FE647E)
-I (..\application\remote_control.h)(0x6232E382)
-I (..\bsp\boards\bsp_rc.h)(0x601A1E58)
 F (..\components\devices\OLED.c)(0x601A1E58)(--c99 -c --cpu Cortex-M4.fp.sp -g -O1 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ..\application -I ..\bsp\boards -I ..\components\devices -I ..\components\algorithm -I ..\components\algorithm\Include -I ..\components\support -I ..\application\protocol -I ..\components\controller -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc-I.\RTE\_standard_robot-ID:\Keil_v5\ARM\PARK\ARM\CMSIS\5.7.0\CMSIS\Core\Include-ID:\Keil_v5\ARM\PARK\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="532" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__FPU_USED="1U" -D__FPU_PRESENT="1U" -D__CC_ARM -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING-o standard_tpye_c\oled.o --omf_browse standard_tpye_c\oled.crf --depend standard_tpye_c\oled.d)
 I (..\components\devices\OLED.h)(0x601A1E58)
 I (..\application\struct_typedef.h)(0x601A1E58)

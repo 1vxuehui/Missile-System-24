@@ -830,11 +830,6 @@
               <FilePath>..\application\CAN_receive.c</FilePath>
             </File>
             <File>
-              <FileName>calibrate_task.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\application\calibrate_task.c</FilePath>
-            </File>
-            <File>
               <FileName>launcher_behaviour.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\application\launcher_behaviour.c</FilePath>
@@ -843,11 +838,6 @@
               <FileName>launcher_task.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\application\launcher_task.c</FilePath>
-            </File>
-            <File>
-              <FileName>INS_task.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\application\INS_task.c</FilePath>
             </File>
             <File>
               <FileName>referee.c</FileName>
@@ -873,16 +863,6 @@
               <FileName>led_flow_task.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\application\led_flow_task.c</FilePath>
-            </File>
-            <File>
-              <FileName>RM_Cilent_UI.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\application\RM_Cilent_UI.c</FilePath>
-            </File>
-            <File>
-              <FileName>vision.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\application\vision.c</FilePath>
             </File>
           </Files>
         </Group>

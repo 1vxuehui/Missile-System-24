@@ -81,7 +81,6 @@ standard_tpye_c\main.o: ..\bsp\boards\bsp_delay.h
 standard_tpye_c\main.o: ..\bsp\boards\bsp_usart.h
 standard_tpye_c\main.o: ..\application\remote_control.h
 standard_tpye_c\main.o: ..\bsp\boards\bsp_rc.h
-standard_tpye_c\main.o: ..\application\calibrate_task.h
 standard_tpye_c\main.o: ..\application\detect_task.h
 standard_tpye_c\main.o: ..\application\launcher_task.h
 standard_tpye_c\main.o: ..\application\CAN_receive.h
@@ -91,7 +90,6 @@ standard_tpye_c\main.o: ..\components\controller\STM32_Config.h
 standard_tpye_c\main.o: ..\components\controller\rtwtypes.h
 standard_tpye_c\main.o: ..\components\controller\stm32_External_Functions.h
 standard_tpye_c\main.o: ..\components\controller\stm32_types.h
-standard_tpye_c\main.o: ..\application\INS_task.h
 standard_tpye_c\main.o: ..\application\led_flow_task.h
 standard_tpye_c\main.o: ..\application\oled_task.h
 standard_tpye_c\main.o: ..\application\referee_usart_task.h

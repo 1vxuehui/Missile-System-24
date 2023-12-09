@@ -67,5 +67,4 @@ standard_tpye_c\ins_task.o: ..\components\devices\ist8310driver.h
 standard_tpye_c\ins_task.o: ..\components\controller\pid.h
 standard_tpye_c\ins_task.o: ..\components\algorithm\ahrs.h
 standard_tpye_c\ins_task.o: ..\components\algorithm\AHRS_MiddleWare.h
-standard_tpye_c\ins_task.o: ..\application\calibrate_task.h
 standard_tpye_c\ins_task.o: ..\application\detect_task.h

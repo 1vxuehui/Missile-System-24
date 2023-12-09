@@ -46,21 +46,6 @@
 #define YAW_SPEED_PID_MAX_OUT   20000.0f
 #define YAW_SPEED_PID_MAX_IOUT  10000.0f
 
-//spring 角度环 角度由陀螺仪解算 PID参数以及 PID最大输出，积分输出
-#define spring_GYRO_ABSOLUTE_PID_KP 0.0f
-#define spring_GYRO_ABSOLUTE_PID_KI 0.0f
-#define spring_GYRO_ABSOLUTE_PID_KD 0.0f
-
-#define spring_GYRO_ABSOLUTE_PID_MAX_OUT  0.0f
-#define spring_GYRO_ABSOLUTE_PID_MAX_IOUT 0.0f
-
-//yaw 角度环 角度由陀螺仪解算 PID参数以及 PID最大输出，积分输出
-#define YAW_GYRO_ABSOLUTE_PID_KP        10.0f
-#define YAW_GYRO_ABSOLUTE_PID_KI        0.0f
-#define YAW_GYRO_ABSOLUTE_PID_KD        0.0f
-#define YAW_GYRO_ABSOLUTE_PID_MAX_OUT   10.0f
-#define YAW_GYRO_ABSOLUTE_PID_MAX_IOUT  0.0f
-
 //spring 角度环 角度由编码器 PID参数以及 PID最大输出，积分输出
 #define spring_ENCODE_RELATIVE_PID_KP 		150.0f
 #define spring_ENCODE_RELATIVE_PID_KI 		0.0f
@@ -148,9 +133,7 @@
 typedef enum
 {
     launcher_MOTOR_RAW = 0, //电机原始值控制
-    launcher_MOTOR_GYRO,    //电机陀螺仪角度控制
     launcher_MOTOR_ENCONDE, //电机编码值角度控制
-		launcher_MOTOR_GYRONOLIMIT,//小陀螺陀螺仪控制
 } launcher_motor_mode_e;
 
 typedef struct
@@ -176,9 +159,7 @@ typedef struct
 typedef struct
 {
     const motor_measure_t *launcher_motor_measure;
-    launcher_PID_t launcher_motor_absolute_angle_pid;
     launcher_PID_t launcher_motor_relative_angle_pid;
-    pid_type_def launcher_motor_gyro_pid;
     launcher_motor_mode_e launcher_motor_mode;
     launcher_motor_mode_e last_launcher_motor_mode;
     uint16_t offset_ecd;
@@ -187,10 +168,6 @@ typedef struct
 
     fp32 relative_angle;     //rad
     fp32 relative_angle_set; //rad
-    fp32 absolute_angle;     //rad
-    fp32 absolute_angle_set; //rad
-    fp32 motor_gyro;         //rad/s
-    fp32 motor_gyro_set;
     fp32 motor_speed;
     fp32 raw_cmd_current;
     fp32 current_set;
@@ -216,11 +193,8 @@ typedef struct
 typedef struct
 {
     const RC_ctrl_t *launcher_rc_ctrl;
-    const fp32 *launcher_INT_angle_point;
-    const fp32 *launcher_INT_gyro_point;
     launcher_motor_t launcher_yaw_motor;
     launcher_motor_t launcher_spring_motor;
-    launcher_step_cali_t launcher_cali;
 		
 } launcher_control_t;
 
@@ -245,19 +219,6 @@ extern const launcher_motor_t *get_spring_motor_point(void);
   */
 
 extern void launcher_task(void const *pvParameters);
-
-/**
-  * @brief          发射架校准计算，将校准记录的中值,最大 最小值返回
-  * @param[out]     yaw 中值 指针
-  * @param[out]     spring 中值 指针
-  * @param[out]     yaw 最大相对角度 指针
-  * @param[out]     yaw 最小相对角度 指针
-  * @param[out]     spring 最大相对角度 指针
-  * @param[out]     spring 最小相对角度 指针
-  * @retval         返回1 代表成功校准完毕， 返回0 代表未校准完
-  * @waring         这个函数使用到launcher_control 静态变量导致函数不适用以上通用指针复用
-  */
-extern bool_t cmd_cali_launcher_hook(uint16_t *yaw_offset, uint16_t *spring_offset, fp32 *max_yaw, fp32 *min_yaw, fp32 *max_spring, fp32 *min_spring);
 
 /**
   * @brief          发射架校准设置，将校准的发射架中值以及最小最大机械相对角度

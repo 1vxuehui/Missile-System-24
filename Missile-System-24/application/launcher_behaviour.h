@@ -86,8 +86,7 @@
 typedef enum
 {
   launcher_ZERO_FORCE = 0, 
-  launcher_INIT,           
-  launcher_CALI,           
+  launcher_INIT,                    
   launcher_RELATIVE_ANGLE, 
   launcher_MOTIONLESS,     
 } launcher_behaviour_e;

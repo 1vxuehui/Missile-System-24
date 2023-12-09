@@ -62,9 +62,6 @@ standard_tpye_c\launcher_behaviour.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\string
 standard_tpye_c\launcher_behaviour.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
 standard_tpye_c\launcher_behaviour.o: ..\bsp\boards\bsp_buzzer.h
 standard_tpye_c\launcher_behaviour.o: ..\application\detect_task.h
-standard_tpye_c\launcher_behaviour.o: ..\application\vision.h
-standard_tpye_c\launcher_behaviour.o: ..\bsp\boards\bsp_usart.h
-standard_tpye_c\launcher_behaviour.o: ../Inc/usart.h
 standard_tpye_c\launcher_behaviour.o: ..\components\algorithm\user_lib.h
 standard_tpye_c\launcher_behaviour.o: ..\application\referee.h
 standard_tpye_c\launcher_behaviour.o: ..\application\protocol\protocol.h

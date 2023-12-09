@@ -76,7 +76,6 @@ standard_tpye_c\launcher_task.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
 standard_tpye_c\launcher_task.o: ..\components\algorithm\user_lib.h
 standard_tpye_c\launcher_task.o: ..\application\detect_task.h
 standard_tpye_c\launcher_task.o: ..\application\launcher_behaviour.h
-standard_tpye_c\launcher_task.o: ..\application\INS_task.h
 standard_tpye_c\launcher_task.o: ..\application\shoot_task.h
 standard_tpye_c\launcher_task.o: ..\bsp\boards\bsp_usart.h
 standard_tpye_c\launcher_task.o: ..\application\referee.h

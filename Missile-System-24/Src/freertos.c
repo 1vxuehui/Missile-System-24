@@ -27,17 +27,14 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */     
 
-#include "calibrate_task.h"
 #include "detect_task.h"
 #include "launcher_task.h"
 #include "shoot_task.h"
-#include "INS_task.h"
 #include "led_flow_task.h"
 #include "oled_task.h"
 #include "referee_usart_task.h"
 #include "usb_task.h"
 #include "voltage_task.h"
-#include "UI_task.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -146,17 +143,12 @@ void MX_FREERTOS_Init(void) {
 	
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
-    osThreadDef(cali, calibrate_task, osPriorityNormal, 0, 512);
-    calibrate_tast_handle = osThreadCreate(osThread(cali), NULL);
 
 		osThreadDef(DETECT, detect_task, osPriorityNormal, 0, 256);
 		detect_handle = osThreadCreate(osThread(DETECT), NULL);
 
 		osThreadDef(launcherTask, launcher_task, osPriorityHigh, 0, 512);
 		launcherTaskHandle = osThreadCreate(osThread(launcherTask), NULL);
-
-    osThreadDef(imuTask, INS_task, osPriorityRealtime, 0, 1024);
-    imuTaskHandle = osThreadCreate(osThread(imuTask), NULL);
 
     osThreadDef(led, led_RGB_flow_task, osPriorityNormal, 0, 256);
     led_RGB_flow_handle = osThreadCreate(osThread(led), NULL);
