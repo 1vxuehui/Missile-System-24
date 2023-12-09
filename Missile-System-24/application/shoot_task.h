@@ -28,7 +28,7 @@
 //任务开始空闲一段时间
 #define SHOOT_TASK_INIT_TIME 300
 //云台模式使用的开关通道
-#define SHOOT_CONTROL_TIME          GIMBAL_CONTROL_TIME
+#define SHOOT_CONTROL_TIME          launcher_CONTROL_TIME
 
 #define SHOOT_FRIC_PWM_ADD_VALUE    100.0f
 //射击任务控制间隔 2ms
@@ -114,10 +114,8 @@
 typedef struct
 {
     const RC_ctrl_t *shoot_rc;
-		const motor_measure_t *trigger_motor_measure;
-		const motor_measure_t *fric_b_motor_measure;
-		const motor_measure_t *fric_left_motor_measure;
-		const motor_measure_t *fric_right_motor_measure;
+		const motor_measure_t *shoot_motor_measure;
+		const motor_measure_t *reload_motor_measure;
     pid_type_def trigger_pid;
 		pid_type_def bullet_pid;
 		pid_type_def fric_left_pid;

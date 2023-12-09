@@ -88,6 +88,7 @@
 "standard_tpye_c\usb_task.o"
 "standard_tpye_c\referee_usart_task.o"
 "standard_tpye_c\led_flow_task.o"
+"standard_tpye_c\shoot_task.o"
 "standard_tpye_c\oled.o"
 "standard_tpye_c\bmi088driver.o"
 "standard_tpye_c\bmi088middleware.o"

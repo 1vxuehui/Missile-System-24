@@ -129,8 +129,8 @@ void CAN_cmd_launcher(int16_t yaw, int16_t spring)
 
 /**
   * @brief          发送电机控制电流(0x205,0x206,0x207,0x208)
-  * @param[in]      shoot: (0x201) 2006电机控制电流, 范围 [-16384,16384]
   * @param[in]      reload: (0x202) 3508电机控制电流, 范围 [-16384,16384]
+  * @param[in]      shoot: (0x201) 3508电机控制电流, 范围 [-16384,16384]
   * @retval         none
   */
 void CAN_cmd_shoot(int16_t shoot, int16_t reload)

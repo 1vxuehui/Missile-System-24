@@ -16,7 +16,6 @@
   */
 
 #include "shoot_task.h"
-#include "chassis_task.h"
 #include "main.h"
 
 #include "cmsis_os.h"
@@ -27,7 +26,7 @@
 #include "referee.h"
 
 #include "CAN_receive.h"
-#include "gimbal_behaviour.h"
+#include "launcher_behaviour.h"
 #include "detect_task.h"
 #include "pid.h"
 #include "tim.h"
@@ -72,7 +71,7 @@ static void trigger_motor_turn_back(void);
 
 
 shoot_control_t shoot_control;          //射击数据
-static int16_t s_can_set_current = 0 ,left_can_set_current = 0, right_can_set_current = 0, trigger_can_set_current = 0;
+static int16_t shoot_can_set_current = 0 ,reload_can_set_current = 0;
 /**
   * @brief          射击任务
   * @param[in]      void
@@ -87,15 +86,15 @@ void shoot_task(void const *pvParameters)
 				shoot_set_mode();
 				shoot_feedback_update();
 				shoot_control_loop();		 //设置发弹控制量
-			  if (!(toe_is_error(TRIGGER_MOTOR_TOE) && toe_is_error(FRIC_LEFT_MOTOR_TOE) && toe_is_error(FRIC_RIGHT_MOTOR_TOE)))
+			  if (!(toe_is_error(SHOOT_MOTOR_TOE) && toe_is_error(RELOAD_MOTOR_TOE)))
         {
             if (toe_is_error(DBUS_TOE))
             {
-                CAN_cmd_shoot(0, 0, 0, 0);
+                CAN_cmd_shoot(0, 0);
             }
             else
             {
-                CAN_cmd_shoot(s_can_set_current ,left_can_set_current, right_can_set_current, trigger_can_set_current);
+                CAN_cmd_shoot(shoot_can_set_current, reload_can_set_current);
             }
         }
 				vTaskDelay(SHOOT_CONTROL_TIME_MS);
@@ -111,39 +110,27 @@ void shoot_init(void)
 {
 		//电机PID初始化
 		static const fp32 Trigger_speed_pid[3] = {TRIGGER_ANGLE_PID_KP, TRIGGER_ANGLE_PID_KI, TRIGGER_ANGLE_PID_KD};
-    static const fp32 fric_b_pid[3] = {FRIC_S_MOTOR_SPEED_PID_KP, FRIC_S_MOTOR_SPEED_PID_KI, FRIC_S_MOTOR_SPEED_PID_KD};
-    static const fp32 fric_left_pid[3] = {FRIC_LEFT_MOTOR_SPEED_PID_KP, FRIC_LEFT_MOTOR_SPEED_PID_KI, FRIC_LEFT_MOTOR_SPEED_PID_KD};
 		static const fp32 fric_right_pid[3] = {FRIC_RIGHT_MOTOR_SPEED_PID_KP, FRIC_RIGHT_MOTOR_SPEED_PID_KI, FRIC_RIGHT_MOTOR_SPEED_PID_KD};
 		
     //遥控器指针
     shoot_control.shoot_rc = get_remote_control_point();
     //电机指针
-    shoot_control.trigger_motor_measure = get_trigger_motor_measure_point();
-		shoot_control.fric_b_motor_measure = get_can_2006_measure_point();
-		shoot_control.fric_left_motor_measure = get_can_3508_left_measure_point();
-		shoot_control.fric_right_motor_measure = get_can_3508_right_measure_point();
+    	shoot_control.shoot_motor_measure = get_shoot_measure_point();
+		shoot_control.reload_motor_measure = get_reload_measure_point();
     //初始化PID
 		PID_init(&shoot_control.trigger_pid, PID_POSITION, Trigger_speed_pid, TRIGGER_READY_PID_MAX_OUT, TRIGGER_READY_PID_MAX_IOUT);		
-		PID_init(&shoot_control.bullet_pid, PID_POSITION, fric_b_pid, FRIC_S_MOTOR_SPEED_PID_MAX_OUT, FRIC_S_MOTOR_SPEED_PID_MAX_IOUT);		
-		PID_init(&shoot_control.fric_left_pid, PID_POSITION, fric_left_pid, FRIC_LEFT_MOTOR_SPEED_PID_MAX_OUT, FRIC_LEFT_MOTOR_SPEED_PID_MAX_IOUT);
 		PID_init(&shoot_control.fric_right_pid, PID_POSITION, fric_right_pid, FRIC_RIGHT_MOTOR_SPEED_PID_MAX_OUT, FRIC_RIGHT_MOTOR_SPEED_PID_MAX_IOUT);
     //更新数据
 		shoot_control.shoot_flag = 0;
-		shoot_control.bullet_flag = 0;
 		shoot_control.shoot_continu_flag = 0;
-		shoot_control.stuck_flag = 0;
 		shoot_control.reverse_time = 0;
 		shoot_control.shoot_time = 150;
 		
 		shoot_control.trigger_given_current = 0;
-    shoot_control.trigger_speed = 0.0f;
-    shoot_control.trigger_speed_set = 0.0f;
-		shoot_control.fric_b_speed = 0.0f;
-    shoot_control.fric_b_speed_set = 0.0f;
-		shoot_control.fric_left_speed = 0.0f;
-    shoot_control.fric_left_speed_set = 0.0f;
+    	shoot_control.trigger_speed = 0.0f;
+    	shoot_control.trigger_speed_set = 0.0f;
 		shoot_control.fric_right_speed = 0.0f;
-    shoot_control.fric_right_speed_set = 0.0f;
+    	shoot_control.fric_right_speed_set = 0.0f;
 		
 		shoot_control.trigger_angle = 0;
 		shoot_control.trigger_angle_set = shoot_control.trigger_angle;
@@ -336,13 +323,9 @@ static void shoot_control_loop(void)
 {
 			//计算pid
 			PID_calc(&shoot_control.trigger_pid, shoot_control.trigger_speed, shoot_control.trigger_speed_set);
-			PID_calc(&shoot_control.bullet_pid, shoot_control.fric_b_speed, shoot_control.fric_b_speed_set);
-			PID_calc(&shoot_control.fric_left_pid, shoot_control.fric_left_speed, shoot_control.fric_left_speed_set);
 			PID_calc(&shoot_control.fric_right_pid, shoot_control.fric_right_speed, shoot_control.fric_right_speed_set);
-			trigger_can_set_current = shoot_control.trigger_pid.out;
-			s_can_set_current = shoot_control.bullet_pid.out;
-			left_can_set_current = shoot_control.fric_left_pid.out;
-			right_can_set_current = shoot_control.fric_right_pid.out;
+			shoot_can_set_current = shoot_control.trigger_pid.out;
+			reload_can_set_current = shoot_control.fric_right_pid.out;
 }
 
 /**
@@ -363,13 +346,11 @@ static void shoot_feedback_update(void)
     //二阶低通滤波
     speed_fliter_1 = speed_fliter_2;
     speed_fliter_2 = speed_fliter_3;
-    speed_fliter_3 = speed_fliter_2 * fliter_num[0] + speed_fliter_1 * fliter_num[1] + (shoot_control.trigger_motor_measure->speed_rpm * MOTOR_RPM_TO_SPEED) * fliter_num[2];
+    speed_fliter_3 = speed_fliter_2 * fliter_num[0] + speed_fliter_1 * fliter_num[1] + (shoot_control.shoot_motor_measure->speed_rpm * MOTOR_RPM_TO_SPEED) * fliter_num[2];
     shoot_control.trigger_speed = speed_fliter_3;
 		
 		//电机速度更新
-		shoot_control.fric_b_speed = shoot_control.fric_b_motor_measure->speed_rpm;
-		shoot_control.fric_left_speed = shoot_control.fric_left_motor_measure->speed_rpm;
-		shoot_control.fric_right_speed = shoot_control.fric_right_motor_measure->speed_rpm;
+		shoot_control.fric_right_speed = shoot_control.reload_motor_measure->speed_rpm;
 		
     //鼠标按键
     shoot_control.last_press_l = shoot_control.press_l;
@@ -388,7 +369,7 @@ static void shoot_feedback_update(void)
 static void trigger_motor_turn_back(void)
 {
 			//根据电流值和时间判断是否卡弹
-			if(trigger_can_set_current < -7000.0f)
+			if(shoot_can_set_current < -7000.0f)
 			{
 					shoot_control.block_time ++;
 					if(shoot_control.block_time > 800)

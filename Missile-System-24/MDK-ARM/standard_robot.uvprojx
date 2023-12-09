@@ -864,6 +864,11 @@
               <FileType>1</FileType>
               <FilePath>..\application\led_flow_task.c</FilePath>
             </File>
+            <File>
+              <FileName>shoot_task.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\application\shoot_task.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
