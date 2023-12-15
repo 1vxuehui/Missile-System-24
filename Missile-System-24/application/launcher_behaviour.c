@@ -373,60 +373,15 @@ static void launcher_behavour_set(launcher_control_t *launcher_mode_set)
     {
         return;
     }
-
-		static int16_t last_key_G = 0;
-		static int16_t move = 0;
-		
-		if(!last_key_G && launcher_mode_set->launcher_rc_ctrl->key.v & KEY_PRESSED_OFFSET_G)
-		{
-				move=!move;
-		}
-
-		static int mode = 0;
-		if(launcher_mode_set->launcher_rc_ctrl->key.v & KEY_PRESSED_OFFSET_B )
-		{
-				mode = 1;
-		}
-		if(launcher_mode_set->launcher_rc_ctrl->key.v & KEY_PRESSED_OFFSET_V )
-		{
-				mode = 2;
-		}
 		
     //开关控制 发射架状态
-		if (!switch_is_down(launcher_mode_set->launcher_rc_ctrl->rc.s[1]))
+		if (switch_is_down(launcher_mode_set->launcher_rc_ctrl->rc.s[1]))
 		{
-				// if (switch_is_down(launcher_mode_set->launcher_rc_ctrl->rc.s[0]))
-				// {
-				// 		launcher_behaviour = launcher_ABSOLUTE_ANGLE;
-				// }
-				// else if (switch_is_mid(launcher_mode_set->launcher_rc_ctrl->rc.s[0]))
-				// {
-				// 		launcher_behaviour = launcher_ABSOLUTE_ANGLE;
-				// }
-				// else if (switch_is_up(launcher_mode_set->launcher_rc_ctrl->rc.s[0]))
-				// {
-				// 		launcher_behaviour = launcher_ABSOLUTE_SPIN;
-				// }
+				launcher_behaviour = launcher_ZERO_FORCE;
 		}
-		else if(switch_is_down(launcher_mode_set->launcher_rc_ctrl->rc.s[1]) && move)
+		else if(switch_is_up(launcher_mode_set->launcher_rc_ctrl->rc.s[1]))
 		{
-				// if (mode == 1)
-				// {
-				// 		launcher_behaviour = launcher_ABSOLUTE_ANGLE;
-				// }
-				// else if (mode == 2)
-				// {
-				// 		launcher_behaviour = launcher_ABSOLUTE_ANGLE;
-										
-				// 		if(launcher_mode_set->launcher_rc_ctrl->key.v & KEY_PRESSED_OFFSET_SHIFT)
-				// 		{
-				// 				launcher_behaviour = launcher_ABSOLUTE_SPIN;
-				// 		}
-				// }
-				// else
-				// {
-						launcher_behaviour = launcher_ZERO_FORCE;
-				// }
+				launcher_behaviour = launcher_RELATIVE_ANGLE;
 		}
 		else
 		{

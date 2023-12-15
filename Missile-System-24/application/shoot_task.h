@@ -117,15 +117,9 @@ typedef struct
 		const motor_measure_t *shoot_motor_measure;
 		const motor_measure_t *reload_motor_measure;
     pid_type_def trigger_pid;
-		pid_type_def bullet_pid;
-		pid_type_def fric_left_pid;
 		pid_type_def fric_right_pid;
 	  fp32 trigger_speed;
     fp32 trigger_speed_set;
-		fp32 fric_b_speed;
-    fp32 fric_b_speed_set;
-		fp32 fric_left_speed;
-    fp32 fric_left_speed_set;
 		fp32 fric_right_speed;
     fp32 fric_right_speed_set;
     fp32 trigger_angle;
@@ -144,12 +138,10 @@ typedef struct
     uint16_t block_time;				//判断卡弹时间
     uint16_t reverse_time;			//退弹时间
     uint16_t heat_limit;
-    uint16_t heat;							//热量
 			
 		uint16_t shoot_time;				//发弹时间
 		
 		bool_t shoot_flag;          //发射
-		bool_t bullet_flag;					//二级拨弹
 		bool_t shoot_continu_flag;	//退单
 		bool_t stuck_flag;					//卡弹
 		

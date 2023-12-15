@@ -71,7 +71,7 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 					{
 							static uint8_t i = 0;
 							//get motor id
-							i = rx_header.StdId - CAN_YAW_3508_ID;
+							i = rx_header.StdId - CAN_YAW_3508_ID;   
 							get_motor_measure(&motor_launcher[i], rx_data);
 							detect_hook(LAUNCHER_MOTOR1_TOE + i);
 							break;

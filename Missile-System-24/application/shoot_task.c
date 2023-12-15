@@ -32,33 +32,35 @@
 #include "tim.h"
 #include "stm32.h"
 														//开启发弹摩擦轮
-#define shoot_fric(speed) 	shoot_control.fric_left_speed_set = -speed;\
-														shoot_control.fric_right_speed_set = speed    
-#define trigger_motor(speed)				shoot_control.trigger_speed_set = -speed //开启拨弹电机
-#define third_fric(speed)		shoot_control.fric_b_speed_set = -speed 	//开启二级拨弹电机
+#define shoot_fric(speed) 	shoot_control.fric_left_speed_set = speed; 
+#define trigger_motor(speed)				shoot_control.trigger_speed_set = -speed //开启拨弹电机  
 //行程开关IO
 #define BUTTEN_TRIG_PIN     HAL_GPIO_ReadPin(BUTTON_TRIG_GPIO_Port, BUTTON_TRIG_Pin)
 
 
 static void shoot_init(void);
+
 /**
   * @brief          摩擦轮模式切换
   * @param[in]      void
   * @retval         void
   */
 static void shoot_set_mode(void);
+
 /**
   * @brief          电机速度计算
   * @param[in]      void
   * @retval         void
   */
 static void shoot_control_loop(void);
+
 /**
   * @brief          射击数据更新
   * @param[in]      void
   * @retval         void
   */
 static void shoot_feedback_update(void);
+
 /**
   * @brief          卡弹拨盘回拨
   * @param[in]      void
@@ -105,14 +107,14 @@ void shoot_task(void const *pvParameters)
   * @brief          射击初始化，初始化PID，遥控器指针，电机指针
   * @param[in]      void
   * @retval         返回空
-  */
+  */ 
 void shoot_init(void)
 {
 		//电机PID初始化
 		static const fp32 Trigger_speed_pid[3] = {TRIGGER_ANGLE_PID_KP, TRIGGER_ANGLE_PID_KI, TRIGGER_ANGLE_PID_KD};
 		static const fp32 fric_right_pid[3] = {FRIC_RIGHT_MOTOR_SPEED_PID_KP, FRIC_RIGHT_MOTOR_SPEED_PID_KI, FRIC_RIGHT_MOTOR_SPEED_PID_KD};
 		
-    //遥控器指针
+    //遥控器指针    w
     shoot_control.shoot_rc = get_remote_control_point();
     //电机指针
     	shoot_control.shoot_motor_measure = get_shoot_measure_point();
