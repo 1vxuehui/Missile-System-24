@@ -2,6 +2,7 @@
     "C_Cpp.errorSquiggles": "disabled",
     "files.associations": {
         "can_receive.h": "c",
-        "shoot_task.h": "c"
+        "shoot_task.h": "c",
+        "task.h": "c"
     }
 }

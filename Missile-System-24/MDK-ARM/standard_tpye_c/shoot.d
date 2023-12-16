@@ -67,7 +67,7 @@ standard_tpye_c\shoot.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/queu
 standard_tpye_c\shoot.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h
 standard_tpye_c\shoot.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h
 standard_tpye_c\shoot.o: ..\bsp\boards\bsp_laser.h
-standard_tpye_c\shoot.o: ..\bsp\boards\bsp_fric.h
+standard_tpye_c\shoot.o: ..\bsp\boards\bsp_missile.h
 standard_tpye_c\shoot.o: ..\components\algorithm\Include\arm_math.h
 standard_tpye_c\shoot.o: ../Drivers/CMSIS/Include/core_cm4.h
 standard_tpye_c\shoot.o: E:\Keil_5\ARM\ARMCC\Bin\..\include\string.h

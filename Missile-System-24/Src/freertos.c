@@ -1,4 +1,4 @@
-/* USER CODE BEGIN Header */
+ /* USER CODE BEGIN Header */
 /**
   ******************************************************************************
   * File Name          : freertos.c
@@ -10,7 +10,7 @@
   * All rights reserved.</center></h2>
   *
   * This software component is licensed by ST under Ultimate Liberty license
-  * SLA0044, the "License"; You may not use this file except in compliance with
+  * SLA0044, the "License"; You may not use this file except in compliance with  
   * the License. You may obtain a copy of the License at:
   *                             www.st.com/SLA0044
   *
@@ -41,7 +41,6 @@
 /* USER CODE BEGIN PTD */
 
 osThreadId calibrate_tast_handle;
-osThreadId chassisTaskHandle;
 osThreadId detect_handle;
 osThreadId launcherTaskHandle;
 osThreadId imuTaskHandle;
@@ -51,6 +50,7 @@ osThreadId referee_usart_task_handle;
 osThreadId usb_task_handle;
 osThreadId battery_voltage_handle;
 osThreadId servo_task_handle;
+osThreadId shoot_task_handle;
 
 /* USER CODE END PTD */
 
@@ -148,6 +148,9 @@ void MX_FREERTOS_Init(void) {
 		detect_handle = osThreadCreate(osThread(DETECT), NULL);
 
 		osThreadDef(launcherTask, launcher_task, osPriorityHigh, 0, 512);
+		launcherTaskHandle = osThreadCreate(osThread(launcherTask), NULL);
+
+    osThreadDef(shootTask, shoot_task, osPriorityHigh, 0, 512);
 		launcherTaskHandle = osThreadCreate(osThread(launcherTask), NULL);
 
     osThreadDef(led, led_RGB_flow_task, osPriorityNormal, 0, 256);

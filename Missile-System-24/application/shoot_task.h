@@ -30,11 +30,9 @@
 //云台模式使用的开关通道
 #define SHOOT_CONTROL_TIME          launcher_CONTROL_TIME
 
-#define SHOOT_FRIC_PWM_ADD_VALUE    100.0f
+#define SHOOT_MISSILE_PWM_ADD_VALUE    100.0f
 //射击任务控制间隔 2ms
 #define SHOOT_CONTROL_TIME_MS 2
-//射击摩擦轮激光打开 关闭
-#define SHOOT_ON_KEYBOARD           KEY_PRESSED_OFFSET_Q
 //按键检测时间
 #define BUTTON_TIME                 30
 //射击完成后 子弹弹出去后，判断时间，以防误触发
@@ -58,14 +56,14 @@
 
 #define KEY_OFF_JUGUE_TIME          500
 
-#define TRIGGER_DONE_TIME           500
+#define reload_DONE_TIME           500
 
 #define READY           						1
 #define OFF          								0
 
 
 //卡单时间 以及反转时间
-#define BLOCK_TRIGGER_SPEED         1.0f
+#define BLOCK_RELOAD_SPEED         1.0f
 #define BLOCK_TIME                  1000
 #define REVERSE_TIME                1000
 #define REVERSE_SPEED_LIMIT         13.0f
@@ -76,35 +74,27 @@
 #define PI_TEN                      0.314f
 
 //拨弹轮电机PID
-#define TRIGGER_ANGLE_PID_KP        1800.0f
-#define TRIGGER_ANGLE_PID_KI        0.0f
-#define TRIGGER_ANGLE_PID_KD        10.0f
+#define RELOAD_ANGLE_PID_KP        1800.0f
+#define RELOAD_ANGLE_PID_KI        0.0f
+#define RELOAD_ANGLE_PID_KD        10.0f
 
-#define TRIGGER_READY_PID_MAX_OUT   15000.0f
-#define TRIGGER_READY_PID_MAX_IOUT  10000.0f
+#define RELOAD_READY_PID_MAX_OUT   15000.0f
+#define RELOAD_READY_PID_MAX_IOUT  10000.0f
 
 
 //摩擦轮电机速度环PID
-#define FRIC_S_MOTOR_SPEED_PID_KP 20.0f
-#define FRIC_S_MOTOR_SPEED_PID_KI 1.0f
-#define FRIC_S_MOTOR_SPEED_PID_KD 0.0f
+#define MISSILE_LEFT_MOTOR_SPEED_PID_KP 20.0f
+#define MISSILE_LEFT_MOTOR_SPEED_PID_KI 4.0f
+#define MISSILE_LEFT_MOTOR_SPEED_PID_KD 0.0f
 
-#define FRIC_S_MOTOR_SPEED_PID_MAX_OUT  30000.0f
-#define FRIC_S_MOTOR_SPEED_PID_MAX_IOUT 20000.0f
+#define MISSILE_LEFT_MOTOR_SPEED_PID_MAX_OUT  16385.0f
+#define MISSILE_LEFT_MOTOR_SPEED_PID_MAX_IOUT 10000.0f
 
-#define FRIC_LEFT_MOTOR_SPEED_PID_KP 20.0f
-#define FRIC_LEFT_MOTOR_SPEED_PID_KI 4.0f
-#define FRIC_LEFT_MOTOR_SPEED_PID_KD 0.0f
-
-#define FRIC_LEFT_MOTOR_SPEED_PID_MAX_OUT  16385.0f
-#define FRIC_LEFT_MOTOR_SPEED_PID_MAX_IOUT 10000.0f
-
-#define FRIC_RIGHT_MOTOR_SPEED_PID_KP 20.0f
-#define FRIC_RIGHT_MOTOR_SPEED_PID_KI 4.0f
-#define FRIC_RIGHT_MOTOR_SPEED_PID_KD 0.0f
-
-#define FRIC_RIGHT_MOTOR_SPEED_PID_MAX_OUT  16385.0f
-#define FRIC_RIGHT_MOTOR_SPEED_PID_MAX_IOUT 10000.0f
+#define MISSILE_SHOOT_MOTOR_SPEED_PID_KP 20.0f
+#define MISSILE_SHOOT_MOTOR_SPEED_PID_KI 4.0f
+#define MISSILE_SHOOT_MOTOR_SPEED_PID_KD 0.0f
+#define MISSILE_SHOOT_MOTOR_SPEED_PID_MAX_OUT  16385.0f
+#define MISSILE_SHOOT_MOTOR_SPEED_PID_MAX_IOUT 10000.0f
 
 #define SHOOT_HEAT_REMAIN_VALUE     80
 
@@ -116,16 +106,16 @@ typedef struct
     const RC_ctrl_t *shoot_rc;
 		const motor_measure_t *shoot_motor_measure;
 		const motor_measure_t *reload_motor_measure;
-    pid_type_def trigger_pid;
-		pid_type_def fric_right_pid;
-	  fp32 trigger_speed;
-    fp32 trigger_speed_set;
-		fp32 fric_right_speed;
-    fp32 fric_right_speed_set;
-    fp32 trigger_angle;
-    fp32 trigger_angle_set;
-    int16_t trigger_given_current;
-    int8_t trigger_ecd_count;
+    pid_type_def reload_pid;
+		pid_type_def missile_shoot_pid;
+	  fp32 reload_speed;
+    fp32 reload_speed_set;
+		fp32 missile_shoot_speed;
+    fp32 missile_shoot_speed_set;
+    fp32 reload_angle;
+    fp32 reload_angle_set;
+    int16_t reload_given_current;
+    int8_t reload_ecd_count;
 
     bool_t press_l;
     bool_t press_r;
