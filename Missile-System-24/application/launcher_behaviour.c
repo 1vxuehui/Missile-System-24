@@ -410,8 +410,6 @@ static void launcher_behavour_set(launcher_control_t *launcher_mode_set)
         }
         last_launcher_behaviour = launcher_behaviour;
     }
-		
-		last_key_G = launcher_mode_set->launcher_rc_ctrl->key.v & KEY_PRESSED_OFFSET_G;
 }
 
 /**

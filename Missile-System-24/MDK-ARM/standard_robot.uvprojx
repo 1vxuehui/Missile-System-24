@@ -835,14 +835,14 @@
               <FilePath>..\application\launcher_behaviour.c</FilePath>
             </File>
             <File>
-              <FileName>launcher_task.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\application\launcher_task.c</FilePath>
-            </File>
-            <File>
               <FileName>referee.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\application\referee.c</FilePath>
+            </File>
+            <File>
+              <FileName>launcher_task.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\application\launcher_task.c</FilePath>
             </File>
             <File>
               <FileName>voltage_task.c</FileName>

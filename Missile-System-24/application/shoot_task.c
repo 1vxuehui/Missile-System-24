@@ -40,12 +40,12 @@
 
 static void shoot_init(void);
 
-/**
-  * @brief          模式切换
-  * @param[in]      void
-  * @retval         void
-  */
-static void shoot_set_mode(void);
+///**
+//  * @brief          模式切换
+//  * @param[in]      void
+//  * @retval         void
+//  */
+//static void shoot_set_mode(void);
 
 /**
   * @brief          电机速度计算
@@ -78,7 +78,7 @@ void shoot_task(void const *pvParameters)
 		shoot_init();
 		while(1)
 		{
-				shoot_set_mode();
+//				shoot_set_mode();
 				shoot_feedback_update();
 				shoot_control_loop();		 //设置发弹控制量
 			  if (!(toe_is_error(SHOOT_MOTOR_TOE) && toe_is_error(RELOAD_MOTOR_TOE)))
@@ -104,8 +104,8 @@ void shoot_task(void const *pvParameters)
 void shoot_init(void)
 {
 		//电机PID初始化
-		static const fp32 reload_speed_pid[3] = {reload_ANGLE_PID_KP, reload_ANGLE_PID_KI, reload_ANGLE_PID_KD};
-		static const fp32 missile_shoot_pid[3] = {missile_shoot_MOTOR_SPEED_PID_KP, missile_shoot_MOTOR_SPEED_PID_KI, missile_shoot_MOTOR_SPEED_PID_KD};
+		static const fp32 reload_speed_pid[3] = {RELOAD_ANGLE_PID_KP, RELOAD_ANGLE_PID_KI, RELOAD_ANGLE_PID_KD};
+		static const fp32 missile_shoot_pid[3] = {MISSILE_SHOOT_MOTOR_SPEED_PID_KP, MISSILE_SHOOT_MOTOR_SPEED_PID_KI, MISSILE_SHOOT_MOTOR_SPEED_PID_KD};
 		
     //遥控器指针
     shoot_control.shoot_rc = get_remote_control_point();
@@ -113,8 +113,8 @@ void shoot_init(void)
     	shoot_control.shoot_motor_measure = get_shoot_measure_point();
 		shoot_control.reload_motor_measure = get_reload_measure_point();
     //初始化PID
-		PID_init(&shoot_control.reload_pid, PID_POSITION, reload_speed_pid, reload_READY_PID_MAX_OUT, reload_READY_PID_MAX_IOUT);		
-		PID_init(&shoot_control.missile_shoot_pid, PID_POSITION, missile_shoot_pid, missile_shoot_MOTOR_SPEED_PID_MAX_OUT, missile_shoot_MOTOR_SPEED_PID_MAX_IOUT);
+		PID_init(&shoot_control.reload_pid, PID_POSITION, reload_speed_pid, RELOAD_READY_PID_MAX_OUT, RELOAD_READY_PID_MAX_IOUT);		
+		PID_init(&shoot_control.missile_shoot_pid, PID_POSITION, missile_shoot_pid, MISSILE_SHOOT_MOTOR_SPEED_PID_MAX_OUT, MISSILE_SHOOT_MOTOR_SPEED_PID_MAX_IOUT);
     //更新数据
 		shoot_control.shoot_flag = 0;
 		shoot_control.shoot_continu_flag = 0;
@@ -130,102 +130,102 @@ void shoot_init(void)
 		shoot_control.reload_angle = 0;
 		shoot_control.reload_angle_set = shoot_control.reload_angle;
 }
-/**
-  * @brief          射击状态机设置
-  * @param[in]      void
-  * @retval         void
-  */
-int8_t R = 0;
-int s=2000,l;
-static void shoot_set_mode(void)
-{
-//		static int8_t press_l_last_s = 0;
-		static uint16_t press_R_time = 0;
-		fp32 missile_speed;
+///**
+//  * @brief          射击状态机设置
+//  * @param[in]      void
+//  * @retval         void
+//  */
+//int8_t R = 0;
+//int s=2000,l;
+//static void shoot_set_mode(void)
+//{
+////		static int8_t press_l_last_s = 0;
+//		static uint16_t press_R_time = 0;
+//		fp32 missile_speed;
 
-		//键盘控制长按R建开启摩擦轮
-		if(shoot_control.shoot_rc->key.v & KEY_PRESSED_OFFSET_R)
-		{
-				press_R_time ++;
-		}
-		if(press_R_time > 500) 
-		{
-				R=!R;
-				press_R_time = 0;
-		}
+//		//键盘控制长按R建开启摩擦轮
+//		if(shoot_control.shoot_rc->key.v & KEY_PRESSED_OFFSET_R)
+//		{
+//				press_R_time ++;
+//		}
+//		if(press_R_time > 500) 
+//		{
+//				R=!R;
+//				press_R_time = 0;
+//		}
 
-//		if ((switch_is_up(shoot_control.shoot_rc->rc.s[1]) || R) && robot_state.mains_power_shooter_output)
-			if (switch_is_up(shoot_control.shoot_rc->rc.s[1]))
-    {
-				laser_on();
-				reload_motor_turn_back();
-				//根据裁判系统 控制弹速
-				switch (robot_state.shooter_id1_42mm_speed_limit)
-				{
-						case 10:
-						{
-								missile_speed = 4100;
-								break;
-						}					
-						case 16:
-						{
-								missile_speed = 5900;//14->4900  16->5900
-								break;
-						}
-						default:
-						{
-								missile_speed = 4900;
-								break;
-						}
-				}
-				shoot_missile(missile_speed);
-//				
-				if(shoot_control.stuck_flag == 0)//无卡弹
-				{
-						//拨弹
-						if(!BUTTEN_TRIG_PIN)  	reload_motor(0.0f);
-						else if(BUTTEN_TRIG_PIN)		reload_motor(4.0f);
-					
-						if(shoot_control.shoot_rc->rc.ch[4] < 120)
-						{
-								shoot_control.bullet_flag = 1;
-						}
-						//发弹
-						if(shoot_control.bullet_flag == 1 && (shoot_control.shoot_rc->rc.ch[4] > 600) && !BUTTEN_TRIG_PIN)
-//						if(shoot_control.bullet_flag == 1 && (shoot_control.shoot_rc->rc.ch[4] > 600 || (!press_l_last_s && shoot_control.press_l)) &&
-//							!BUTTEN_TRIG_PIN && (robot_state.shooter_id1_42mm_cooling_limit - power_heat_data_t.shooter_id1_42mm_cooling_heat >= 100))  
-						{
-								shoot_control.shoot_flag = 1;
-								shoot_control.bullet_flag = 0;
-						}
-				}
-    }
-		else
-		{
-				laser_off();
-				shoot_missile(0);
-				third_missile(0);	
-				reload_motor(0);
-		}
-		
-		if(shoot_control.shoot_flag ==1)
-		{
-				shoot_control.shoot_time = 0;
-				shoot_control.shoot_flag = 0;
-		}
-		//拨弹
-		if(shoot_control.shoot_time < 40)
-		{
-				reload_motor(6.0f);
-		}
-		
-	
-		
-		shoot_control.shoot_time++;
-		
-		if(shoot_control.shoot_time >= 150) shoot_control.shoot_time = 150;
+////		if ((switch_is_up(shoot_control.shoot_rc->rc.s[1]) || R) && robot_state.mains_power_shooter_output)
+//			if (switch_is_up(shoot_control.shoot_rc->rc.s[1]))
+//    {
+//				laser_on();
+//				reload_motor_turn_back();
+//				//根据裁判系统 控制弹速
+//				switch (robot_state.shooter_id1_42mm_speed_limit)
+//				{
+//						case 10:
+//						{
+//								missile_speed = 4100;
+//								break;
+//						}					
+//						case 16:
+//						{
+//								missile_speed = 5900;//14->4900  16->5900
+//								break;
+//						}
+//						default:
+//						{
+//								missile_speed = 4900;
+//								break;
+//						}
+//				}
+//				shoot_missile(missile_speed);
+////				
+//				if(shoot_control.stuck_flag == 0)//无卡弹
+//				{
+//						//拨弹
+//						if(!BUTTEN_TRIG_PIN)  	reload_motor(0.0f);
+//						else if(BUTTEN_TRIG_PIN)		reload_motor(4.0f);
+//					
+//						if(shoot_control.shoot_rc->rc.ch[4] < 120)
+//						{
+//								shoot_control.bullet_flag = 1;
+//						}
+//						//发弹
+//						if(shoot_control.bullet_flag == 1 && (shoot_control.shoot_rc->rc.ch[4] > 600) && !BUTTEN_TRIG_PIN)
+////						if(shoot_control.bullet_flag == 1 && (shoot_control.shoot_rc->rc.ch[4] > 600 || (!press_l_last_s && shoot_control.press_l)) &&
+////							!BUTTEN_TRIG_PIN && (robot_state.shooter_id1_42mm_cooling_limit - power_heat_data_t.shooter_id1_42mm_cooling_heat >= 100))  
+//						{
+//								shoot_control.shoot_flag = 1;
+//								shoot_control.bullet_flag = 0;
+//						}
+//				}
+//    }
+//		else
+//		{
+//				laser_off();
+//				shoot_missile(0);
+//				third_missile(0);	
+//				reload_motor(0);
+//		}
+//		
+//		if(shoot_control.shoot_flag ==1)
+//		{
+//				shoot_control.shoot_time = 0;
+//				shoot_control.shoot_flag = 0;
+//		}
+//		//拨弹
+//		if(shoot_control.shoot_time < 40)
+//		{
+//				reload_motor(6.0f);
+//		}
+//		
+//	
+//		
+//		shoot_control.shoot_time++;
+//		
+//		if(shoot_control.shoot_time >= 150) shoot_control.shoot_time = 150;
 
-}
+//}
 
 /**
   * @brief          电机速度计算
