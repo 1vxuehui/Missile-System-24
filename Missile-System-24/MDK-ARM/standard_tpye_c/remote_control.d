@@ -50,3 +50,6 @@ standard_tpye_c\remote_control.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_
 standard_tpye_c\remote_control.o: ..\bsp\boards\bsp_usart.h
 standard_tpye_c\remote_control.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 standard_tpye_c\remote_control.o: ..\application\detect_task.h
+standard_tpye_c\remote_control.o: ../Drivers/CMSIS/Include/cmsis_armclang.h
+standard_tpye_c\remote_control.o: ../Drivers/CMSIS/Include/arm_compat.h
+standard_tpye_c\remote_control.o: ../Drivers/CMSIS/Include/arm_acle.h

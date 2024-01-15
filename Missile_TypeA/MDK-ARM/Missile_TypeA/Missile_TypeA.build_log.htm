@@ -1,0 +1,283 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Tool Versions:</h2>
+IDE-Version: ¦ÌVision V5.32.0.0
+Copyright (C) 2020 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: lv xuehui, xuehui, LIC=IC93N-Y09JB-17SRR-KFM0T-B1KVP-91PZQ
+ 
+Tool Versions:
+Toolchain:       MDK-ARM Professional  Version: 5.32.0.0
+Toolchain Path:  D:\Keil_v5\ARM\ARMCC\Bin
+C Compiler:      Armcc.exe V5.06 update 7 (build 960)
+Assembler:       Armasm.exe V5.06 update 7 (build 960)
+Linker/Locator:  ArmLink.exe V5.06 update 7 (build 960)
+Library Manager: ArmAr.exe V5.06 update 7 (build 960)
+Hex Converter:   FromElf.exe V5.06 update 7 (build 960)
+CPU DLL:         SARMCM3.DLL V5.32.0.0
+Dialog DLL:      DCM.DLL V1.17.3.0
+Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V3.0.8.0
+Dialog DLL:      TCM.DLL V1.46.0.0
+ 
+<h2>Project:</h2>
+d:\QIQI\Missile-System-24\Missile_TypeA\MDK-ARM\Missile_TypeA.uvprojx
+Project File Date:  01/13/2024
+
+<h2>Output:</h2>
+*** Using Compiler 'V5.06 update 7 (build 960)', folder: 'D:\Keil_v5\ARM\ARMCC\Bin'
+Build target 'Missile_TypeA'
+compiling OLED.c...
+../Drivers/CMSIS/Include/cmsis_armclang.h(30): warning:  #161-D: unrecognized #pragma
+  #pragma clang system_header   /* treat file as system include file */
+D:\Keil_v5\ARM\ARMCLANG\include\arm_acle.h(15): error:  #35: #error directive: "ACLE intrinsics support not enabled."
+  #error "ACLE intrinsics support not enabled."
+..\module\oled\OLED.c: 1 warning, 1 error
+compiling user_lib.c...
+../Drivers/CMSIS/Include/cmsis_armclang.h(30): warning:  #161-D: unrecognized #pragma
+  #pragma clang system_header   /* treat file as system include file */
+D:\Keil_v5\ARM\ARMCLANG\include\arm_acle.h(15): error:  #35: #error directive: "ACLE intrinsics support not enabled."
+  #error "ACLE intrinsics support not enabled."
+..\module\userlib\user_lib.c: 1 warning, 1 error
+compiling detect_task.c...
+../Drivers/CMSIS/Include/cmsis_armclang.h(30): warning:  #161-D: unrecognized #pragma
+  #pragma clang system_header   /* treat file as system include file */
+D:\Keil_v5\ARM\ARMCLANG\include\arm_acle.h(15): error:  #35: #error directive: "ACLE intrinsics support not enabled."
+  #error "ACLE intrinsics support not enabled."
+..\application\detect_task.c: 1 warning, 1 error
+compiling shoot_task.c...
+../Drivers/CMSIS/Include/cmsis_armclang.h(30): warning:  #161-D: unrecognized #pragma
+  #pragma clang system_header   /* treat file as system include file */
+D:\Keil_v5\ARM\ARMCLANG\include\arm_acle.h(15): error:  #35: #error directive: "ACLE intrinsics support not enabled."
+  #error "ACLE intrinsics support not enabled."
+..\application\shoot_task.c: 1 warning, 1 error
+compiling controller.c...
+D:\Keil_v5\ARM\ARMCLANG\include\string.h(22): warning:  #47-D: incompatible redefinition of macro "__ARMCLIB_VERSION"  (declared at line 22 of "D:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h")
+  #define __ARMCLIB_VERSION 6140101
+../Drivers/CMSIS/Include/cmsis_armclang.h(30): warning:  #161-D: unrecognized #pragma
+  #pragma clang system_header   /* treat file as system include file */
+D:\Keil_v5\ARM\ARMCLANG\include\arm_acle.h(15): error:  #35: #error directive: "ACLE intrinsics support not enabled."
+  #error "ACLE intrinsics support not enabled."
+..\module\controller\controller.c: 2 warnings, 1 error
+compiling bsp_crc32.c...
+..\bsp\bsp_crc32.c(3): error:  #20: identifier "CRC_HandleTypeDef" is undefined
+  extern CRC_HandleTypeDef hcrc;
+..\bsp\bsp_crc32.c(7): warning:  #223-D: function "HAL_CRC_Calculate" declared implicitly
+      return HAL_CRC_Calculate(&hcrc, data, len);
+..\bsp\bsp_crc32.c: 1 warning, 1 error
+compiling INS_task.c...
+../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h(69): error:  #101: "NonMaskableInt_IRQn" has already been declared in the current scope
+    NonMaskableInt_IRQn         = -14,    /*!< 2 Non Maskable Interrupt                                          */
+../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h(70): error:  #101: "MemoryManagement_IRQn" has already been declared in the current scope
+    MemoryManagement_IRQn       = -12,    /*!< 4 Cortex-M4 Memory Management Interrupt                           */
+../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h(71): error:  #101: "BusFault_IRQn" has already been declared in the current scope
+    BusFault_IRQn               = -11,    /*!< 5 Cortex-M4 Bus Fault Interrupt                                   */
+../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h(72): error:  #101: "UsageFault_IRQn" has already been declared in the current scope
+    UsageFault_IRQn             = -10,    /*!< 6 Cortex-M4 Usage Fault Interrupt                                 */
+../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h(73): error:  #101: "SVCall_IRQn" has already been declared in the current scope
+    SVCall_IRQn                 = -5,     /*!< 11 Cortex-M4 SV Call Interrupt                                    */
+../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h(74): error:  #101: "DebugMonitor_IRQn" has already been declared in the current scope
+    DebugMonitor_IRQn           = -4,     /*!< 12 Cortex-M4 Debug Monitor Interrupt                              */
+../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h(75): error:  #101: "PendSV_IRQn" has already been declared in the current scope
+    PendSV_IRQn                 = -2,     /*!< 14 Cortex-M4 Pend SV Interrupt                                    */
+../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h(76): error:  #101: "SysTick_IRQn" has already been declared in the current scope
+    SysTick_IRQn                = -1,     /*!< 15 Cortex-M4 System Tick Interrupt                                */
+../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h(78): error:  #101: "WWDG_IRQn" has already been declared in the current scope
+    WWDG_IRQn                   = 0,      /*!< Window WatchDog Interrupt                                         */
+../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h(79): error:  #101: "PVD_IRQn" has already been declared in the current scope
+    PVD_IRQn                    = 1,      /*!< PVD through EXTI Line detection Interrupt                         */
+../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h(80): error:  #101: "TAMP_STAMP_IRQn" has already been declared in the current scope
+    TAMP_STAMP_IRQn             = 2,      /*!< Tamper and TimeStamp interrupts through the EXTI line             */
+../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h(81): error:  #101: "RTC_WKUP_IRQn" has already been declared in the current scope
+    RTC_WKUP_IRQn               = 3,      /*!< RTC Wakeup interrupt through the EXTI line                        */
+../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h(82): error:  #101: "FLASH_IRQn" has already been declared in the current scope
+    FLASH_IRQn                  = 4,      /*!< FLASH global Interrupt                                            */
+../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h(83): error:  #101: "RCC_IRQn" has already been declared in the current scope
+    RCC_IRQn                    = 5,      /*!< RCC global Interrupt                                              */
+../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h(84): error:  #101: "EXTI0_IRQn" has already been declared in the current scope
+    EXTI0_IRQn                  = 6,      /*!< EXTI Line0 Interrupt                                              */
+../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h(85): error:  #101: "EXTI1_IRQn" has already been declared in the current scope
+    EXTI1_IRQn                  = 7,      /*!< EXTI Line1 Interrupt                                              */
+../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h(86): error:  #101: "EXTI2_IRQn" has already been declared in the current scope
+    EXTI2_IRQn                  = 8,      /*!< EXTI Line2 Interrupt                                              */
+../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h(87): error:  #101: "EXTI3_IRQn" has already been declared in the current scope
+    EXTI3_IRQn                  = 9,      /*!< EXTI Line3 Interrupt                                              */
+../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h(88): error:  #101: "EXTI4_IRQn" has already been declared in the current scope
+    EXTI4_IRQn                  = 10,     /*!< EXTI Line4 Interrupt                                              */
+../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h(89): error:  #101: "DMA1_Stream0_IRQn" has already been declared in the current scope
+    DMA1_Stream0_IRQn           = 11,     /*!< DMA1 Stream 0 global Interrupt                                    */
+../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h(90): error:  #101: "DMA1_Stream1_IRQn" has already been declared in the current scope
+    DMA1_Stream1_IRQn           = 12,     /*!< DMA1 Stream 1 global Interrupt                                    */
+../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h(91): error:  #101: "DMA1_Stream2_IRQn" has already been declared in the current scope
+    DMA1_Stream2_IRQn           = 13,     /*!< DMA1 Stream 2 global Interrupt                                    */
+../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h(92): error:  #101: "DMA1_Stream3_IRQn" has already been declared in the current scope
+    DMA1_Stream3_IRQn           = 14,     /*!< DMA1 Stream 3 global Interrupt                                    */
+../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h(93): error:  #101: "DMA1_Stream4_IRQn" has already been declared in the current scope
+    DMA1_Stream4_IRQn           = 15,     /*!< DMA1 Stream 4 global Interrupt                                    */
+../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h(94): error:  #101: "DMA1_Stream5_IRQn" has already been declared in the current scope
+    DMA1_Stream5_IRQn           = 16,     /*!< DMA1 Stream 5 global Interrupt                                    */
+../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h(95): error:  #101: "DMA1_Stream6_IRQn" has already been declared in the current scope
+    DMA1_Stream6_IRQn           = 17,     /*!< DMA1 Stream 6 global Interrupt                                    */
+../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h(96): error:  #101: "ADC_IRQn" has already been declared in the current scope
+    ADC_IRQn                    = 18,     /*!< ADC1, ADC2 and ADC3 global Interrupts                             */
+../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h(97): error:  #101: "CAN1_TX_IRQn" has already been declared in the current scope
+    CAN1_TX_IRQn                = 19,     /*!< CAN1 TX Interrupt                                                 */
+../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h(98): error:  #101: "CAN1_RX0_IRQn" has already been declared in the current scope
+    CAN1_RX0_IRQn               = 20,     /*!< CAN1 RX0 Interrupt                                                */
+../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h(99): error:  #101: "CAN1_RX1_IRQn" has already been declared in the current scope
+    CAN1_RX1_IRQn               = 21,     /*!< CAN1 RX1 Interrupt                                                */
+..\application\INS_task.c: 0 warnings, 30 errors
+compiling remote_control.c...
+../Drivers/CMSIS/Include/cmsis_armclang.h(30): warning:  #161-D: unrecognized #pragma
+  #pragma clang system_header   /* treat file as system include file */
+D:\Keil_v5\ARM\ARMCLANG\include\arm_acle.h(15): error:  #35: #error directive: "ACLE intrinsics support not enabled."
+  #error "ACLE intrinsics support not enabled."
+..\module\remote_control\remote_control.c: 1 warning, 1 error
+compiling bsp_adc.c...
+..\bsp\bsp_adc.c(3): error:  #20: identifier "ADC_HandleTypeDef" is undefined
+  extern ADC_HandleTypeDef hadc1;
+..\bsp\bsp_adc.c(4): error:  #20: identifier "ADC_HandleTypeDef" is undefined
+  extern ADC_HandleTypeDef hadc2;
+..\bsp\bsp_adc.c(5): error:  #20: identifier "ADC_HandleTypeDef" is undefined
+  extern ADC_HandleTypeDef hadc3;
+..\bsp\bsp_adc.c(9): error:  #20: identifier "ADC_HandleTypeDef" is undefined
+  static uint16_t adcx_get_chx_value(ADC_HandleTypeDef *ADCx, uint32_t ch)
+..\bsp\bsp_adc.c(11): error:  #20: identifier "ADC_ChannelConfTypeDef" is undefined
+      static ADC_ChannelConfTypeDef sConfig = {0};
+..\bsp\bsp_adc.c(14): error:  #20: identifier "ADC_SAMPLETIME_3CYCLES" is undefined
+      sConfig.SamplingTime = ADC_SAMPLETIME_3CYCLES;//ADC_SAMPLETIME_3CYCLES;
+..\bsp\bsp_adc.c(16): warning:  #223-D: function "HAL_ADC_ConfigChannel" declared implicitly
+      if (HAL_ADC_ConfigChannel(ADCx, &sConfig) != HAL_OK)
+..\bsp\bsp_adc.c(21): warning:  #223-D: function "HAL_ADC_Start" declared implicitly
+      HAL_ADC_Start(ADCx);
+..\bsp\bsp_adc.c(23): warning:  #223-D: function "HAL_ADC_PollForConversion" declared implicitly
+      HAL_ADC_PollForConversion(ADCx, 10);
+..\bsp\bsp_adc.c(24): warning:  #223-D: function "HAL_ADC_GetValue" declared implicitly
+      return (uint16_t)HAL_ADC_GetValue(ADCx);
+..\bsp\bsp_adc.c(33): error:  #20: identifier "ADC_CHANNEL_VREFINT" is undefined
+          total_adc += adcx_get_chx_value(&hadc1, ADC_CHANNEL_VREFINT);
+..\bsp\bsp_adc.c(44): error:  #20: identifier "ADC_CHANNEL_TEMPSENSOR" is undefined
+      adcx = adcx_get_chx_value(&hadc1, ADC_CHANNEL_TEMPSENSOR);
+..\bsp\bsp_adc.c(57): error:  #20: identifier "ADC_CHANNEL_8" is undefined
+      adcx = adcx_get_chx_value(&hadc3, ADC_CHANNEL_8);
+..\bsp\bsp_adc.c(66): error:  #20: identifier "HW0_GPIO_Port" is undefined
+      hardware_version = HAL_GPIO_ReadPin(HW0_GPIO_Port, HW0_Pin)
+..\bsp\bsp_adc.c(66): error:  #20: identifier "HW0_Pin" is undefined
+      hardware_version = HAL_GPIO_ReadPin(HW0_GPIO_Port, HW0_Pin)
+..\bsp\bsp_adc.c(67): error:  #20: identifier "HW1_GPIO_Port" is undefined
+                                  | (HAL_GPIO_ReadPin(HW1_GPIO_Port, HW1_Pin)<<1)
+..\bsp\bsp_adc.c(67): error:  #20: identifier "HW1_Pin" is undefined
+                                  | (HAL_GPIO_ReadPin(HW1_GPIO_Port, HW1_Pin)<<1)
+..\bsp\bsp_adc.c(68): error:  #20: identifier "HW2_GPIO_Port" is undefined
+                                  | (HAL_GPIO_ReadPin(HW2_GPIO_Port, HW2_Pin)<<2);
+..\bsp\bsp_adc.c(68): error:  #20: identifier "HW2_Pin" is undefined
+                                  | (HAL_GPIO_ReadPin(HW2_GPIO_Port, HW2_Pin)<<2);
+..\bsp\bsp_adc.c: 4 warnings, 15 errors
+compiling bsp_rng.c...
+..\bsp\bsp_rng.c(4): error:  #20: identifier "RNG_HandleTypeDef" is undefined
+  extern RNG_HandleTypeDef hrng;
+..\bsp\bsp_rng.c(9): warning:  #223-D: function "HAL_RNG_GenerateRandomNumber" declared implicitly
+      HAL_RNG_GenerateRandomNumber(&hrng, &rng);
+..\bsp\bsp_rng.c: 1 warning, 1 error
+compiling bsp_i2c.c...
+..\bsp\bsp_i2c.c(5): error:  #20: identifier "I2C_HandleTypeDef" is undefined
+  extern I2C_HandleTypeDef hi2c1;
+..\bsp\bsp_i2c.c(6): error:  #20: identifier "I2C_HandleTypeDef" is undefined
+  extern I2C_HandleTypeDef hi2c2;
+..\bsp\bsp_i2c.c(13): warning:  #223-D: function "HAL_I2C_Master_Transmit" declared implicitly
+          HAL_I2C_Master_Transmit(&hi2c1, I2C_address, data, len, 100);
+..\bsp\bsp_i2c.c(17): warning:  #223-D: function "HAL_I2C_Master_Transmit" declared implicitly
+          HAL_I2C_Master_Transmit(&hi2c2, I2C_address, data, len, 100);
+..\bsp\bsp_i2c.c(24): error:  #20: identifier "I2C_HandleTypeDef" is undefined
+      I2C_HandleTypeDef *hi2c;
+..\bsp\bsp_i2c.c(24): error:  #20: identifier "hi2c" is undefined
+      I2C_HandleTypeDef *hi2c;
+..\bsp\bsp_i2c.c(36): warning:  #223-D: function "HAL_I2C_Init" declared implicitly
+      if (HAL_I2C_Init(hi2c) != HAL_OK)
+..\bsp\bsp_i2c.c(46): error:  #20: identifier "I2C_HandleTypeDef" is undefined
+      I2C_HandleTypeDef *hi2c;
+..\bsp\bsp_i2c.c(46): error:  #20: identifier "hi2c" is undefined
+      I2C_HandleTypeDef *hi2c;
+..\bsp\bsp_i2c.c(90): warning:  #223-D: function "I2C_7BIT_ADD_WRITE" declared implicitly
+          hi2c->Instance->DR = I2C_7BIT_ADD_WRITE(I2C_address);
+..\bsp\bsp_i2c.c(182): error:  #20: identifier "I2C_HandleTypeDef" is undefined
+  HAL_StatusTypeDef I2C_TX_DMA_START(I2C_HandleTypeDef *hi2c, uint16_t DevAddress)
+..\bsp\bsp_i2c.c(220): warning:  #223-D: function "I2C_7BIT_ADD_WRITE" declared implicitly
+      hi2c->Instance->DR = I2C_7BIT_ADD_WRITE(DevAddress);
+..\bsp\bsp_i2c.c: 5 warnings, 7 errors
+compiling CAN_receive.c...
+../Drivers/CMSIS/Include/cmsis_armclang.h(30): warning:  #161-D: unrecognized #pragma
+  #pragma clang system_header   /* treat file as system include file */
+D:\Keil_v5\ARM\ARMCLANG\include\arm_acle.h(15): error:  #35: #error directive: "ACLE intrinsics support not enabled."
+  #error "ACLE intrinsics support not enabled."
+..\module\dji_motor\CAN_receive.c: 1 warning, 1 error
+compiling referee.c...
+D:\Keil_v5\ARM\ARMCLANG\include\string.h(22): warning:  #47-D: incompatible redefinition of macro "__ARMCLIB_VERSION"  (declared at line 22 of "D:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h")
+  #define __ARMCLIB_VERSION 6140101
+..\application\referee.c(163): error:  #20: identifier "ROBOT_COMMAND_ID" is undefined
+          case ROBOT_COMMAND_ID:
+..\application\referee.c(232): warning:  #1-D: last line of file ends without a newline
+  }
+..\application\referee.c: 2 warnings, 1 error
+compiling ist8310driver_middleware.c...
+..\module\ist8310\ist8310driver_middleware.c(25): error:  #20: identifier "I2C_HandleTypeDef" is undefined
+  extern I2C_HandleTypeDef hi2c3;
+..\module\ist8310\ist8310driver_middleware.c(40): warning:  #223-D: function "HAL_I2C_Mem_Read" declared implicitly
+      HAL_I2C_Mem_Read(&hi2c3, IST8310_IIC_ADDRESS, reg, I2C_MEMADD_SIZE_8BIT, &res, 1, 100);
+..\module\ist8310\ist8310driver_middleware.c(40): error:  #20: identifier "I2C_MEMADD_SIZE_8BIT" is undefined
+      HAL_I2C_Mem_Read(&hi2c3, IST8310_IIC_ADDRESS, reg, I2C_MEMADD_SIZE_8BIT, &res, 1, 100);
+..\module\ist8310\ist8310driver_middleware.c(45): warning:  #223-D: function "HAL_I2C_Mem_Write" declared implicitly
+      HAL_I2C_Mem_Write(&hi2c3, IST8310_IIC_ADDRESS, reg, I2C_MEMADD_SIZE_8BIT, &data, 1, 100);
+..\module\ist8310\ist8310driver_middleware.c(45): error:  #20: identifier "I2C_MEMADD_SIZE_8BIT" is undefined
+      HAL_I2C_Mem_Write(&hi2c3, IST8310_IIC_ADDRESS, reg, I2C_MEMADD_SIZE_8BIT, &data, 1, 100);
+..\module\ist8310\ist8310driver_middleware.c(50): warning:  #223-D: function "HAL_I2C_Mem_Read" declared implicitly
+      HAL_I2C_Mem_Read(&hi2c3, IST8310_IIC_ADDRESS, reg, I2C_MEMADD_SIZE_8BIT, buf, len, 100);
+..\module\ist8310\ist8310driver_middleware.c(50): error:  #20: identifier "I2C_MEMADD_SIZE_8BIT" is undefined
+      HAL_I2C_Mem_Read(&hi2c3, IST8310_IIC_ADDRESS, reg, I2C_MEMADD_SIZE_8BIT, buf, len, 100);
+..\module\ist8310\ist8310driver_middleware.c(54): warning:  #223-D: function "HAL_I2C_Mem_Write" declared implicitly
+      HAL_I2C_Mem_Write(&hi2c3, IST8310_IIC_ADDRESS, reg, I2C_MEMADD_SIZE_8BIT, data, len, 100);
+..\module\ist8310\ist8310driver_middleware.c(54): error:  #20: identifier "I2C_MEMADD_SIZE_8BIT" is undefined
+      HAL_I2C_Mem_Write(&hi2c3, IST8310_IIC_ADDRESS, reg, I2C_MEMADD_SIZE_8BIT, data, len, 100);
+..\module\ist8310\ist8310driver_middleware.c(67): error:  #20: identifier "RSTN_IST8310_GPIO_Port" is undefined
+      HAL_GPIO_WritePin(RSTN_IST8310_GPIO_Port, RSTN_IST8310_Pin, GPIO_PIN_SET);
+..\module\ist8310\ist8310driver_middleware.c(67): error:  #20: identifier "RSTN_IST8310_Pin" is undefined
+      HAL_GPIO_WritePin(RSTN_IST8310_GPIO_Port, RSTN_IST8310_Pin, GPIO_PIN_SET);
+..\module\ist8310\ist8310driver_middleware.c(71): error:  #20: identifier "RSTN_IST8310_GPIO_Port" is undefined
+      HAL_GPIO_WritePin(RSTN_IST8310_GPIO_Port, RSTN_IST8310_Pin, GPIO_PIN_RESET);
+..\module\ist8310\ist8310driver_middleware.c(71): error:  #20: identifier "RSTN_IST8310_Pin" is undefined
+      HAL_GPIO_WritePin(RSTN_IST8310_GPIO_Port, RSTN_IST8310_Pin, GPIO_PIN_RESET);
+..\module\ist8310\ist8310driver_middleware.c: 4 warnings, 9 errors
+compiling referee_usart_task.c...
+../Drivers/CMSIS/Include/cmsis_armclang.h(30): warning:  #161-D: unrecognized #pragma
+  #pragma clang system_header   /* treat file as system include file */
+D:\Keil_v5\ARM\ARMCLANG\include\arm_acle.h(15): error:  #35: #error directive: "ACLE intrinsics support not enabled."
+  #error "ACLE intrinsics support not enabled."
+..\application\referee_usart_task.c: 1 warning, 1 error
+"Missile_TypeA\Missile_TypeA.axf" - 72 Error(s), 26 Warning(s).
+
+<h2>Software Packages used:</h2>
+
+Package Vendor: ARM
+                http://www.keil.com/pack/ARM.CMSIS.5.7.0.pack
+                ARM.CMSIS.5.7.0
+                CMSIS (Cortex Microcontroller Software Interface Standard)
+   * Component: CORE Version: 5.4.0
+
+Package Vendor: Keil
+                http://www.keil.com/pack/Keil.STM32F4xx_DFP.2.16.0.pack
+                Keil.STM32F4xx_DFP.2.16.0
+                STMicroelectronics STM32F4 Series Device Support, Drivers and Examples
+
+<h2>Collection of Component include folders:</h2>
+  .\RTE\_Missile_TypeA
+  D:\Keil_v5\ARM\PARK\ARM\CMSIS\5.7.0\CMSIS\Core\Include
+  D:\Keil_v5\ARM\PARK\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include
+
+<h2>Collection of Component Files used:</h2>
+
+   * Component: ARM::CMSIS:CORE:5.4.0
+Target not created.
+Build Time Elapsed:  00:00:05
+</pre>
+</body>
+</html>

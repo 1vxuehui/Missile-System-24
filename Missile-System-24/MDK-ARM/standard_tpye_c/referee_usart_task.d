@@ -62,10 +62,6 @@ standard_tpye_c\referee_usart_task.o: ../Middlewares/Third_Party/FreeRTOS/Source
 standard_tpye_c\referee_usart_task.o: ..\bsp\boards\bsp_usart.h
 standard_tpye_c\referee_usart_task.o: ..\application\struct_typedef.h
 standard_tpye_c\referee_usart_task.o: ..\application\detect_task.h
-standard_tpye_c\referee_usart_task.o: ..\components\support\CRC8_CRC16.h
-standard_tpye_c\referee_usart_task.o: ..\components\support\fifo.h
-standard_tpye_c\referee_usart_task.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
-standard_tpye_c\referee_usart_task.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
-standard_tpye_c\referee_usart_task.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
-standard_tpye_c\referee_usart_task.o: ..\application\protocol\protocol.h
-standard_tpye_c\referee_usart_task.o: ..\application\referee.h
+standard_tpye_c\referee_usart_task.o: ../Drivers/CMSIS/Include/cmsis_armclang.h
+standard_tpye_c\referee_usart_task.o: ../Drivers/CMSIS/Include/arm_compat.h
+standard_tpye_c\referee_usart_task.o: ../Drivers/CMSIS/Include/arm_acle.h

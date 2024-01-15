@@ -1,121 +1,130 @@
 /**
-  ****************************(C) COPYRIGHT 2019 DJI****************************
-  * @file       shoot.c/h
-  * @brief      射击功能。
-  * @note       
-  * @history
-  *  Version    Date            Author          Modification
-  *  V1.0.0     Dec-26-2018     RM              1. 完成
-  *
-  @verbatim
-  ==============================================================================
-
-  ==============================================================================
-  @endverbatim
-  ****************************(C) COPYRIGHT 2019 DJI****************************
-  */
-
+ * @file shoot_task.h
+ * @version 0.1
+ * @date 2023-05-11
+ * 
+ * @copyright Copyright (c) 2023
+ * 
+ */
 #ifndef SHOOT_TASK_H
 #define SHOOT_TASK_H
+
+
 #include "struct_typedef.h"
 
 #include "CAN_receive.h"
-#include "launcher_task.h"
+#include "pid.h"
 #include "remote_control.h"
 #include "user_lib.h"
 
 
-//任务开始空闲一段时间
-#define SHOOT_TASK_INIT_TIME 300
-//云台模式使用的开关通道
-#define SHOOT_CONTROL_TIME          launcher_CONTROL_TIME
+//射击遥控器控制射击控制方式的通道
+#define SHOOT_CONTROL_CHANNEL 0
+#define SHOOT_TASK_INIT_TIME 201
+//发射任务延时时间 1ms
+#define SHOOT_TASK_DELAY_TIME 1
 
-#define SHOOT_MISSILE_PWM_ADD_VALUE    100.0f
-//射击任务控制间隔 2ms
-#define SHOOT_CONTROL_TIME_MS 2
-//按键检测时间
-#define BUTTON_TIME                 30
-//射击完成后 子弹弹出去后，判断时间，以防误触发
-#define SHOOT_DONE_KEY_OFF_TIME     15
-//射击时间
-#define SHOOT_TIME                  100
-//鼠标长按判断
-#define PRESS_LONG_TIME             400
-//遥控器射击开关打下档一段时间后 连续发射子弹 用于清单
-#define RC_S_LONG_TIME              2000
-//摩擦轮高速 加速 时间
-#define UP_ADD_TIME                 80
-//电机反馈码盘值范围
-#define HALF_ECD_RANGE              4096
-#define ECD_RANGE                   8191
-//电机rmp 变化成 旋转速度的比例
-#define MOTOR_RPM_TO_SPEED          0.00290888208665721596153948461415f
-#define MOTOR_ECD_TO_ANGLE          0.000040372843107647f //-3.14--3.14
-#define MOTOR_ECD_TO_ANG          	0.002313193556470837f //-180--180
-#define FULL_COUNT                  19
+// 发射任务时间转化 秒转毫秒
+#define SHOOT_TASK_S_TO_MS(x) ((int32_t)((x * 1000.0f) / (SHOOT_TASK_DELAY_TIME)))
 
-#define KEY_OFF_JUGUE_TIME          500
+//发射任务最大时间，以秒为单位 20 s
+#define SHOOT_TASK_MAX_INIT_TIME 10
 
-#define reload_DONE_TIME           500
+//拨弹盘电机转速   10
+#define TRIGGER_MOTOR_RUN_SPEED 25.0
+//拨弹盘电机停转
+#define TRIGGER_MOTOR_STOP_SPEED 0
 
-#define READY           						1
-#define OFF          								0
+#define GIMBAL_ModeChannel  1
+
+#define SHOOT_CONTROL_TIME  0.02
+
+#define RC_S_LONG_TIME 2000
+
+#define PRESS_LONG_TIME 400
+
+#define SHOOT_ON_KEYBOARD KEY_PRESSED_OFFSET_Q
+#define SHOOT_OFF_KEYBOARD KEY_PRESSED_OFFSET_E
 
 
-//卡单时间 以及反转时间
-#define BLOCK_RELOAD_SPEED         1.0f
-#define BLOCK_TIME                  1000
-#define REVERSE_TIME                1000
-#define REVERSE_SPEED_LIMIT         13.0f
+#define MAX_SPEED 15.0f //-12.0f
+#define MID_SPEED 12.0f //-12.0f
+#define MIN_SPEED 10.0f //-12.0f
+#define Ready_Trigger_Speed 6.0f
 
-#define SHOOT_DISABLE_TIME					200
+#define Motor_RMP_TO_SPEED 0.00290888208665721596153948461415f
+#define Motor_ECD_TO_ANGLE 0.000021305288720633905968306772076277f
+#define FULL_COUNT 18
 
-#define PI_FOUR                     0.78539816339744830961566084581988f
-#define PI_TEN                      0.314f
+#define TRIGGER_ANGLE_PID_KP 900///2450.0f
+#define TRIGGER_ANGLE_PID_KI 0.0f
+#define TRIGGER_ANGLE_PID_KD 100.0f
 
-//拨弹轮电机PID
-#define RELOAD_ANGLE_PID_KP        1800.0f
-#define RELOAD_ANGLE_PID_KI        0.0f
-#define RELOAD_ANGLE_PID_KD        10.0f
+#define TRIGGER_READY_PID_MAX_OUT 30000.0f
+#define TRIGGER_READY_PID_MAX_IOUT 2500.0f
 
-#define RELOAD_READY_PID_MAX_OUT   15000.0f
-#define RELOAD_READY_PID_MAX_IOUT  10000.0f
+#define TRIGGER_BULLET_PID_MAX_OUT 30000.0f
+#define TRIGGER_BULLET_PID_MAX_IOUT 5000.0f
+
+#define Half_ecd_range 395  //395  7796
+#define ecd_range 8191
+
+#define S3505_MOTOR_SPEED_PID_KP 8700.f
+#define S3505_MOTOR_SPEED_PID_KI  0.0f
+#define S3505_MOTOR_SPEED_PID_KD  10.f
+#define S3505_MOTOR_SPEED_PID_MAX_OUT 11000.0f
+#define S3505_MOTOR_SPEED_PID_MAX_IOUT 1000.0f
+
+#define PI_Four 0.78539816339744830961566084581988f
+#define PI_Three 1.0466666666666f
+#define PI_Ten 0.314f
+
+#define TRIGGER_SPEED 3.0f
+#define SWITCH_TRIGGER_ON 0
 
 
-//摩擦轮电机速度环PID
-#define MISSILE_LEFT_MOTOR_SPEED_PID_KP 20.0f
-#define MISSILE_LEFT_MOTOR_SPEED_PID_KI 4.0f
-#define MISSILE_LEFT_MOTOR_SPEED_PID_KD 0.0f
 
-#define MISSILE_LEFT_MOTOR_SPEED_PID_MAX_OUT  16385.0f
-#define MISSILE_LEFT_MOTOR_SPEED_PID_MAX_IOUT 10000.0f
+typedef enum
+{
+    SHOOT_STOP = 0,
+    SHOOT_READY,
+    SHOOT_BULLET,
+    SHOOT_BULLET_ONE,
+    SHOOT_DONE,
+    SHOOT_INIT, //初始化模式
+} shoot_mode_e;
 
-#define MISSILE_SHOOT_MOTOR_SPEED_PID_KP 20.0f
-#define MISSILE_SHOOT_MOTOR_SPEED_PID_KI 4.0f
-#define MISSILE_SHOOT_MOTOR_SPEED_PID_KD 0.0f
-#define MISSILE_SHOOT_MOTOR_SPEED_PID_MAX_OUT  16385.0f
-#define MISSILE_SHOOT_MOTOR_SPEED_PID_MAX_IOUT 10000.0f
+//电机控制模式
+typedef enum
+{
+    SHOOT_MOTOR_RUN,  // 电机运行
+    SHOOT_MOTOR_STOP, // 电机停止
+} shoot_motor_control_mode_e;
 
-#define SHOOT_HEAT_REMAIN_VALUE     80
 
-#define SHOOT_THIRD_MODE 0
-
+typedef enum
+{
+    SHOOT_OUTPOST,    		 //击打前哨站模式
+    SHOOT_RC_CONTROL,      //遥控器控制模式
+		SHOOT_BASE,            //击打基地模式
+    SHOOT_INIT_CONTROL,    //初始化控制模式
+    SHOOT_STOP_CONTROL,    //停止控制模式
+}shoot_control_mode_e;
 
 typedef struct
 {
-    const RC_ctrl_t *shoot_rc;
-		const motor_measure_t *shoot_motor_measure;
-		const motor_measure_t *reload_motor_measure;
-    pid_type_def reload_pid;
-		pid_type_def missile_shoot_pid;
-	  fp32 reload_speed;
-    fp32 reload_speed_set;
-		fp32 missile_shoot_speed;
-    fp32 missile_shoot_speed_set;
-    fp32 reload_angle;
-    fp32 reload_angle_set;
-    int16_t reload_given_current;
-    int8_t reload_ecd_count;
+    //PID结构体
+
+    pid_type_def motor_pid;
+
+    const motor_measure_t *shoot_motor_measure;
+    fp32 speed;
+    fp32 speed_set;
+    fp32 angle;
+		fp32 given_angle;
+    int8_t ecd_count;
+    fp32 set_angle;
+    int16_t given_current;
 
     bool_t press_l;
     bool_t press_r;
@@ -125,18 +134,76 @@ typedef struct
     uint16_t press_r_time;
     uint16_t rc_s_time;
 
-    uint16_t block_time;				//判断卡弹时间
-    uint16_t reverse_time;			//退弹时间
-    uint16_t heat_limit;
-			
-		uint16_t shoot_time;				//发弹时间
-		
-		bool_t shoot_flag;          //发射
-		bool_t shoot_continu_flag;	//退单
-		bool_t stuck_flag;					//卡弹
-		
-} shoot_control_t;
+    uint32_t run_time;
+    uint32_t cmd_time;
+    int16_t move_flag;
+    int16_t move_flag_ONE;
+    bool_t key;
+    int16_t BulletShootCnt;
+    int16_t last_butter_count;
+    fp32 shoot_CAN_Set_Current;
+    fp32 blocking_angle_set;
+    fp32 blocking_angle_current;
+    int8_t blocking_ecd_count;
+} Shoot_Motor_t;
 
-extern void shoot_task(void const *pvParameters);
+typedef struct
+{
+    const motor_measure_t *missile_shoot_motor_measure;
+    fp32 accel;
+    fp32 speed;
+    fp32 speed_set;
+    int16_t give_current;
+    uint16_t rc_key_time;
+} missile_shoot_Motor_t;
+
+
+//初始化状态
+typedef enum
+{
+    SHOOT_INIT_FINISH,   // 初始化完成
+    SHOOT_INIT_UNFINISH, // 初始化未完成
+} shoot_init_state_e;
+
+typedef struct
+{
+    const RC_ctrl_t *shoot_rc;            // 遥控器
+
+    shoot_mode_e missile_shoot_mode;               // 发射模式
+    shoot_mode_e last_missile_shoot_mode;          // 上一次的发射模式
+    fp32 missile_shoot_CAN_Set_Current[2];         // can发射电流
+
+    first_order_filter_type_t missile_shoot1_cmd_slow_set_speed; // 一阶低通
+    first_order_filter_type_t missile_shoot2_cmd_slow_set_speed; // 一阶低通
+
+    fp32 angle[2];
+    int16_t ecd_count[2];
+    int16_t given_current[2];
+    fp32 set_angle[2];
+    fp32 speed[2];
+    fp32 speed_set[2];
+    fp32 current_set[2];
+    bool_t move_flag;
+
+    fp32 min_speed;
+    fp32 max_speed;
+    int flag[2];
+    int laster_add;
+    
+} missile_shoot_move_t;
+
+extern void shoot_init(void);
+extern void shoot_control_loop(void);
+
+
+
+/**
+ * @brief 射击任务函数
+ * 
+ * @param pvParameters 
+ */
+void shoot_task(void const *pvParameters);
+
+
 
 #endif

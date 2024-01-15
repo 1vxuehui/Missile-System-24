@@ -74,4 +74,6 @@ standard_tpye_c\usb_task.o: ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/
 standard_tpye_c\usb_task.o: ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ctlreq.h
 standard_tpye_c\usb_task.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdarg.h
 standard_tpye_c\usb_task.o: ..\application\detect_task.h
-standard_tpye_c\usb_task.o: ..\application\voltage_task.h
+standard_tpye_c\usb_task.o: ../Drivers/CMSIS/Include/cmsis_armclang.h
+standard_tpye_c\usb_task.o: ../Drivers/CMSIS/Include/arm_compat.h
+standard_tpye_c\usb_task.o: ../Drivers/CMSIS/Include/arm_acle.h

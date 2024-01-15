@@ -1,0 +1,15 @@
+missile_system_a\event_groups.o: ../Middlewares/Third_Party/FreeRTOS/Source/event_groups.c
+missile_system_a\event_groups.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+missile_system_a\event_groups.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
+missile_system_a\event_groups.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+missile_system_a\event_groups.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+missile_system_a\event_groups.o: ../Inc/FreeRTOSConfig.h
+missile_system_a\event_groups.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
+missile_system_a\event_groups.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h
+missile_system_a\event_groups.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/deprecated_definitions.h
+missile_system_a\event_groups.o: ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F/portmacro.h
+missile_system_a\event_groups.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrappers.h
+missile_system_a\event_groups.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h
+missile_system_a\event_groups.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/list.h
+missile_system_a\event_groups.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h
+missile_system_a\event_groups.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h

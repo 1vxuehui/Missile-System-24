@@ -1,0 +1,11 @@
+missile_system_a\shoot_task.o: ..\application\shoot_task.c
+missile_system_a\shoot_task.o: ..\application\shoot_task.h
+missile_system_a\shoot_task.o: ..\application\struct_typedef.h
+missile_system_a\shoot_task.o: ..\module\dji_motor\CAN_receive.h
+missile_system_a\shoot_task.o: ..\application\gimbal_task.h
+missile_system_a\shoot_task.o: ..\module\controller\pid.h
+missile_system_a\shoot_task.o: ..\module\remote_control\remote_control.h
+missile_system_a\shoot_task.o: ..\bsp\bsp_rc.h
+missile_system_a\shoot_task.o: ../Drivers/CMSIS/Include/cmsis_armclang.h
+missile_system_a\shoot_task.o: D:\Keil_v5\ARM\ARMCLANG\include\arm_compat.h
+missile_system_a\shoot_task.o: D:\Keil_v5\ARM\ARMCLANG\include\arm_acle.h
