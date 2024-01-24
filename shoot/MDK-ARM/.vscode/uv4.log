@@ -1,0 +1,22 @@
+*** Using Compiler 'V6.18', folder: 'D:\Keil_v5\ARM\ARMCLANG\Bin'
+Build target 'standard_gimbal'
+../application/shoot_task.c(520): warning: using floating point absolute value function 'fabs' when argument is of integer type [-Wabsolute-value]
+                    if (fabs(fric_move.shoot_rc->rc.ch[4]) == 660)
+                        ^
+../application/shoot_task.c(520): note: use function 'abs' instead
+                    if (fabs(fric_move.shoot_rc->rc.ch[4]) == 660)
+                        ^~~~
+                        abs
+../application/shoot_task.c(535): warning: using floating point absolute value function 'fabs' when argument is of integer type [-Wabsolute-value]
+                if (fabs(fric_move.shoot_rc->rc.ch[4]) == 0)
+                    ^
+../application/shoot_task.c(535): note: use function 'abs' instead
+                if (fabs(fric_move.shoot_rc->rc.ch[4]) == 0)
+                    ^~~~
+                    abs
+2 warnings generated.
+compiling shoot_task.c...
+linking...
+Program Size: Code=76168 RO-data=4484 RW-data=208 ZI-data=52976  
+"standard_tpye_c\standard_gimbal_type_c.axf" - 0 Error(s), 2 Warning(s).
+Build Time Elapsed:  00:00:00
