@@ -71,18 +71,14 @@ standard_tpye_c/main.o: ..\Src\main.c ..\Inc\main.h \
   ..\bsp\bsp_can.h ..\application\struct_typedef.h ..\bsp\bsp_delay.h \
   ..\bsp\bsp_usart.h ..\module\remote_control\remote_control.h \
   ..\bsp\bsp_rc.h ..\Drivers\CMSIS\Include\cmsis_armclang.h \
-  ..\bsp\bsp_servo_pwm.h ..\application\chassis_task.h \
-  ..\application\struct_typedef.h ..\module\dji_motor\CAN_receive.h \
-  ..\application\gimbal_task.h ..\module\controller\pid.h \
-  ..\module\userlib\user_lib.h ..\application\vision_task.h \
-  ..\application\INS_task.h ..\module\bmi088\BMI088driver.h \
+  ..\bsp\bsp_servo_pwm.h ..\application\detect_task.h \
+  ..\application\struct_typedef.h ..\application\INS_task.h \
+  ..\module\bmi088\BMI088driver.h \
   ..\module\kalman_filter\QuaternionEKF.h \
   ..\module\kalman_filter\kalman_filter.h \
   ..\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f407xx.h \
   ..\module\arm_math\Include\arm_math.h \
-  D:\Keil_v5\ARM\ARMCLANG\Bin\..\include\math.h ..\application\referee.h \
-  ..\application\protocol\protocol.h ..\application\detect_task.h \
-  ..\application\gimbal_task.h ..\application\INS_task.h \
+  D:\Keil_v5\ARM\ARMCLANG\Bin\..\include\math.h \
   ..\application\led_flow_task.h ..\application\referee_usart_task.h \
   ..\module\controller\stm32\stm32.h \
   ..\module\controller\stm32\STM32_Config.h \
