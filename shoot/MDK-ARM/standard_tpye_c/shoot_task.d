@@ -82,4 +82,6 @@ standard_tpye_c/shoot_task.o: ..\application\shoot_task.c \
   ..\module\controller\stm32\STM32_Config.h \
   ..\module\controller\stm32\rtwtypes.h \
   ..\module\controller\stm32\stm32_External_Functions.h \
-  ..\module\controller\stm32\stm32_types.h ..\Inc\tim.h ..\Inc\gpio.h
+  ..\module\controller\stm32\stm32_types.h ..\Inc\tim.h ..\Inc\gpio.h \
+  ..\module\hx711\hx711.h \
+  D:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdbool.h

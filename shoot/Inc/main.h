@@ -106,6 +106,10 @@ typedef signed   int     int32;      // 有符号32位整型变量
 #define SPI2_CS_GPIO_Port GPIOB
 #define CS1_GYRO_Pin GPIO_PIN_0
 #define CS1_GYRO_GPIO_Port GPIOB
+#define HX711_DOUT_GPIO_Port GPIOE
+#define HX711_DOUT_GPIO_PIN GPIO_PIN_13
+#define HX711_SCK_GPIO_Port GPIOE
+#define HX711_SCK_GPIO_PIN GPIO_PIN_14
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */

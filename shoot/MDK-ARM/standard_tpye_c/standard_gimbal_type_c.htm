@@ -3,7 +3,7 @@
 <title>Static Call Graph - [standard_tpye_c\standard_gimbal_type_c.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image standard_tpye_c\standard_gimbal_type_c.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6140101: Last Updated: Sun Mar  3 15:19:24 2024
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6140101: Last Updated: Tue Mar  5 20:48:27 2024
 <BR><P>
 <H3>Maximum Stack Usage =        376 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -1850,10 +1850,10 @@ Global Symbols
 <P><STRONG><a name="[14d]"></a>HAL_TIM_ConfigClockSource</STRONG> (Thumb, 208 bytes, Stack size 8 bytes, stm32f4xx_hal_tim.o(.text.HAL_TIM_ConfigClockSource))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = HAL_TIM_ConfigClockSource
 </UL>
-<BR>[Calls]<UL><LI><a href="#[14e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_ETR_SetConfig
-<LI><a href="#[150]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_TI2_ConfigInputStage
+<BR>[Calls]<UL><LI><a href="#[150]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_TI2_ConfigInputStage
 <LI><a href="#[14f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_TI1_ConfigInputStage
 <LI><a href="#[151]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_ITRx_SetConfig
+<LI><a href="#[14e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_ETR_SetConfig
 </UL>
 <BR>[Called By]<UL><LI><a href="#[19c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_TIM8_Init
 <LI><a href="#[19b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_TIM5_Init
@@ -1878,12 +1878,12 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[155]"></a>HAL_TIM_PWM_ConfigChannel</STRONG> (Thumb, 160 bytes, Stack size 16 bytes, stm32f4xx_hal_tim.o(.text.HAL_TIM_PWM_ConfigChannel))
-<BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = HAL_TIM_PWM_ConfigChannel &rArr; TIM_OC2_SetConfig
+<BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = HAL_TIM_PWM_ConfigChannel &rArr; TIM_OC3_SetConfig
 </UL>
-<BR>[Calls]<UL><LI><a href="#[157]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_OC2_SetConfig
-<LI><a href="#[159]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_OC4_SetConfig
+<BR>[Calls]<UL><LI><a href="#[159]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_OC4_SetConfig
 <LI><a href="#[158]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_OC3_SetConfig
 <LI><a href="#[156]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_OC1_SetConfig
+<LI><a href="#[157]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_OC2_SetConfig
 </UL>
 <BR>[Called By]<UL><LI><a href="#[19c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_TIM8_Init
 <LI><a href="#[19b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_TIM5_Init
@@ -2160,7 +2160,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[18d]"></a>MX_GPIO_Init</STRONG> (Thumb, 496 bytes, Stack size 64 bytes, gpio.o(.text.MX_GPIO_Init))
+<P><STRONG><a name="[18d]"></a>MX_GPIO_Init</STRONG> (Thumb, 564 bytes, Stack size 64 bytes, gpio.o(.text.MX_GPIO_Init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 112<LI>Call Chain = MX_GPIO_Init &rArr; HAL_GPIO_Init
 </UL>
 <BR>[Calls]<UL><LI><a href="#[e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_NVIC_SetPriority
@@ -2246,7 +2246,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[196]"></a>MX_TIM1_Init</STRONG> (Thumb, 344 bytes, Stack size 96 bytes, tim.o(.text.MX_TIM1_Init))
+<P><STRONG><a name="[196]"></a>MX_TIM1_Init</STRONG> (Thumb, 296 bytes, Stack size 96 bytes, tim.o(.text.MX_TIM1_Init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 200<LI>Call Chain = MX_TIM1_Init &rArr; HAL_TIM_MspPostInit &rArr; HAL_GPIO_Init
 </UL>
 <BR>[Calls]<UL><LI><a href="#[ef]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Error_Handler
@@ -3310,9 +3310,9 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 200 + Unknown Stack Size
 <LI>Call Chain = osThreadCreate &rArr; xTaskCreate &rArr; pvPortMalloc &rArr; xTaskResumeAll &rArr; xTaskIncrementTick
 </UL>
-<BR>[Calls]<UL><LI><a href="#[1fb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;makeFreeRtosPriority
-<LI><a href="#[1fc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xTaskCreateStatic
+<BR>[Calls]<UL><LI><a href="#[1fc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xTaskCreateStatic
 <LI><a href="#[1fd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xTaskCreate
+<LI><a href="#[1fb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;makeFreeRtosPriority
 </UL>
 <BR>[Called By]<UL><LI><a href="#[18b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_FREERTOS_Init
 </UL>

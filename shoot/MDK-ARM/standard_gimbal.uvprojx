@@ -340,7 +340,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32F407xx,USE_HAL_DRIVER,STM32F407xx,ARM_MATH_CM4,__FPU_USED=1U,__FPU_PRESENT=1U,ARM_MATH_MATRIX_CHECK,ARM_MATH_ROUNDING</Define>
               <Undefine></Undefine>
-              <IncludePath>../Inc;../Drivers/STM32F4xx_HAL_Driver/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;../Middlewares/Third_Party/FreeRTOS/Source/include;../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS;../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F;../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../Drivers/CMSIS/Include;../application;../application/protocol;../Middlewares/ST/STM32_USB_Device_Library/Core/Inc;../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc;..\module\can_comm;..\module\crc8_crc16;..\module\bmi088;..\module\ist8310;..\module\arm_math\Include;..\module\userlib;..\module\kalman_filter;..\module\oled;..\module\oled;..\module\controller;..\module\controller\stm32;..\support;..\bsp;..\module\remote_control;..\module\dji_motor</IncludePath>
+              <IncludePath>../Inc;../Drivers/STM32F4xx_HAL_Driver/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;../Middlewares/Third_Party/FreeRTOS/Source/include;../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS;../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F;../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../Drivers/CMSIS/Include;../application;../application/protocol;../Middlewares/ST/STM32_USB_Device_Library/Core/Inc;../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc;..\module\can_comm;..\module\crc8_crc16;..\module\bmi088;..\module\ist8310;..\module\arm_math\Include;..\module\userlib;..\module\kalman_filter;..\module\oled;..\module\oled;..\module\controller;..\module\controller\stm32;..\support;..\bsp;..\module\remote_control;..\module\dji_motor;..\module\hx711</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -618,6 +618,16 @@
               <FileName>CAN_receive.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\module\dji_motor\CAN_receive.c</FilePath>
+            </File>
+            <File>
+              <FileName>hx711.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\module\hx711\hx711.c</FilePath>
+            </File>
+            <File>
+              <FileName>hx711.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\module\hx711\hx711.h</FilePath>
             </File>
           </Files>
         </Group>

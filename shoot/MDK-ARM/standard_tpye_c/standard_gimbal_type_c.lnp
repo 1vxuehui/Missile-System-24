@@ -42,6 +42,7 @@
 "standard_tpye_c\stm32.o"
 "standard_tpye_c\remote_control.o"
 "standard_tpye_c\can_receive.o"
+"standard_tpye_c\hx711.o"
 "standard_tpye_c\bsp_adc.o"
 "standard_tpye_c\bsp_buzzer.o"
 "standard_tpye_c\bsp_can.o"

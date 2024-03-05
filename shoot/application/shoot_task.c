@@ -20,6 +20,7 @@
 #include "stm32.h"
 #include "tim.h"
 #include "gpio.h"
+#include "hx711.h"
 /*----------------------------------宏定义---------------------------*/
 #define shoot_laser_on() laser_on()                                              // 激光开启宏定义
 #define shoot_laser_off() laser_off()                                            // 激光关闭宏定义
@@ -153,6 +154,7 @@ int turn_yaw_flag = 0;
 int yaw_cnt = 1;
 uint8_t cnt = 1;
 int B_flag=0;
+float Pulling_force = 0;
 /*----------------------------------结构体------------------------------*/
 Shoot_Motor_t missile_shoot_motor; 
 Shoot_Motor_t pull_spring_motor; 
@@ -331,6 +333,8 @@ static void Shoot_Feedback_Update(void)
 		Motor_Angle_Cal(&yaw_motor);
 		Motor_Current_Cal(&yaw_motor);
 		Motor_Block(&yaw_motor);
+	
+//		Pulling_force = hx711_get_actual_weight();
 	
 }
 
