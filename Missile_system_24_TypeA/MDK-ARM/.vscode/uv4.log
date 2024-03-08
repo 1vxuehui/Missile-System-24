@@ -1,0 +1,69 @@
+*** Using Compiler 'V5.06 update 7 (build 960)', folder: 'D:\Keil_v5\ARM\ARMCC\Bin'
+Build target 'Enginner_2022'
+compiling shoot_task.c...
+Tasks\shoot_task.c(183): error:  #167: argument of type "int16_t" is incompatible with parameter of type "CAN_HandleTypeDef *"
+  		CAN_CMD_MOTO(pull_spring_motor.give_current, reload_motor.give_current, missile_shoot_motor.give_current, yaw_motor.give_current);
+Tasks\shoot_task.c(183): error:  #165: too few arguments in function call
+  		CAN_CMD_MOTO(pull_spring_motor.give_current, reload_motor.give_current, missile_shoot_motor.give_current, yaw_motor.give_current);
+Tasks\shoot_task.c(239): warning:  #223-D: function "stm32_shoot_pid_init" declared implicitly
+      stm32_shoot_pid_init();
+Tasks\shoot_task.c(259): warning:  #223-D: function "get_shoot_motor_measure_point" declared implicitly
+      reload_motor.shoot_motor_measure = get_shoot_motor_measure_point(1);
+Tasks\shoot_task.c(259): error:  #513: a value of type "int" cannot be assigned to an entity of type "const Moto_DataTypedef *"
+      reload_motor.shoot_motor_measure = get_shoot_motor_measure_point(1);
+Tasks\shoot_task.c(262): error:  #513: a value of type "int" cannot be assigned to an entity of type "const Moto_DataTypedef *"
+      pull_spring_motor.shoot_motor_measure = get_shoot_motor_measure_point(0);
+Tasks\shoot_task.c(265): warning:  #223-D: function "get_missile_shoot_motor_measure_point" declared implicitly
+      missile_shoot_motor.shoot_motor_measure = get_missile_shoot_motor_measure_point();
+Tasks\shoot_task.c(265): error:  #513: a value of type "int" cannot be assigned to an entity of type "const Moto_DataTypedef *"
+      missile_shoot_motor.shoot_motor_measure = get_missile_shoot_motor_measure_point();
+Tasks\shoot_task.c(268): warning:  #223-D: function "get_yaw_motor_measure_point" declared implicitly
+  		yaw_motor.shoot_motor_measure = get_yaw_motor_measure_point();
+Tasks\shoot_task.c(268): error:  #513: a value of type "int" cannot be assigned to an entity of type "const Moto_DataTypedef *"
+  		yaw_motor.shoot_motor_measure = get_yaw_motor_measure_point();
+Tasks\shoot_task.c(285): warning:  #223-D: function "stm32_step_shoot_pid_clear" declared implicitly
+          stm32_step_shoot_pid_clear();
+Tasks\shoot_task.c(327): error:  #136: struct "<unnamed>"  has no field "speed_rpm"
+  	motor_speed_clac->speed = motor_speed_clac->shoot_motor_measure->speed_rpm * Motor_RMP_TO_SPEED * 10;
+Tasks\shoot_task.c(338): error:  #136: struct "<unnamed>"  has no field "ANGLE_rev"
+  	motor_angle_calc->ANGLE_rev.eer = motor_angle_calc->shoot_motor_measure->ecd -motor_angle_calc->shoot_motor_measure->last_ecd;
+Tasks\shoot_task.c(338): error:  #136: struct "<unnamed>"  has no field "ecd"
+  	motor_angle_calc->ANGLE_rev.eer = motor_angle_calc->shoot_motor_measure->ecd -motor_angle_calc->shoot_motor_measure->last_ecd;
+Tasks\shoot_task.c(338): error:  #136: struct "<unnamed>"  has no field "last_ecd"
+  	motor_angle_calc->ANGLE_rev.eer = motor_angle_calc->shoot_motor_measure->ecd -motor_angle_calc->shoot_motor_measure->last_ecd;
+Tasks\shoot_task.c(339): error:  #136: struct "<unnamed>"  has no field "ANGLE_rev"
+  		if(motor_angle_calc->ANGLE_rev.eer < -4096)
+Tasks\shoot_task.c(341): error:  #136: struct "<unnamed>"  has no field "ANGLE_rev"
+  			motor_angle_calc->ANGLE_rev.eer += 8192;
+Tasks\shoot_task.c(343): error:  #136: struct "<unnamed>"  has no field "ANGLE_rev"
+  		else if(motor_angle_calc->ANGLE_rev.eer > 4096)
+Tasks\shoot_task.c(345): error:  #136: struct "<unnamed>"  has no field "ANGLE_rev"
+  			motor_angle_calc->ANGLE_rev.eer -= 8192;
+Tasks\shoot_task.c(347): error:  #136: struct "<unnamed>"  has no field "ANGLE_rev"
+  		motor_angle_calc->angle_sum += motor_angle_calc->ANGLE_rev.eer;
+Tasks\shoot_task.c(337): warning:  #177-D: variable "pos"  was declared but never referenced
+  	static float pos, pos_old;
+Tasks\shoot_task.c(337): warning:  #177-D: variable "pos_old"  was declared but never referenced
+  	static float pos, pos_old;
+Tasks\shoot_task.c(359): error:  #136: struct "<unnamed>"  has no field "given_current"
+  	motor_current_calc->current_cal = motor_current_calc->shoot_motor_measure->given_current;
+Tasks\shoot_task.c(369): warning:  #223-D: function "abs" declared implicitly
+  	if(abs(blocking_motor->give_current) == 10000)
+Tasks\shoot_task.c(511): warning:  #223-D: function "abs" declared implicitly
+  		    if (abs(missile_shoot_move.shoot_rc->rc.ch[4]) >= 1000 && turn_shoot_flag == 0)
+Tasks\shoot_task.c(513): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  					missile_shoot_motor.set_angle -= 0.5;
+Tasks\shoot_task.c(526): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  					missile_shoot_motor.set_angle += 0.5;
+Tasks\shoot_task.c(544): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  					pull_spring_motor.set_angle += 0.03;	
+Tasks\shoot_task.c(549): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  					pull_spring_motor.set_angle -= 0.01;		
+Tasks\shoot_task.c(598): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  					yaw_motor.set_angle += 0.01;
+Tasks\shoot_task.c(603): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  					yaw_motor.set_angle -= 0.01;
+Tasks\shoot_task.c: 15 warnings, 16 errors
+"Enginner_2022\Enginner_2022.axf" - 16 Error(s), 15 Warning(s).
+Target not created.
+Build Time Elapsed:  00:00:02
