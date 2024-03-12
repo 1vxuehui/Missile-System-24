@@ -14,7 +14,7 @@
 #include "stm32f4xx_hal.h"
 
 /* CAN send and receive ID */
-
+#define    CAN_YAW_ALL_ID  0x200
 #define    CAN_SHOOT_ALL_ID  0x1FF
 #define    CAN_PULL_SPRING_ID  0x205
 #define    CAN_RELOAD_ID  0x206

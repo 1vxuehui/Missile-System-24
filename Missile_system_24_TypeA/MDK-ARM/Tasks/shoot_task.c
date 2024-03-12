@@ -17,7 +17,6 @@
 #include "gpio.h"
 /*----------------------------------宏定义---------------------------*/
 #define Linear_Actuator(x) HAL_GPIO_WritePin(GPIOI, GPIO_PIN_7, x) // 电推杆IO
-#define missile_shoot_motor(speed) trigger_control.trigger_set_speed = speed           // 开启拨弹电机
 /*----------------------------------内部函数---------------------------*/
 /**
  * @brief          射击模式设置
@@ -170,8 +169,8 @@ void shoot_task(void const *pvParameters)
         // 射击控制循环
         shoot_control_loop();
         // 发送控制电流
-//				CAN_CMD_MOTO(&hcan1, CAN_SHOOT_ALL_ID, 0,0,0,0);
-	CAN_CMD_MOTO(&hcan1, CAN_SHOOT_ALL_ID, pull_spring_motor.give_current, reload_motor.give_current, missile_shoot_motor.give_current, yaw_motor.give_current);
+				CAN_CMD_MOTO(&hcan1, CAN_SHOOT_ALL_ID, 0,0,0,yaw_motor.give_current);
+//	CAN_CMD_MOTO(&hcan1, CAN_SHOOT_ALL_ID, pull_spring_motor.give_current, reload_motor.give_current, missile_shoot_motor.give_current, yaw_motor.give_current);
 		vTaskDelay(SHOOT_TASK_DELAY_TIME);
     }
 }
@@ -232,8 +231,8 @@ void shoot_init(void)
 		static const fp32 pull_spring_angle_pid[3] = {10, 0, 0.5};
 		static const fp32 reload_speed_pid[3] = {60, 0, 10};
 		static const fp32 reload_angle_pid[3] = {60, 0, 10};
-		static const fp32 yaw_speed_pid[3] = {50, 0, 1};
-		static const fp32 yaw_angle_pid[3] = {30, 0, 1};
+		static const fp32 yaw_speed_pid[3] = {20, 0, 1};
+		static const fp32 yaw_angle_pid[4] = {10, 0, 1 ,30};
 		PID_Init(&missile_shoot_motor.motor_pid_angle, PID_POSITION, missile_shoot_angle_pid, MISSILE_READY_ANGLE_PID_MAX_OUT, MISSILE_READY_ANGLE_PID_MAX_IOUT);
     PID_Init(&missile_shoot_motor.motor_pid, PID_POSITION, missile_shoot_speed_pid, MISSILE_READY_SPEED_PID_MAX_OUT, MISSILE_READY_SPEED_PID_MAX_IOUT);
 		PID_Init(&pull_spring_motor.motor_pid_angle, PID_POSITION, pull_spring_angle_pid, SPRING_READY_ANGLE_PID_MAX_OUT, SPRING_READY_ANGLE_PID_MAX_IOUT);
