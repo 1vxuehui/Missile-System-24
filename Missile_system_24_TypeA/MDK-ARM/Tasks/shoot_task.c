@@ -169,8 +169,7 @@ void shoot_task(void const *pvParameters)
         // 射击控制循环
         shoot_control_loop();
         // 发送控制电流
-				CAN_CMD_MOTO(&hcan1, CAN_SHOOT_ALL_ID, 0,0,0,yaw_motor.give_current);
-//	CAN_CMD_MOTO(&hcan1, CAN_SHOOT_ALL_ID, pull_spring_motor.give_current, reload_motor.give_current, missile_shoot_motor.give_current, yaw_motor.give_current);
+		CAN_CMD_MOTO(&hcan1, CAN_SHOOT_ALL_ID, pull_spring_motor.give_current, reload_motor.give_current, missile_shoot_motor.give_current, yaw_motor.give_current);
 		vTaskDelay(SHOOT_TASK_DELAY_TIME);
     }
 }
@@ -235,8 +234,8 @@ void shoot_init(void)
 		static const fp32 yaw_angle_pid[4] = {10, 0, 1 ,30};
 		PID_Init(&missile_shoot_motor.motor_pid_angle, PID_POSITION, missile_shoot_angle_pid, MISSILE_READY_ANGLE_PID_MAX_OUT, MISSILE_READY_ANGLE_PID_MAX_IOUT);
     PID_Init(&missile_shoot_motor.motor_pid, PID_POSITION, missile_shoot_speed_pid, MISSILE_READY_SPEED_PID_MAX_OUT, MISSILE_READY_SPEED_PID_MAX_IOUT);
-		PID_Init(&pull_spring_motor.motor_pid_angle, PID_POSITION, pull_spring_angle_pid, SPRING_READY_ANGLE_PID_MAX_OUT, SPRING_READY_ANGLE_PID_MAX_IOUT);
-		PID_Init(&pull_spring_motor.motor_pid, PID_POSITION, pull_spring_speed_pid, SPRING_READY_SPEED_PID_MAX_OUT, SPRING_READY_SPEED_PID_MAX_IOUT);
+		PID_init(&pull_spring_motor.motor_Pid_angle, PID_POSITION, pull_spring_angle_pid, SPRING_READY_ANGLE_PID_MAX_OUT, SPRING_READY_ANGLE_PID_MAX_IOUT);
+		PID_init(&pull_spring_motor.motor_Pid, PID_POSITION, pull_spring_speed_pid, SPRING_READY_SPEED_PID_MAX_OUT, SPRING_READY_SPEED_PID_MAX_IOUT);
 		PID_Init(&reload_motor.motor_pid_angle, PID_POSITION, reload_angle_pid, RELOAD_READY_ANGLE_PID_MAX_OUT, RELOAD_READY_ANGLE_PID_MAX_IOUT);
 		PID_Init(&reload_motor.motor_pid, PID_POSITION, reload_speed_pid, RELOAD_READY_SPEED_PID_MAX_OUT, RELOAD_READY_SPEED_PID_MAX_IOUT);
 		PID_Init(&yaw_motor.motor_pid_angle, PID_POSITION, yaw_angle_pid, MYAW_READY_ANGLE_PID_MAX_OUT, MYAW_READY_ANGLE_PID_MAX_IOUT);
@@ -518,7 +517,7 @@ void shoot_control_loop(void)
     }
 		else if (missile_shoot_move.shoot_rc->rc.ch[2] == -660 && turn_spring_flag == 0)
     {
-					pull_spring_motor.set_angle -= 0.01f;		
+					pull_spring_motor.set_angle -= 0.03f;		
 //					turn_spring_flag = 1;
     }
 
@@ -650,13 +649,13 @@ static void missile_angle_control_loop(Shoot_Motor_t *missile_move_control_loop)
  */
 static void missile_spring_angle_control_loop(Shoot_Motor_t *missile_move_control_loop)
 {
-    missile_move_control_loop->motor_pid.max_out = SPRING_SPEED_PID_MAX_OUT;
-    missile_move_control_loop->motor_pid.max_iout = SPRING_SPEED_PID_MAX_IOUT;	
-		missile_move_control_loop->motor_pid_angle.max_out = SPRING_ANGLE_PID_MAX_OUT;
-    missile_move_control_loop->motor_pid_angle.max_iout = SPRING_ANGLE_PID_MAX_IOUT;	
-		missile_move_control_loop->given_angle = PID_Calc(&missile_move_control_loop->motor_pid_angle, missile_move_control_loop->angle_ref, missile_move_control_loop->set_angle);
-		PID_Calc(&missile_move_control_loop->motor_pid, missile_move_control_loop->speed, missile_move_control_loop->given_angle);
-    missile_move_control_loop->give_current = (missile_move_control_loop->motor_pid.out);
+    missile_move_control_loop->motor_Pid.max_out = SPRING_SPEED_PID_MAX_OUT;
+    missile_move_control_loop->motor_Pid.max_iout = SPRING_SPEED_PID_MAX_IOUT;	
+		missile_move_control_loop->motor_Pid_angle.max_out = SPRING_ANGLE_PID_MAX_OUT;
+    missile_move_control_loop->motor_Pid_angle.max_iout = SPRING_ANGLE_PID_MAX_IOUT;	
+		missile_move_control_loop->given_angle = PID_calc(&missile_move_control_loop->motor_Pid_angle, missile_move_control_loop->angle_ref, missile_move_control_loop->set_angle);
+		PID_calc(&missile_move_control_loop->motor_Pid, missile_move_control_loop->speed, missile_move_control_loop->given_angle);
+    missile_move_control_loop->give_current = (missile_move_control_loop->motor_Pid.out);
 }
 
 /**

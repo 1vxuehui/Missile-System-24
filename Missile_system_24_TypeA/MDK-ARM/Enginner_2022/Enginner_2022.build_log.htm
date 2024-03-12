@@ -27,7 +27,20 @@ Project File Date:  03/07/2024
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 7 (build 960)', folder: 'D:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'Missile_system_24_TypeA'
-"Enginner_2022\Enginner_2022.axf" - 0 Error(s), 0 Warning(s).
+compiling shoot_task.c...
+Tasks\shoot_task.c(340): warning:  #223-D: function "abs" declared implicitly
+  	if(abs(blocking_motor->give_current) == 10000)
+Tasks\shoot_task.c(465): warning:  #188-D: enumerated type mixed with another type
+  		Linear_Actuator(1);
+Tasks\shoot_task.c(482): warning:  #223-D: function "abs" declared implicitly
+  		    if (abs(missile_shoot_move.shoot_rc->rc.ch[4]) >= 1000 && turn_shoot_flag == 0)
+Tasks\shoot_task.c(625): warning:  #188-D: enumerated type mixed with another type
+  			Linear_Actuator(0);
+Tasks\shoot_task.c: 4 warnings, 0 errors
+linking...
+Program Size: Code=24760 RO-data=1460 RW-data=252 ZI-data=25180  
+FromELF: creating hex file...
+"Enginner_2022\Enginner_2022.axf" - 0 Error(s), 4 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -50,7 +63,7 @@ Package Vendor: Keil
 <h2>Collection of Component Files used:</h2>
 
    * Component: ARM::CMSIS:CORE:5.4.0
-Build Time Elapsed:  00:00:00
+Build Time Elapsed:  00:00:03
 </pre>
 </body>
 </html>

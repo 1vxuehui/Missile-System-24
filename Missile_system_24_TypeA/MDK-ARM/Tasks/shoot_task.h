@@ -139,6 +139,8 @@ typedef struct
 
     PidTypeDef motor_pid;
 		PidTypeDef motor_pid_angle;
+		pid_type_def motor_Pid;
+		pid_type_def motor_Pid_angle;
 		Moto_DataTypedef *shoot_motor_measure;
 		ANGLE_TypeDef ANGLE_rev;
     fp32 speed;
