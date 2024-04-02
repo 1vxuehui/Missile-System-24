@@ -1,8 +1,8 @@
 --cpu=Cortex-M4.fp.sp
 "enginner_2022\startup_stm32f427xx.o"
 "enginner_2022\main.o"
-"enginner_2022\gpio.o"
 "enginner_2022\freertos.o"
+"enginner_2022\gpio.o"
 "enginner_2022\can.o"
 "enginner_2022\dma.o"
 "enginner_2022\tim.o"

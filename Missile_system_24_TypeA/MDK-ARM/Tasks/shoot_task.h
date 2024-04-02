@@ -154,22 +154,8 @@ typedef struct
 		int16_t current_cal;
 		int32 angle_ref;
 		int32 reload_angle_ref;
-    bool_t press_l;
-    bool_t press_r;
-    bool_t last_press_l;
-    bool_t last_press_r;
-    uint16_t press_l_time;
-    uint16_t press_r_time;
-    uint16_t rc_s_time;
-    uint32_t run_time;
-    uint32_t cmd_time;
 		uint32_t blocking_time;
 		int16_t block_flag;
-    int16_t move_flag;
-    int16_t move_flag_ONE;
-    bool_t key;
-    int16_t BulletShootCnt;
-    int16_t last_butter_count;
     fp32 shoot_CAN_Set_Current;
     fp32 blocking_angle_set;
     fp32 blocking_angle_current;
@@ -218,8 +204,6 @@ typedef struct
 
     fp32 min_speed;
     fp32 max_speed;
-    int flag[2];
-    int laster_add;
     
 } missile_shoot_move_t;
 

@@ -89,6 +89,13 @@ static void Motor_Current_Cal(Shoot_Motor_t *motor_current_calc);
 static void Motor_Block(Shoot_Motor_t*blocking_motor);
 
 /**
+ * @brief          判断微动开关是否触发
+ * @param[in]      void
+ * @retval         返回空
+ */
+static void Micro_switch_feedback();
+
+/**
  * @brief          设置发射控制模式
  * @param[in]      void
  * @retval         返回空
@@ -109,8 +116,10 @@ void shoot_init(void);
  */
 void SERIO_Control(void);
 /*----------------------------------内部变量---------------------------*/
+
 fp32 missile_shoot;
 int a;
+int shoot_step = 0;
 fp32 motor_last_angle = 0;
 fp32 sum = 0;
 int b = 0;
@@ -121,17 +130,20 @@ fp32 rc_speedset;
 #define SERVO_MAX_PWM   2000
 int PWM=1000;
 int turn_shoot_flag = 0;
-int shoot_cnt = 1;
 int turn_spring_flag = 0;
-int spring_cnt = 1;
 int turn_reload_flag = 0;
-int reload_cnt = 1;
-int turn_reload_cnt = 0;
 int turn_yaw_flag = 0;
 int yaw_cnt = 1;
 uint8_t cnt = 1;
 int B_flag=0;
 float Pulling_force = 0;
+int micro_switch_on = 0;
+int32 last_reload_ref = 0;
+int missile_shoot_cnt = 0;
+int reload_next = 1;
+float time_flag = 0;
+float last_time_flag = 0;
+int shoot_finish_flag = 1;
 /*----------------------------------结构体------------------------------*/
 Shoot_Motor_t missile_shoot_motor; 
 Shoot_Motor_t pull_spring_motor; 
@@ -201,15 +213,24 @@ void SERIO_Control(void)
 			HAL_GPIO_WritePin(GPIOE, GPIO_PIN_13, GPIO_PIN_SET);
 		}
 		}
-		if(shoot_control_mode == SHOOT_OUTPOST || shoot_control_mode == SHOOT_BASE)
+		if(shoot_control_mode == SHOOT_OUTPOST)
 		{
-		if(shoot_ready_flag == 1)
-		{
-		PWM = 1130;
-		}
-		else if(shoot_ready_flag == 2)
+		if(shoot_step == 0)
 		{
 		PWM = 1320;
+		}
+		if(shoot_step == 3)
+		{
+		PWM = 1000;
+		}
+		if(shoot_step == 5)
+		{
+		PWM = 1320;
+			if(shoot_finish_flag == 1)
+			{
+			last_time_flag = time_flag;
+				shoot_finish_flag = 0;
+			}
 		}
 		__HAL_TIM_SetCompare(&htim8, TIM_CHANNEL_1,PWM);
 		}
@@ -222,24 +243,22 @@ void SERIO_Control(void)
  */
 void shoot_init(void)
 {
-    missile_shoot_move.laster_add = 0;
-    missile_shoot_motor.move_flag = 1;
-    static const fp32 missile_shoot_speed_pid[3] = {20, 0, 10};
-		static const fp32 missile_shoot_angle_pid[3] = {10, 0, 10};
+    static const fp32 missile_shoot_speed_pid[3] = {40, 0, 20};
+		static const fp32 missile_shoot_angle_pid[3] = {2, 0, 0.1};
 		static const fp32 pull_spring_speed_pid[3] = {15, 0, 2};
 		static const fp32 pull_spring_angle_pid[3] = {10, 0, 0.5};
-		static const fp32 reload_speed_pid[3] = {60, 0, 10};
-		static const fp32 reload_angle_pid[3] = {60, 0, 10};
+		static const fp32 reload_speed_pid[3] = {50, 0, 10};
+		static const fp32 reload_angle_pid[3] = {50, 0, 10};
 		static const fp32 yaw_speed_pid[3] = {20, 0, 1};
-		static const fp32 yaw_angle_pid[4] = {10, 0, 1 ,30};
-		PID_Init(&missile_shoot_motor.motor_pid_angle, PID_POSITION, missile_shoot_angle_pid, MISSILE_READY_ANGLE_PID_MAX_OUT, MISSILE_READY_ANGLE_PID_MAX_IOUT);
-    PID_Init(&missile_shoot_motor.motor_pid, PID_POSITION, missile_shoot_speed_pid, MISSILE_READY_SPEED_PID_MAX_OUT, MISSILE_READY_SPEED_PID_MAX_IOUT);
+		static const fp32 yaw_angle_pid[4] = {10, 0, 1};
+		PID_init(&missile_shoot_motor.motor_Pid_angle, PID_POSITION, missile_shoot_angle_pid, MISSILE_READY_ANGLE_PID_MAX_OUT, MISSILE_READY_ANGLE_PID_MAX_IOUT);
+    PID_init(&missile_shoot_motor.motor_Pid, PID_POSITION, missile_shoot_speed_pid, MISSILE_READY_SPEED_PID_MAX_OUT, MISSILE_READY_SPEED_PID_MAX_IOUT);
 		PID_init(&pull_spring_motor.motor_Pid_angle, PID_POSITION, pull_spring_angle_pid, SPRING_READY_ANGLE_PID_MAX_OUT, SPRING_READY_ANGLE_PID_MAX_IOUT);
 		PID_init(&pull_spring_motor.motor_Pid, PID_POSITION, pull_spring_speed_pid, SPRING_READY_SPEED_PID_MAX_OUT, SPRING_READY_SPEED_PID_MAX_IOUT);
-		PID_Init(&reload_motor.motor_pid_angle, PID_POSITION, reload_angle_pid, RELOAD_READY_ANGLE_PID_MAX_OUT, RELOAD_READY_ANGLE_PID_MAX_IOUT);
-		PID_Init(&reload_motor.motor_pid, PID_POSITION, reload_speed_pid, RELOAD_READY_SPEED_PID_MAX_OUT, RELOAD_READY_SPEED_PID_MAX_IOUT);
-		PID_Init(&yaw_motor.motor_pid_angle, PID_POSITION, yaw_angle_pid, MYAW_READY_ANGLE_PID_MAX_OUT, MYAW_READY_ANGLE_PID_MAX_IOUT);
-		PID_Init(&yaw_motor.motor_pid, PID_POSITION, yaw_speed_pid, MYAW_READY_SPEED_PID_MAX_OUT, MYAW_READY_SPEED_PID_MAX_IOUT);
+		PID_init(&reload_motor.motor_Pid_angle, PID_POSITION, reload_angle_pid, RELOAD_READY_ANGLE_PID_MAX_OUT, RELOAD_READY_ANGLE_PID_MAX_IOUT);
+		PID_init(&reload_motor.motor_Pid, PID_POSITION, reload_speed_pid, RELOAD_READY_SPEED_PID_MAX_OUT, RELOAD_READY_SPEED_PID_MAX_IOUT);
+		PID_init(&yaw_motor.motor_Pid_angle, PID_POSITION, yaw_angle_pid, MYAW_READY_ANGLE_PID_MAX_OUT, MYAW_READY_ANGLE_PID_MAX_IOUT);
+		PID_init(&yaw_motor.motor_Pid, PID_POSITION, yaw_speed_pid, MYAW_READY_SPEED_PID_MAX_OUT, MYAW_READY_SPEED_PID_MAX_IOUT);
     // 数据指针获取
     missile_shoot_move.shoot_rc = get_remote_control_point();
     reload_motor.shoot_motor_measure = &Moto_Data1[5];
@@ -285,6 +304,9 @@ static void Shoot_Feedback_Update(void)
 		Motor_Current_Cal(&yaw_motor);
 		Motor_Block(&yaw_motor);
 	
+		Micro_switch_feedback();
+	
+		time_flag+=0.01;
 //		Pulling_force = hx711_get_actual_weight();
 	
 }
@@ -353,6 +375,23 @@ static void Motor_Block(Shoot_Motor_t*blocking_motor)
 	{
 		blocking_motor->block_flag = 0;
 	}
+}
+
+/**
+ * @brief          判断微动开关是否触发
+ * @param[in]      void
+ * @retval         返回空
+ */
+static void Micro_switch_feedback()
+{
+if(HAL_GPIO_ReadPin(KEY_GPIO_Port, KEY_Pin) == GPIO_PIN_SET)
+{
+	micro_switch_on = 0;
+}
+else
+{
+	micro_switch_on = 1;
+}
 }
 
 /**
@@ -462,26 +501,94 @@ void shoot_control_loop(void)
 {
 	if(shoot_control_mode == SHOOT_OUTPOST)//击打前哨站
 	{
-		Linear_Actuator(1);
-		
-//		missile_shoot_motor.set_angle += 0.5;
-//		if(missile_shoot_motor.set_angle >= 300)
-//		{
-//			missile_shoot_motor.set_angle = 300;
-//		}
-//		
-//		// pid计算
-//    missile_angle_control_loop(&missile_shoot_motor); // 发射控制
-//		missile_spring_angle_control_loop(&pull_spring_motor); // 弹簧控制
-//		missile_reload_angle_control_loop(&reload_motor); // 换弹盘控制
-//		missile_yaw_angle_control_loop(&yaw_motor); // yaw轴控制
+		if(shoot_step == 0)
+		{
+			missile_shoot_motor.set_angle += 0.8f;
+				if(micro_switch_on == 1)
+				{
+					missile_shoot_motor.set_angle = missile_shoot_motor.angle_ref;
+					shoot_step++;
+				}
+		}		
+		if(shoot_step == 1)
+		{
+			reload_motor.set_angle += 0.05f;
+				if(reload_motor.block_flag == 1)
+				{
+						reload_motor.set_angle = reload_motor.reload_angle_ref;
+						shoot_step++;
+				}
+		}
+		if(shoot_step == 2 && PWM == 1320)
+			{
+				missile_shoot_motor.set_angle -= 0.8f;
+					if(missile_shoot_motor.set_angle <= 880)
+					{
+						missile_shoot_motor.set_angle = 880;
+						shoot_step++;
+					}	
+			}
+		if(shoot_step == 3 && PWM == 1000)
+			{
+				missile_shoot_motor.set_angle += 0.8f;
+					if(micro_switch_on == 1)
+				{
+					missile_shoot_motor.set_angle = missile_shoot_motor.angle_ref;
+					shoot_step++;
+				}
+			}
+		if(shoot_step == 4)
+			{
+				missile_shoot_motor.set_angle -= 0.8f;
+					if(missile_shoot_motor.set_angle <= 0)
+					{
+						missile_shoot_motor.set_angle = 0;
+						shoot_finish_flag = 1;
+						shoot_step++;
+					}	
+			}
+			if(shoot_step == 5&& PWM == 1320 && time_flag - last_time_flag >= 20)
+			{
+				if(reload_next == 1)
+				{
+				last_reload_ref = reload_motor.reload_angle_ref;
+					Linear_Actuator(1);
+					reload_next = 0;
+				}
+				reload_motor.set_angle = last_reload_ref + 10;
+				if(reload_motor.reload_angle_ref >= last_reload_ref + 10)
+				{
+						Linear_Actuator(0);
+						shoot_step = 0;
+						missile_shoot_cnt++;
+					  reload_next = 1;
+				}
+			}
+			if(missile_shoot_cnt == 4)
+			{
+				shoot_step = 6;
+			}
+			
+		if(missile_shoot_motor.set_angle <= 0)
+		{
+			missile_shoot_motor.set_angle = 0;
+		}
+		else if(missile_shoot_motor.set_angle >= 1700)
+		{
+			missile_shoot_motor.set_angle = 1700;
+		}
+		// pid计算
+    missile_angle_control_loop(&missile_shoot_motor); // 发射控制
+		missile_spring_angle_control_loop(&pull_spring_motor); // 弹簧控制
+		missile_reload_angle_control_loop(&reload_motor); // 换弹盘控制
+		missile_yaw_angle_control_loop(&yaw_motor); // yaw轴控制
 	}
 	
 	if(shoot_control_mode == SHOOT_RC_CONTROL)//遥控器控制
 	{		
 		    if (abs(missile_shoot_move.shoot_rc->rc.ch[4]) >= 1000 && turn_shoot_flag == 0)
     {
-					missile_shoot_motor.set_angle -= 0.5f;
+					missile_shoot_motor.set_angle -= 0.8f;
 //					if(missile_shoot_motor.set_angle >= 200*shoot_cnt)
 //					{
 //					turn_shoot_flag = 1;
@@ -494,7 +601,7 @@ void shoot_control_loop(void)
     }
 		else if (abs(missile_shoot_move.shoot_rc->rc.ch[4]) == 660 && turn_shoot_flag == 0)
     {
-					missile_shoot_motor.set_angle += 0.5f;
+					missile_shoot_motor.set_angle += 0.8f;
 //					if(missile_shoot_motor.set_angle <= 200*shoot_cnt)
 //					{	
 //					turn_shoot_flag = 1;
@@ -508,6 +615,12 @@ void shoot_control_loop(void)
 		if(missile_shoot_motor.set_angle <= 0)
 		{
 			missile_shoot_motor.set_angle = 0;
+		}
+		
+		if(micro_switch_on == 1)
+		{
+			missile_shoot_motor.set_angle = missile_shoot_motor.angle_ref;
+			turn_shoot_flag = 1;
 		}
 
 				if (missile_shoot_move.shoot_rc->rc.ch[2] ==660 && turn_spring_flag == 0)
@@ -523,15 +636,13 @@ void shoot_control_loop(void)
 
 				if (missile_shoot_move.shoot_rc->rc.ch[1] > 400 && turn_reload_flag == 0)
     {
-					reload_motor.set_angle += 60;
+					reload_motor.set_angle += 0.05f;
 //			if(PHOTOLECTRIC_DOOR_PIN == 1)
 //			{
 //				reload_motor.set_angle += 1;
 //			}
 //					if(reload_motor.set_angle >= 40*reload_cnt)
 //					{
-
-					turn_reload_flag = 1;
 
 //					reload_cnt += 1;
 //						if(reload_cnt == 0)
@@ -543,14 +654,13 @@ void shoot_control_loop(void)
     }
 		else if (missile_shoot_move.shoot_rc->rc.ch[1] < -400 && turn_reload_flag == 0)
     {
-					reload_motor.set_angle -= 60;	
+					reload_motor.set_angle -= 0.05f;	
 //						if(PHOTOLECTRIC_DOOR_PIN == 1)
 //			{
 //				reload_motor.set_angle -= 2;
 //			}
 //					if(reload_motor.set_angle <= 40*reload_cnt)
 //					{	
-					turn_reload_flag = 1;
 //					reload_cnt -= 1;
 //						if(reload_cnt == 0)
 //						{
@@ -562,6 +672,7 @@ void shoot_control_loop(void)
 		if(reload_motor.block_flag == 1)
 		{
 				reload_motor.set_angle = reload_motor.reload_angle_ref;
+				turn_reload_flag = 1;
 		}
 		
 				if (missile_shoot_move.shoot_rc->rc.ch[0] > 400 && turn_yaw_flag == 0)
@@ -622,7 +733,22 @@ void shoot_control_loop(void)
 	}
 	if(shoot_control_mode == SHOOT_BASE)
 	{
-			Linear_Actuator(0);
+		if(reload_next == 1)
+				{
+				last_reload_ref = reload_motor.reload_angle_ref;
+				Linear_Actuator(1);
+				reload_next = 0;
+				}
+		reload_motor.set_angle = last_reload_ref + 10;
+		if(time_flag - last_time_flag >= 20)
+				{
+						Linear_Actuator(0);
+				}
+				// pid计算
+    missile_angle_control_loop(&missile_shoot_motor); // 发射控制
+		missile_spring_angle_control_loop(&pull_spring_motor); // 弹簧控制
+		missile_reload_angle_control_loop(&reload_motor); // 换弹盘控制
+		missile_yaw_angle_control_loop(&yaw_motor); // yaw轴控制
 	}
 }
 
@@ -633,13 +759,13 @@ void shoot_control_loop(void)
  */
 static void missile_angle_control_loop(Shoot_Motor_t *missile_move_control_loop)
 {
-    missile_move_control_loop->motor_pid.max_out = MISSILE_SPEED_PID_MAX_OUT;
-    missile_move_control_loop->motor_pid.max_iout = MISSILE_SPEED_PID_MAX_IOUT;	
-		missile_move_control_loop->motor_pid_angle.max_out = MISSILE_ANGLE_PID_MAX_OUT;
-    missile_move_control_loop->motor_pid_angle.max_iout = MISSILE_ANGLE_PID_MAX_IOUT;	
-		missile_move_control_loop->given_angle = PID_Calc(&missile_move_control_loop->motor_pid_angle, missile_move_control_loop->angle_ref, missile_move_control_loop->set_angle);
-		PID_Calc(&missile_move_control_loop->motor_pid, missile_move_control_loop->speed, missile_move_control_loop->given_angle);
-    missile_move_control_loop->give_current = (missile_move_control_loop->motor_pid.out);
+    missile_move_control_loop->motor_Pid.max_out = MISSILE_SPEED_PID_MAX_OUT;
+    missile_move_control_loop->motor_Pid.max_iout = MISSILE_SPEED_PID_MAX_IOUT;	
+		missile_move_control_loop->motor_Pid_angle.max_out = MISSILE_ANGLE_PID_MAX_OUT;
+    missile_move_control_loop->motor_Pid_angle.max_iout = MISSILE_ANGLE_PID_MAX_IOUT;	
+		missile_move_control_loop->given_angle = PID_calc(&missile_move_control_loop->motor_Pid_angle, missile_move_control_loop->angle_ref, missile_move_control_loop->set_angle);
+		PID_calc(&missile_move_control_loop->motor_Pid, missile_move_control_loop->speed, missile_move_control_loop->given_angle);
+    missile_move_control_loop->give_current = (missile_move_control_loop->motor_Pid.out);
 }
 
 /**
@@ -665,13 +791,13 @@ static void missile_spring_angle_control_loop(Shoot_Motor_t *missile_move_contro
  */
 static void missile_reload_angle_control_loop(Shoot_Motor_t *missile_move_control_loop)
 {
-    missile_move_control_loop->motor_pid.max_out = RELOAD_SPEED_PID_MAX_OUT;
-    missile_move_control_loop->motor_pid.max_iout = RELOAD_SPEED_PID_MAX_IOUT;	
-		missile_move_control_loop->motor_pid_angle.max_out = RELOAD_ANGLE_PID_MAX_OUT;
-    missile_move_control_loop->motor_pid_angle.max_iout = RELOAD_ANGLE_PID_MAX_IOUT;	
-		missile_move_control_loop->given_angle = PID_Calc(&missile_move_control_loop->motor_pid_angle, missile_move_control_loop->reload_angle_ref, missile_move_control_loop->set_angle);
-		PID_Calc(&missile_move_control_loop->motor_pid, missile_move_control_loop->speed, missile_move_control_loop->given_angle);
-    missile_move_control_loop->give_current = (missile_move_control_loop->motor_pid.out);
+    missile_move_control_loop->motor_Pid.max_out = RELOAD_SPEED_PID_MAX_OUT;
+    missile_move_control_loop->motor_Pid.max_iout = RELOAD_SPEED_PID_MAX_IOUT;	
+		missile_move_control_loop->motor_Pid_angle.max_out = RELOAD_ANGLE_PID_MAX_OUT;
+    missile_move_control_loop->motor_Pid_angle.max_iout = RELOAD_ANGLE_PID_MAX_IOUT;	
+		missile_move_control_loop->given_angle = PID_calc(&missile_move_control_loop->motor_Pid_angle, missile_move_control_loop->reload_angle_ref, missile_move_control_loop->set_angle);
+		PID_calc(&missile_move_control_loop->motor_Pid, missile_move_control_loop->speed, missile_move_control_loop->given_angle);
+    missile_move_control_loop->give_current = (missile_move_control_loop->motor_Pid.out);
 }
 
 /**
@@ -681,13 +807,13 @@ static void missile_reload_angle_control_loop(Shoot_Motor_t *missile_move_contro
  */
 static void missile_yaw_angle_control_loop(Shoot_Motor_t *missile_move_control_loop)
 {
-    missile_move_control_loop->motor_pid.max_out = MYAW_SPEED_PID_MAX_OUT;
-    missile_move_control_loop->motor_pid.max_iout = MYAW_SPEED_PID_MAX_IOUT;	
-		missile_move_control_loop->motor_pid_angle.max_out = MYAW_ANGLE_PID_MAX_OUT;
-    missile_move_control_loop->motor_pid_angle.max_iout = MYAW_ANGLE_PID_MAX_IOUT;	
-		missile_move_control_loop->given_angle = PID_Calc(&missile_move_control_loop->motor_pid_angle, missile_move_control_loop->angle_ref, missile_move_control_loop->set_angle);
-		PID_Calc(&missile_move_control_loop->motor_pid, missile_move_control_loop->speed, missile_move_control_loop->given_angle);
-    missile_move_control_loop->give_current = (missile_move_control_loop->motor_pid.out);
+    missile_move_control_loop->motor_Pid.max_out = MYAW_SPEED_PID_MAX_OUT;
+    missile_move_control_loop->motor_Pid.max_iout = MYAW_SPEED_PID_MAX_IOUT;	
+		missile_move_control_loop->motor_Pid_angle.max_out = MYAW_ANGLE_PID_MAX_OUT;
+    missile_move_control_loop->motor_Pid_angle.max_iout = MYAW_ANGLE_PID_MAX_IOUT;	
+		missile_move_control_loop->given_angle = PID_calc(&missile_move_control_loop->motor_Pid_angle, missile_move_control_loop->angle_ref, missile_move_control_loop->set_angle);
+		PID_calc(&missile_move_control_loop->motor_Pid, missile_move_control_loop->speed, missile_move_control_loop->given_angle);
+    missile_move_control_loop->give_current = (missile_move_control_loop->motor_Pid.out);
 }
 
 
