@@ -181,6 +181,7 @@ void shoot_task(void const *pvParameters)
         // 射击控制循环
         shoot_control_loop();
         // 发送控制电流
+		//CAN_CMD_MOTO(&hcan1, CAN_SHOOT_ALL_ID, 0, 0, 0, 0);
 		CAN_CMD_MOTO(&hcan1, CAN_SHOOT_ALL_ID, pull_spring_motor.give_current, reload_motor.give_current, missile_shoot_motor.give_current, yaw_motor.give_current);
 		vTaskDelay(SHOOT_TASK_DELAY_TIME);
     }

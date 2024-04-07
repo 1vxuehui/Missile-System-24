@@ -653,6 +653,11 @@
               <FileType>1</FileType>
               <FilePath>.\User\CRC8_CRC16.c</FilePath>
             </File>
+            <File>
+              <FileName>hx711.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\User\hx711.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
