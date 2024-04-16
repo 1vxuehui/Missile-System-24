@@ -32,5 +32,6 @@ void        hx711_set_offset_value(float offset); 	/* 设置HX711重量补偿值 */
 void        hx711_set_gain(ENUM_HX711_GAIN_TYPEDEF gain); /* 设置HX711增益系数 */
 float       hx711_get_tare_weight(void); 			/* 获取皮重 */
 float       hx711_get_actual_weight(void); 			/* 获取实重 */
+void 				hx711_get_weight(void);
  
 #endif

@@ -187,10 +187,11 @@ void MX_GPIO_Init(void)
 	GPIO_InitStruct.Pin = HX711_DOUT_GPIO_PIN;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_PULLUP;
+	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(HX711_DOUT_GPIO_Port, &GPIO_InitStruct);
 	
 	/*Configure GPIO pin : PEPin */
-	GPIO_InitStruct.Pin = HX711_DOUT_GPIO_PIN;
+	GPIO_InitStruct.Pin = HX711_SCK_GPIO_PIN;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
 	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;

@@ -22,33 +22,38 @@ Dialog DLL:      TCM.DLL V1.46.0.0
  
 <h2>Project:</h2>
 D:\QIQI\Missile-System-24\Missile_system_24_TypeA\MDK-ARM\Missile_system_24_TypeA.uvprojx
-Project File Date:  04/07/2024
+Project File Date:  04/16/2024
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 7 (build 960)', folder: 'D:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'Missile_system_24_TypeA'
+compiling main.c...
 compiling shoot_task.c...
-Tasks\shoot_task.c(96): warning:  #1295-D: Deprecated declaration Micro_switch_feedback - give arg types
+Tasks\shoot_task.c(90): warning:  #1295-D: Deprecated declaration Pull_Force_Cal - give arg types
+  static void Pull_Force_Cal();
+Tasks\shoot_task.c(104): warning:  #1295-D: Deprecated declaration Micro_switch_feedback - give arg types
   static void Micro_switch_feedback();
-Tasks\shoot_task.c(310): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+Tasks\shoot_task.c(318): warning:  #1035-D: single-precision operand implicitly converted to double-precision
   		time_flag+=0.01;
-Tasks\shoot_task.c(363): warning:  #223-D: function "abs" declared implicitly
+Tasks\shoot_task.c(378): warning:  #223-D: function "abs" declared implicitly
   	if(abs(blocking_motor->give_current) == 10000)
-Tasks\shoot_task.c(556): warning:  #188-D: enumerated type mixed with another type
+Tasks\shoot_task.c(571): warning:  #188-D: enumerated type mixed with another type
   					Linear_Actuator(1);
-Tasks\shoot_task.c(562): warning:  #188-D: enumerated type mixed with another type
+Tasks\shoot_task.c(577): warning:  #188-D: enumerated type mixed with another type
   						Linear_Actuator(0);
-Tasks\shoot_task.c(590): warning:  #223-D: function "abs" declared implicitly
+Tasks\shoot_task.c(605): warning:  #223-D: function "abs" declared implicitly
   		    if (abs(missile_shoot_move.shoot_rc->rc.ch[4]) >= 1000 && turn_shoot_flag == 0)
-Tasks\shoot_task.c(740): warning:  #188-D: enumerated type mixed with another type
+Tasks\shoot_task.c(755): warning:  #188-D: enumerated type mixed with another type
   				Linear_Actuator(1);
-Tasks\shoot_task.c(746): warning:  #188-D: enumerated type mixed with another type
+Tasks\shoot_task.c(761): warning:  #188-D: enumerated type mixed with another type
   						Linear_Actuator(0);
-Tasks\shoot_task.c: 8 warnings, 0 errors
+Tasks\shoot_task.c(367): warning:  #177-D: function "Pull_Force_Cal"  was declared but never referenced
+  static void Pull_Force_Cal()
+Tasks\shoot_task.c: 10 warnings, 0 errors
 linking...
-Program Size: Code=33032 RO-data=1464 RW-data=320 ZI-data=25056  
+Program Size: Code=32996 RO-data=1464 RW-data=316 ZI-data=25052  
 FromELF: creating hex file...
-"Enginner_2022\Enginner_2022.axf" - 0 Error(s), 8 Warning(s).
+"Enginner_2022\Enginner_2022.axf" - 0 Error(s), 10 Warning(s).
 
 <h2>Software Packages used:</h2>
 

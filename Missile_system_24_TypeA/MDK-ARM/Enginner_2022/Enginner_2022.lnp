@@ -48,7 +48,6 @@
 "enginner_2022\referee_usart_task.o"
 "enginner_2022\fifo.o"
 "enginner_2022\crc8_crc16.o"
-"enginner_2022\hx711.o"
 "enginner_2022\shoot_task.o"
 "enginner_2022\stm32.o"
 "enginner_2022\user_lib.o"

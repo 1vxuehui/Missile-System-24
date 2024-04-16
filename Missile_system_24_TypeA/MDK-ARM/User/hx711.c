@@ -9,7 +9,7 @@
 #define     HX711_DOUT_STATE    	 HAL_GPIO_ReadPin(HX711_DOUT_GPIO_Port, HX711_DOUT_GPIO_PIN)
  
 static STRUCT_HX711_TYPEDEF hx711;
- 
+float Pulling_force;
 
  
 /* 传感器结构体参数初始化 */
@@ -34,7 +34,7 @@ static unsigned long hx711_readCount(void)
     while(HX711_DOUT_STATE) { /* 等待DOUT从高电平到低电平跳变 */
         timeOut_cnt ++;
         HAL_Delay(1);
-        if(timeOut_cnt > 100) return 0;
+        if(timeOut_cnt > 1) return 0;
     }
     /* 读取24位的ADC数字量数据 */
     for(unsigned char i=0; i<24; i++) {
@@ -116,4 +116,11 @@ float hx711_get_actual_weight(void)
         hx711.actual = weight - hx711.tare;
     }
     return (hx711.actual);
+}
+
+void hx711_get_weight(void)
+{
+	hx711_get_tare_weight();
+	hx711_get_actual_weight();
+	Pulling_force = hx711.actual;
 }

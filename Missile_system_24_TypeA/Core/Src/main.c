@@ -24,7 +24,6 @@
 #include "tim.h"
 #include "usart.h"
 #include "gpio.h"
-
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "remote_control.h"
@@ -128,7 +127,6 @@ int main(void)
 
   /* Start scheduler */
   osKernelStart();
-
   /* We should never get here as control is now taken by the scheduler */
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
