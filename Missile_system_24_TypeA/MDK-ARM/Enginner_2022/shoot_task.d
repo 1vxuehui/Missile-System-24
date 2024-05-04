@@ -64,3 +64,5 @@ enginner_2022\shoot_task.o: ..\components\controller\stm32_External_Functions.h
 enginner_2022\shoot_task.o: ..\components\controller\stm32_types.h
 enginner_2022\shoot_task.o: ../Core/Inc/tim.h
 enginner_2022\shoot_task.o: ../Core/Inc/gpio.h
+enginner_2022\shoot_task.o: ../Core/Inc/usart.h
+enginner_2022\shoot_task.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h

@@ -15,7 +15,8 @@
 #include "stm32.h"
 #include "tim.h"
 #include "gpio.h"
-
+#include "usart.h"
+#include "stdio.h"
 /*----------------------------------宏定义---------------------------*/
 #define Linear_Actuator(x) HAL_GPIO_WritePin(GPIOI, GPIO_PIN_7, x) // 电推杆IO
 /*----------------------------------内部函数---------------------------*/
@@ -83,13 +84,6 @@ static void Motor_Speed_Cal(Shoot_Motor_t *motor_speed_clac);
 static void Motor_Current_Cal(Shoot_Motor_t *motor_current_calc);
 
 /**
- * @brief          计算拉力返回值
- * @param[in]      none
- * @retval         返回空
- */
-static void Pull_Force_Cal();
-
-/**
  * @brief          判断电机堵转
  * @param[in]      motor_current_calc：要判断堵转的结构体
  * @retval         返回空
@@ -124,16 +118,12 @@ void shoot_init(void);
  */
 void SERIO_Control(void);
 /*----------------------------------内部变量---------------------------*/
-
+uint8_t Pull_force = 0;
 fp32 missile_shoot;
-int a;
 int shoot_step = 0;
 fp32 motor_last_angle = 0;
-fp32 sum = 0;
-int b = 0;
 int turnback_flag = 0;
 int shoot_ready_flag = 0;
-fp32 rc_speedset;
 #define SERVO_MIN_PWM   500
 #define SERVO_MAX_PWM   2000
 int PWM=1000;
@@ -141,15 +131,12 @@ int turn_shoot_flag = 0;
 int turn_spring_flag = 0;
 int turn_reload_flag = 0;
 int turn_yaw_flag = 0;
-int yaw_cnt = 1;
-uint8_t cnt = 1;
-int B_flag=0;
 int micro_switch_on = 0;
 int32 last_reload_ref = 0;
 int missile_shoot_cnt = 0;
 int reload_next = 1;
-float time_flag = 0;
-float last_time_flag = 0;
+double time_flag = 0;
+double last_time_flag = 0;
 int shoot_finish_flag = 1;
 /*----------------------------------结构体------------------------------*/
 Shoot_Motor_t missile_shoot_motor; 
@@ -160,7 +147,6 @@ missile_shoot_move_t missile_shoot_move;       // 发射控制
 /*----------------------------------外部变量---------------------------*/
 extern ExtY_stm32 stm32_Y_shoot;
 extern ext_power_heat_data_t power_heat_data_t;
-extern float Pulling_force;
 /*---------------------------------------------------------------------*/
 // 控制模式
 shoot_mode_e shoot_mode = SHOOT_STOP;                             // 此次射击模式
@@ -189,8 +175,8 @@ void shoot_task(void const *pvParameters)
         // 射击控制循环
         shoot_control_loop();
         // 发送控制电流
-		CAN_CMD_MOTO(&hcan1, CAN_SHOOT_ALL_ID, 0, 0, 0, 0);
-//		CAN_CMD_MOTO(&hcan1, CAN_SHOOT_ALL_ID, pull_spring_motor.give_current, reload_motor.give_current, missile_shoot_motor.give_current, yaw_motor.give_current);
+//		CAN_CMD_MOTO(&hcan1, CAN_SHOOT_ALL_ID, 0, 0, 0, 0);
+		CAN_CMD_MOTO(&hcan1, CAN_SHOOT_ALL_ID, pull_spring_motor.give_current, reload_motor.give_current, missile_shoot_motor.give_current, yaw_motor.give_current);
 		vTaskDelay(SHOOT_TASK_DELAY_TIME);
     }
 }
@@ -314,7 +300,6 @@ static void Shoot_Feedback_Update(void)
 		Motor_Block(&yaw_motor);
 	
 		Micro_switch_feedback();
-	
 		time_flag+=0.01;
 }
 
@@ -357,15 +342,6 @@ static void Motor_Angle_Cal(Shoot_Motor_t *motor_angle_calc)
 static void Motor_Current_Cal(Shoot_Motor_t *motor_current_calc)
 {
 	motor_current_calc->current_cal = motor_current_calc->shoot_motor_measure->current;
-}
-
-/**
- * @brief          计算拉力返回值
- * @param[in]      none
- * @retval         返回空
- */
-static void Pull_Force_Cal()
-{
 }
 
 /**
@@ -580,7 +556,7 @@ void shoot_control_loop(void)
 					  reload_next = 1;
 				}
 			}
-			if(missile_shoot_cnt == 4)
+			if(missile_shoot_cnt == 2)
 			{
 				shoot_step = 6;
 			}

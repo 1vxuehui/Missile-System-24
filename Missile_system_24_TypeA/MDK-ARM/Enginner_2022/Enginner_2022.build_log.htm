@@ -27,33 +27,26 @@ Project File Date:  04/16/2024
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 7 (build 960)', folder: 'D:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'Missile_system_24_TypeA'
-compiling main.c...
 compiling shoot_task.c...
-Tasks\shoot_task.c(90): warning:  #1295-D: Deprecated declaration Pull_Force_Cal - give arg types
-  static void Pull_Force_Cal();
-Tasks\shoot_task.c(104): warning:  #1295-D: Deprecated declaration Micro_switch_feedback - give arg types
+Tasks\shoot_task.c(98): warning:  #1295-D: Deprecated declaration Micro_switch_feedback - give arg types
   static void Micro_switch_feedback();
-Tasks\shoot_task.c(318): warning:  #1035-D: single-precision operand implicitly converted to double-precision
-  		time_flag+=0.01;
-Tasks\shoot_task.c(378): warning:  #223-D: function "abs" declared implicitly
+Tasks\shoot_task.c(354): warning:  #223-D: function "abs" declared implicitly
   	if(abs(blocking_motor->give_current) == 10000)
-Tasks\shoot_task.c(571): warning:  #188-D: enumerated type mixed with another type
+Tasks\shoot_task.c(547): warning:  #188-D: enumerated type mixed with another type
   					Linear_Actuator(1);
-Tasks\shoot_task.c(577): warning:  #188-D: enumerated type mixed with another type
+Tasks\shoot_task.c(553): warning:  #188-D: enumerated type mixed with another type
   						Linear_Actuator(0);
-Tasks\shoot_task.c(605): warning:  #223-D: function "abs" declared implicitly
+Tasks\shoot_task.c(581): warning:  #223-D: function "abs" declared implicitly
   		    if (abs(missile_shoot_move.shoot_rc->rc.ch[4]) >= 1000 && turn_shoot_flag == 0)
-Tasks\shoot_task.c(755): warning:  #188-D: enumerated type mixed with another type
+Tasks\shoot_task.c(731): warning:  #188-D: enumerated type mixed with another type
   				Linear_Actuator(1);
-Tasks\shoot_task.c(761): warning:  #188-D: enumerated type mixed with another type
+Tasks\shoot_task.c(737): warning:  #188-D: enumerated type mixed with another type
   						Linear_Actuator(0);
-Tasks\shoot_task.c(367): warning:  #177-D: function "Pull_Force_Cal"  was declared but never referenced
-  static void Pull_Force_Cal()
-Tasks\shoot_task.c: 10 warnings, 0 errors
+Tasks\shoot_task.c: 7 warnings, 0 errors
 linking...
-Program Size: Code=32996 RO-data=1464 RW-data=316 ZI-data=25052  
+Program Size: Code=33328 RO-data=1464 RW-data=312 ZI-data=26192  
 FromELF: creating hex file...
-"Enginner_2022\Enginner_2022.axf" - 0 Error(s), 10 Warning(s).
+"Enginner_2022\Enginner_2022.axf" - 0 Error(s), 7 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -76,7 +69,7 @@ Package Vendor: Keil
 <h2>Collection of Component Files used:</h2>
 
    * Component: ARM::CMSIS:CORE:5.4.0
-Build Time Elapsed:  00:00:02
+Build Time Elapsed:  00:00:03
 </pre>
 </body>
 </html>

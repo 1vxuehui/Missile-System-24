@@ -29,12 +29,20 @@ extern "C" {
 #include "main.h"
 
 /* USER CODE BEGIN Includes */
-
+#define REC_LENGTH  45
+#define MAX_REC_LENGTH  1024 
+  
+extern unsigned char UART6_Rx_Buf[MAX_REC_LENGTH];
+extern unsigned char UART6_Rx_flg ;
+extern unsigned int  UART6_Rx_cnt ;
+extern unsigned char UART6_temp[REC_LENGTH];
 /* USER CODE END Includes */
 
 extern UART_HandleTypeDef huart8;
 
 extern UART_HandleTypeDef huart1;
+
+extern UART_HandleTypeDef huart6;
 
 /* USER CODE BEGIN Private defines */
 
@@ -42,6 +50,7 @@ extern UART_HandleTypeDef huart1;
 
 void MX_UART8_Init(void);
 void MX_USART1_UART_Init(void);
+void MX_USART6_UART_Init(void);
 
 /* USER CODE BEGIN Prototypes */
 void usart6_init(uint8_t *rx1_buf, uint8_t *rx2_buf, uint16_t dma_buf_num);

@@ -28,27 +28,11 @@
 //发射任务最大时间，以秒为单位 20 s
 #define SHOOT_TASK_MAX_INIT_TIME 10
 
-//拨弹盘电机转速   10
-#define missile_shoot_motor_RUN_SPEED 25.0
-//拨弹盘电机停转
-#define missile_shoot_motor_STOP_SPEED 0
-
-#define GIMBAL_ModeChannel  1
-
 #define SHOOT_CONTROL_TIME  0.02
 
 #define RC_S_LONG_TIME 2000
 
 #define PRESS_LONG_TIME 400
-
-#define SHOOT_ON_KEYBOARD KEY_PRESSED_OFFSET_Q
-#define SHOOT_OFF_KEYBOARD KEY_PRESSED_OFFSET_E
-
-
-#define MAX_SPEED 15.0f //-12.0f
-#define MID_SPEED 12.0f //-12.0f
-#define MIN_SPEED 10.0f //-12.0f
-#define Ready_Trigger_Speed 6.0f
 
 #define Motor_RMP_TO_SPEED 0.00290888208665721596153948461415f
 #define Motor_ECD_TO_ANGLE 0.000021305288720633905968306772076277f
