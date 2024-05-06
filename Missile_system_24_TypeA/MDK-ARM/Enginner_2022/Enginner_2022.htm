@@ -3,7 +3,7 @@
 <title>Static Call Graph - [Enginner_2022\Enginner_2022.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image Enginner_2022\Enginner_2022.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Sat May 04 21:34:59 2024
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Mon May 06 16:55:10 2024
 <BR><P>
 <H3>Maximum Stack Usage =        256 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -412,8 +412,8 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[101]"></a>__aeabi_memcpy</STRONG> (Thumb, 36 bytes, Stack size 0 bytes, memcpya.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[13d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;referee_data_solve
-<LI><a href="#[fb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fifo_s_puts
+<BR><BR>[Called By]<UL><LI><a href="#[fb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fifo_s_puts
+<LI><a href="#[13d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;referee_data_solve
 <LI><a href="#[11f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;prvCopyDataToQueue
 <LI><a href="#[11e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;prvCopyDataFromQueue
 </UL>
@@ -1377,7 +1377,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;remote_control_init
 </UL>
 
-<P><STRONG><a name="[f0]"></a>SERIO_Control</STRONG> (Thumb, 218 bytes, Stack size 24 bytes, shoot_task.o(i.SERIO_Control))
+<P><STRONG><a name="[f0]"></a>SERIO_Control</STRONG> (Thumb, 318 bytes, Stack size 24 bytes, shoot_task.o(i.SERIO_Control))
 <BR><BR>[Stack]<UL><LI>Max Depth = 112<LI>Call Chain = SERIO_Control &rArr; __aeabi_dmul &rArr; _double_epilogue &rArr; _double_round
 </UL>
 <BR>[Calls]<UL><LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
@@ -1662,7 +1662,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BSP_Init
 </UL>
 
-<P><STRONG><a name="[146]"></a>shoot_control_loop</STRONG> (Thumb, 1462 bytes, Stack size 16 bytes, shoot_task.o(i.shoot_control_loop))
+<P><STRONG><a name="[146]"></a>shoot_control_loop</STRONG> (Thumb, 2294 bytes, Stack size 16 bytes, shoot_task.o(i.shoot_control_loop))
 <BR><BR>[Stack]<UL><LI>Max Depth = 104<LI>Call Chain = shoot_control_loop &rArr; __aeabi_dsub &rArr; __aeabi_dadd &rArr; _double_epilogue &rArr; _double_round
 </UL>
 <BR>[Calls]<UL><LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
@@ -2457,13 +2457,13 @@ Local Symbols
 </UL>
 
 <P><STRONG><a name="[ff]"></a>__get_PRIMASK</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, fifo.o(i.__get_PRIMASK))
-<BR><BR>[Called By]<UL><LI><a href="#[fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fifo_s_get
-<LI><a href="#[fb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fifo_s_puts
+<BR><BR>[Called By]<UL><LI><a href="#[fb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fifo_s_puts
+<LI><a href="#[fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fifo_s_get
 </UL>
 
 <P><STRONG><a name="[100]"></a>__set_PRIMASK</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, fifo.o(i.__set_PRIMASK))
-<BR><BR>[Called By]<UL><LI><a href="#[fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fifo_s_get
-<LI><a href="#[fb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fifo_s_puts
+<BR><BR>[Called By]<UL><LI><a href="#[fb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fifo_s_puts
+<LI><a href="#[fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fifo_s_get
 </UL>
 
 <P><STRONG><a name="[ed]"></a>Micro_switch_feedback</STRONG> (Thumb, 30 bytes, Stack size 8 bytes, shoot_task.o(i.Micro_switch_feedback))

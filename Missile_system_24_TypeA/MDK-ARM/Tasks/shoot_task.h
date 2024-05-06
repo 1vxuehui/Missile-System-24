@@ -110,9 +110,9 @@ typedef enum
 
 typedef enum
 {
-    SHOOT_OUTPOST,    		 //击打前哨站模式
+    SHOOT_LAST_TWO,    		 //击打前哨站模式
     SHOOT_RC_CONTROL,      //遥控器控制模式
-		SHOOT_BASE,            //击打基地模式
+		SHOOT_FIRST_TWO,       //击打基地模式
     SHOOT_INIT_CONTROL,    //初始化控制模式
     SHOOT_STOP_CONTROL,    //停止控制模式
 }shoot_control_mode_e;
