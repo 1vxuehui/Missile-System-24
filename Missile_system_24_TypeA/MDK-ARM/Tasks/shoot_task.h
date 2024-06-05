@@ -137,6 +137,7 @@ typedef struct
     int16_t give_current;
 		int16_t current_cal;
 		int32 angle_ref;
+		int32 last_angle_ref;
 		int32 reload_angle_ref;
 		uint32_t blocking_time;
 		int16_t block_flag;

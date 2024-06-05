@@ -136,6 +136,7 @@ int micro_switch_on = 0;
 int32 last_reload_ref = 0;
 int missile_shoot_cnt = 0;
 int reload_next = 1;
+int reload_back_flag = 1;
 double time_flag = 0;
 double last_time_flag = 0;
 int shoot_finish_flag = 1;
@@ -260,12 +261,12 @@ void SERIO_Control(void)
  */
 void shoot_init(void)
 {
-    static const fp32 missile_shoot_speed_pid[3] = {40, 0, 20};
-		static const fp32 missile_shoot_angle_pid[3] = {2, 0, 0.1};
+    static const fp32 missile_shoot_speed_pid[3] = {80, 0, 20};
+		static const fp32 missile_shoot_angle_pid[3] = {3, 0, 0.1};
 		static const fp32 pull_spring_speed_pid[3] = {15, 0, 2};
 		static const fp32 pull_spring_angle_pid[3] = {10, 0, 0.5};
-		static const fp32 reload_speed_pid[3] = {50, 0, 10};
-		static const fp32 reload_angle_pid[3] = {50, 0, 10};
+		static const fp32 reload_speed_pid[3] = {60, 0, 20};
+		static const fp32 reload_angle_pid[3] = {50, 0, 20};
 		static const fp32 yaw_speed_pid[3] = {20, 0, 1};
 		static const fp32 yaw_angle_pid[4] = {10, 0, 1};
 		PID_init(&missile_shoot_motor.motor_Pid_angle, PID_POSITION, missile_shoot_angle_pid, MISSILE_READY_ANGLE_PID_MAX_OUT, MISSILE_READY_ANGLE_PID_MAX_IOUT);
@@ -381,7 +382,7 @@ static void Motor_Block(Shoot_Motor_t*blocking_motor)
 	{
 		blocking_motor->blocking_time = 0;
 	}
-	if(blocking_motor->blocking_time >=700)
+	if(blocking_motor->blocking_time >=1000)
 	{
 		blocking_motor->block_flag = 1;
 	}
@@ -475,6 +476,15 @@ static void shoot_set_control_mode(missile_shoot_move_t *missile_shoot_set_contr
     {
         shoot_control_mode = SHOOT_STOP_CONTROL;
     }
+		
+		if (switch_is_up(missile_shoot_set_control->shoot_rc->rc.s[0])&&switch_is_mid(missile_shoot_set_control->shoot_rc->rc.s[SHOOT_CONTROL_CHANNEL]))
+    {
+        Linear_Actuator(0);
+    }
+    else if (switch_is_down(missile_shoot_set_control->shoot_rc->rc.s[0])&&switch_is_mid(missile_shoot_set_control->shoot_rc->rc.s[SHOOT_CONTROL_CHANNEL]))
+    {
+        Linear_Actuator(1);
+    }
 
     
     // 判断进入初始化模式
@@ -513,7 +523,7 @@ static void Shoot_Set_Mode(void)
  */
 void shoot_control_loop(void)
 {
-	if(shoot_control_mode == SHOOT_LAST_TWO)//后两发（装填并发射）
+	if(shoot_control_mode == SHOOT_LAST_TWO)//装填
 	{
 		if(shoot_step == 0)
 		{
@@ -536,53 +546,12 @@ void shoot_control_loop(void)
 		if(shoot_step == 2 && PWM == 1320)
 			{
 				missile_shoot_motor.set_angle -= 0.8f;
-					if(missile_shoot_motor.set_angle <= 880)
-					{
-						missile_shoot_motor.set_angle = 880;
-						shoot_step++;
-					}	
-			}
-		if(shoot_step == 3 && PWM == 1000)
-			{
-				missile_shoot_motor.set_angle += 0.8f;
-					if(micro_switch_on == 1)
-				{
-					missile_shoot_motor.set_angle = missile_shoot_motor.angle_ref;
-					shoot_step++;
-				}
-			}
-		if(shoot_step == 4)
-			{
-				missile_shoot_motor.set_angle -= 0.8f;
 					if(missile_shoot_motor.set_angle <= 0)
 					{
 						missile_shoot_motor.set_angle = 0;
-						shoot_finish_flag = 1;
 						shoot_step++;
 					}	
 			}
-			if(shoot_step == 5&& PWM == 1320 && time_flag - last_time_flag >= 20)
-			{
-				if(reload_next == 1)
-				{
-				last_reload_ref = reload_motor.reload_angle_ref;
-					Linear_Actuator(1);
-					reload_next = 0;
-				}
-				reload_motor.set_angle = last_reload_ref + 10;
-				if(reload_motor.reload_angle_ref >= last_reload_ref + 10)
-				{
-						Linear_Actuator(0);
-						shoot_step = 0;
-						missile_shoot_cnt++;
-					  reload_next = 1;
-				}
-			}
-			if(missile_shoot_cnt == 2)
-			{
-				shoot_step = 6;
-			}
-			
 		if(missile_shoot_motor.set_angle <= 0)
 		{
 			missile_shoot_motor.set_angle = 0;
@@ -590,7 +559,92 @@ void shoot_control_loop(void)
 		else if(missile_shoot_motor.set_angle >= 1700)
 		{
 			missile_shoot_motor.set_angle = 1700;
-		}
+		}		
+//		if(shoot_step == 0)//后两发（装填并发射）
+//		{
+//			missile_shoot_motor.set_angle += 0.8f;
+//				if(micro_switch_on == 1)
+//				{
+//					missile_shoot_motor.set_angle = missile_shoot_motor.angle_ref;
+//					shoot_step++;
+//				}
+//		}		
+//		if(shoot_step == 1)
+//		{
+//			reload_motor.set_angle += 0.05f;
+//				if(reload_motor.block_flag == 1)
+//				{
+//						reload_motor.set_angle = reload_motor.reload_angle_ref;
+//						shoot_step++;
+//				}
+//		}
+//		if(shoot_step == 2 && PWM == 1320)
+//			{
+//				missile_shoot_motor.set_angle -= 0.8f;
+//					if(missile_shoot_motor.set_angle <= 880)
+//					{
+//						missile_shoot_motor.set_angle = 880;
+//						shoot_step++;
+//					}	
+//			}
+//		if(shoot_step == 3 && PWM == 1000)
+//			{
+//				missile_shoot_motor.set_angle += 0.8f;
+//					if(micro_switch_on == 1)
+//				{
+//					missile_shoot_motor.set_angle = missile_shoot_motor.angle_ref;
+//					shoot_step++;
+//				}
+//			}
+//		if(shoot_step == 4)
+//			{
+//				missile_shoot_motor.set_angle -= 0.8f;
+//					if(missile_shoot_motor.set_angle <= 0)
+//					{
+//						missile_shoot_motor.set_angle = 0;
+//						shoot_finish_flag = 1;
+//						shoot_step++;
+//					}	
+//			}
+//			if(shoot_step == 5&& PWM == 1320 && time_flag - last_time_flag >= 20)
+//			{
+//				if(reload_next == 1)
+//				{
+//				last_reload_ref = reload_motor.reload_angle_ref;
+//					Linear_Actuator(1);
+//					reload_next = 0;
+//				}
+//				if(reload_back_flag == 1)
+//				{
+//				reload_motor.set_angle = last_reload_ref - 3;
+//				reload_back_flag = 0;
+//				}
+//				if(reload_motor.reload_angle_ref <= last_reload_ref - 3)
+//				{
+//				reload_motor.set_angle = last_reload_ref + 10;
+//				}
+//				if(reload_motor.reload_angle_ref >= last_reload_ref + 10)
+//				{
+//						Linear_Actuator(0);
+//						shoot_step = 0;
+//						missile_shoot_cnt++;
+//					  reload_next = 1;
+//					reload_back_flag = 1;
+//				}
+//			}
+//			if(missile_shoot_cnt == 2)
+//			{
+//				shoot_step = 6;
+//			}
+//			
+//		if(missile_shoot_motor.set_angle <= 0)
+//		{
+//			missile_shoot_motor.set_angle = 0;
+//		}
+//		else if(missile_shoot_motor.set_angle >= 1700)
+//		{
+//			missile_shoot_motor.set_angle = 1700;
+//		}
 		// pid计算
     missile_angle_control_loop(&missile_shoot_motor); // 发射控制
 		missile_spring_angle_control_loop(&pull_spring_motor); // 弹簧控制
@@ -603,11 +657,11 @@ void shoot_control_loop(void)
 		shoot_step = 0;	
 		shoot_step12 = 0;
 		missile_shoot_cnt = 0;		
-		    if (abs(missile_shoot_move.shoot_rc->rc.ch[4]) >= 1000 && turn_shoot_flag == 0)
+		    if (missile_shoot_move.shoot_rc->rc.ch[4] <= -600 && turn_shoot_flag == 0)
     {
 					missile_shoot_motor.set_angle -= 0.8f;
     }
-		else if (abs(missile_shoot_move.shoot_rc->rc.ch[4]) == 660 && turn_shoot_flag == 0)
+		else if (missile_shoot_move.shoot_rc->rc.ch[4] >= 600 && turn_shoot_flag == 0)
     {
 					missile_shoot_motor.set_angle += 0.8f;
 		}
@@ -633,12 +687,12 @@ void shoot_control_loop(void)
 
 				if (missile_shoot_move.shoot_rc->rc.ch[1] > 400 && turn_reload_flag == 0)
     {
-					reload_motor.set_angle += 0.05f;
+					reload_motor.set_angle += 0.08f;
 
     }
 		else if (missile_shoot_move.shoot_rc->rc.ch[1] < -400 && turn_reload_flag == 0)
     {
-					reload_motor.set_angle -= 0.05f;	
+					reload_motor.set_angle -= 0.08f;	
     }
 		
 		if(reload_motor.block_flag == 1)
@@ -693,7 +747,7 @@ void shoot_control_loop(void)
 		missile_yaw_angle_control_loop(&yaw_motor); // yaw轴控制
 	}
 	
-	if(shoot_control_mode == SHOOT_FIRST_TWO)//前两发（第一发直接发射，第二发装填并发射）
+	if(shoot_control_mode == SHOOT_FIRST_TWO)//发射两发
 	{
 		if(shoot_step12 == 0)
 		{
@@ -722,13 +776,22 @@ void shoot_control_loop(void)
 					Linear_Actuator(1);
 					reload_next = 0;
 				}
+				if(reload_back_flag == 1)
+				{
+				reload_motor.set_angle = last_reload_ref - 3;
+				reload_back_flag = 0;
+				}
+				if(reload_motor.reload_angle_ref <= last_reload_ref - 3)
+				{
 				reload_motor.set_angle = last_reload_ref + 10;
+				}
 				if(reload_motor.reload_angle_ref >= last_reload_ref + 10)
 				{
 						Linear_Actuator(0);
 						shoot_step12++;
 						missile_shoot_cnt++;
 					  reload_next = 1;
+					reload_back_flag = 1;
 				}
 			}
 			if(shoot_step12 == 3)
@@ -785,13 +848,22 @@ void shoot_control_loop(void)
 					Linear_Actuator(1);
 					reload_next = 0;
 				}
+				if(reload_back_flag == 1)
+				{
+				reload_motor.set_angle = last_reload_ref - 3;
+				reload_back_flag = 0;
+				}
+				if(reload_motor.reload_angle_ref <= last_reload_ref - 3)
+				{
 				reload_motor.set_angle = last_reload_ref + 10;
-				if(reload_motor.reload_angle_ref >= last_reload_ref + 10)
+				}
+				if(reload_motor.reload_angle_ref >= last_reload_ref + 8)
 				{
 						Linear_Actuator(0);
 						shoot_step12++;
 						missile_shoot_cnt++;
 					  reload_next = 1;
+					reload_back_flag = 1;
 				}
 			}
 			
